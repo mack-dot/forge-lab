@@ -1,0 +1,11 @@
+--- /private/tmp/claude-501/-Users-mackianni-forge/fb0fde47-8987-485d-a625-0e9fdb4facee/scratchpad/leg1-escrow/Leg1Escrow.dfy	2026-11-21 16:36:45.683437427 -0500
++++ leg1-copies/L1-P3-drop-record-ts-monotonic//Leg1Escrow.dfy	2026-11-21 17:13:23.065724536 -0500
+@@ -493,7 +493,7 @@
+         r := r.(verdict := Asc("REJECT_AMOUNT_NOT_MONEY"), exitCode := 1, failNull := false, failIndex := i); return;
+       }
+       // step 8 record_ts non-decreasing
+-      if recordTs < tsPrev {
++      if false { // PROBE: record_ts non-decreasing dropped
+         r := r.(verdict := Asc("REJECT_SEQ_MISMATCH"), exitCode := 1, failNull := false, failIndex := i); return;
+       }
+       // step 9 conservation

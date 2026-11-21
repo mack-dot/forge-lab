@@ -1,0 +1,11 @@
+--- /private/tmp/claude-501/-Users-mackianni-forge/fb0fde47-8987-485d-a625-0e9fdb4facee/scratchpad/leg1-escrow/Leg1Escrow.dfy	2026-11-21 16:36:45.683437427 -0500
++++ leg1-copies/L1-M9-expiry-boundary//Leg1Escrow.dfy	2026-11-21 17:10:06.860179093 -0500
+@@ -510,7 +510,7 @@
+       }
+       // step 12 expiry (observed_now required here; present because records>=2)
+       expiryEvaluated := true;
+-      if obsPresent && observedNow >= expiresAt {
++      if obsPresent && observedNow > expiresAt { // MUTANT: equality no longer EXPIRED
+         r := r.(verdict := Asc("REJECT_EXPIRED"), exitCode := 1, failNull := false, failIndex := i, expiryGate := true); return;
+       }
+       // step 13 signatures (only with tape)

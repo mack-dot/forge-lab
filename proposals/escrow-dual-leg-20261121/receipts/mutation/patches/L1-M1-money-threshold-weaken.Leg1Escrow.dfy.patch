@@ -1,0 +1,11 @@
+--- /private/tmp/claude-501/-Users-mackianni-forge/fb0fde47-8987-485d-a625-0e9fdb4facee/scratchpad/leg1-escrow/Leg1Escrow.dfy	2026-11-21 16:36:45.683437427 -0500
++++ leg1-copies/L1-M1-money-threshold-weaken//Leg1Escrow.dfy	2026-11-21 17:07:57.224711007 -0500
+@@ -489,7 +489,7 @@
+       var sellerAmount := LE(rec, 64, 8);
+       var grossSpent := LE(rec, 72, 8);
+       var recordTs := LE(rec, 80, 8);
+-      if sellerAmount > MONEY_MAX || grossSpent > MONEY_MAX {
++      if sellerAmount > 18446744073709551615 || grossSpent > 18446744073709551615 { // MUTANT
+         r := r.(verdict := Asc("REJECT_AMOUNT_NOT_MONEY"), exitCode := 1, failNull := false, failIndex := i); return;
+       }
+       // step 8 record_ts non-decreasing

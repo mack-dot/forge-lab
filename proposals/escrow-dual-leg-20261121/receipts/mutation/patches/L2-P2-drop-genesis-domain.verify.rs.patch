@@ -1,0 +1,11 @@
+--- /private/tmp/claude-501/-Users-mackianni-forge/fb0fde47-8987-485d-a625-0e9fdb4facee/scratchpad/leg2-run2/src-extract/leg2-source/src/verify.rs	2026-11-21 15:16:07.000000000 -0500
++++ leg2-copies/L2-P2-drop-genesis-domain//src/verify.rs	2026-11-21 17:12:48.273819359 -0500
+@@ -122,7 +122,7 @@
+         return Err(Verdict::RejectMalformedRecord);
+     }
+     // §2: domain_id u8 = 2 -> REJECT_BAD_DOMAIN
+-    if rec.domain_id() != DOMAIN_ID {
++    if false { // PROBE: genesis domain check dropped
+         return Err(Verdict::RejectBadDomain);
+     }
+     // §3.2 step 1 (Q2a): kind != 'G' at index 0 -> REJECT_BAD_GENESIS

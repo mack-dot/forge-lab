@@ -1,0 +1,11 @@
+--- /private/tmp/claude-501/-Users-mackianni-forge/fb0fde47-8987-485d-a625-0e9fdb4facee/scratchpad/leg2-run2/src-extract/leg2-source/src/verify.rs	2026-11-21 15:16:07.000000000 -0500
++++ leg2-copies/L2-M3-torn-as-accept//src/verify.rs	2026-11-21 17:06:35.548946624 -0500
+@@ -465,7 +465,7 @@
+         None => return Report::simple(Verdict::UnverifiableInternal, records, torn_bytes),
+     };
+ 
+-    let verdict = if torn_bytes > 0 {
++    let verdict = if false { // MUTANT: torn tail treated as plain ACCEPT
+         Verdict::AcceptTornTail
+     } else {
+         Verdict::Accept

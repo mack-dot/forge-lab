@@ -1,0 +1,13 @@
+{
+  "spec_packet_hash": "51d1d035a3943e7bd9dcef23540e207aa968a2ff837241eede9c94a9ab7e8106",
+  "leg2_source_tree_sha256": "cdec66ea8cdeb02342b004dda8abe4af595cf3f11c2bff13e0fff7acd15bce3e",
+  "leg2_binary_sha256": "1f29d7c6848171c01119c6f544c666fb20e707710500c6578374d973ed38221b",
+  "rustc_version_string": "rustc 1.92.0 (ded5c06cf 2025-12-08)",
+  "built_offline": true,
+  "timestamp": "2026-11-21T20:20:46Z",
+  "labels": {
+    "verifier": "NATIVE CHECK",
+    "agreement": "FINITE TEST",
+    "end_to_end": false
+  }
+}

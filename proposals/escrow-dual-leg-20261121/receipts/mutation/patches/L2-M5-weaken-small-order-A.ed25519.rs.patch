@@ -1,0 +1,11 @@
+--- /private/tmp/claude-501/-Users-mackianni-forge/fb0fde47-8987-485d-a625-0e9fdb4facee/scratchpad/leg2-run2/src-extract/leg2-source/src/ed25519.rs	2026-11-21 15:16:07.000000000 -0500
++++ leg2-copies/L2-M5-weaken-small-order-A//src/ed25519.rs	2026-11-21 17:06:38.972222971 -0500
+@@ -180,7 +180,7 @@
+ /// verification path; it is offered for the genesis-level check Q14 proposes.
+ pub fn is_small_order(enc: &[u8; 32]) -> bool {
+     match decompress(enc) {
+-        Some(p) => p.double().double().double().is_identity(),
++        Some(_p) => false, // MUTANT: small-order A not rejected
+         None => false,
+     }
+ }
