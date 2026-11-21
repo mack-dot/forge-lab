@@ -28,6 +28,33 @@ request 40 its files are in `results/stage6-epoch1` and
 there. The files under `results/stage6` are the run of 2026-11-18 for
 the present gate bytes.
 
+## Task V1 refund-log verifier: a Dafny-proved recheck over the silicon-sink WAL, with its final EXIT record — U929
+
+CURRENT none; M1-B open; Stage12 unauthorized; end_to_end=false.
+Not a stage. The second half of the owner's decision of 2026-11-20
+("Stateful Spec + Task V1: Approved!", U924), built after the U928
+ratification. Branch `feat/v1-refund-log-verifier` from `236198b2`.
+Additive only: new files under `verifier/refund_log/`,
+`tests/refund_log_verifier/` and `scripts/`; no existing file changes
+except the allowed `proposals/refund-log-spec-20261120/README.md`, this
+`ROADMAP.md` and `unsure.md`. No gate module, lock or approval changes.
+NOT merged by the agent. The verifier rechecks every refund in the
+sink's real WAL against the ratified `RefundLogSpec.dfy` (`1a8c7c2a…`);
+it is PROVED about the model on one machine, a NATIVE CHECK as compiled,
+a FINITE TEST in its suites. `end_to_end=false`.
+
+| EXIT command/check | Actual exit/result | Result |
+| --- | --- | --- |
+| `exit_refund_log_verifier.py --case evidence` (build, proofs, suite, cross_target, mutations; twice) | passed=true | two runs byte-identical, bundle `ce71ba67…e31f` (`cmp` + `shasum` here) |
+| `dafny verify RefundLogVerifier.dfy` (gate options) |0|1447 verified, 0 errors, 0 out-of-resource |
+| audit vs empty baseline; `False0`-axiom control |0; audit 2|control names `False0`; 11 of 11 planted cheats caught |
+| two reproducible builds; package check |[0,0]|17 compiled files, 0 differing; 29 package files, 0 under a protected path |
+| suite (one machine, FINITE TEST) |pass|2048 of 2048 flips rejected, 257 offsets, 0 class disagreements, 0 leftover processes |
+| cross_target Python vs Node |0 diffs|2317+124+170+18 calls; full-cap 65,535 ACCEPT exit [0,0]; tail 64/64; 2^63−1 exact digits |
+| mutations (27 changed copies) |27 killed|0 survivors; 3 proof-kill demos each a named-lemma Dafny ERROR |
+| scratch-clone regression (28 Stage EXIT cases; frozen PR-gate; links) |PENDING (this step)| |
+| hosted gate on the pull request |expected: not accepted (no approval rule for these additive files); NOT observed yet| |
+
 ## Ratification proposal applied: stateful refund-log specification under `spec/refund/` (owner decisions D1 to D3 of 2026-11-20; the owner's merge is the ratification) — U928
 
 CURRENT none; M1-B open; Stage12 unauthorized; end_to_end=false.

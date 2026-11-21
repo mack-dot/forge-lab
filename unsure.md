@@ -21237,3 +21237,43 @@ curl: (6) Could not resolve host: github.com
   true` at genesis by the owner's decision. This is an interpretation of the log, stated in the verifier's contract.
 - Impact: none on any stage label. `end_to_end=false`. M1-B OPEN. Next check: the owner's manual review and merge;
   then Task V1.
+
+## U929 — Task V1 refund-log verifier: the final EXIT record, verified here; two byte-identical runs; what it does and does NOT establish
+
+- Refs U928 (the ratified specification), U924 (the owner's approval of Task V1), U913 (the Dafny 4.11 JS runtime
+  bitwise miscompile). Evidence: `scripts/exit_refund_log_verifier.py` ran all five cases (build, proofs, suite,
+  cross_target, mutations) twice into `build/refund_log_verifier_exit/evidence/attempt-0002/run-1` and `run-2`. Both
+  `evidence.json` are BYTE-IDENTICAL, SHA-256 `ce71ba67c63b02b1577d87454b57c8c0b2a41ad9e276c3c164b7e9742530e31f`
+  (re-checked here with `cmp` and `shasum`, not taken on the worker's word). Bundle `passed=true`, `end_to_end=false`,
+  `gate_accepted=false`, kind "record, NOT gate evidence", `spec_pin` `spec/refund/RefundLogSpec.dfy` `1a8c7c2a…bc5a`.
+  An earlier `attempt-0001` is a superseded, incomplete run (no mutations case, pre reap-race fix); it is not the
+  evidence and `build/` is git-ignored, so no attempt dir is committed.
+- Proofs: `dafny verify verifier/refund_log/RefundLogVerifier.dfy` (gate options) → 1447 verified, 0 errors, 0
+  out-of-resource/timeout. Audit == empty baseline (exit 0). Audit-plant control: a `{:axiom} False0` → audit exit 2,
+  one finding naming `False0`. Cheat-scan: 0 findings, scanner control ok; the one extern outside Dafny is the
+  unverified Python shim, listed in the trusted base. 11 of 11 planted proof cheats caught (`assume`, `{:axiom}`,
+  bodyless function/lemma, and the rest).
+- Build: two builds, exit [0,0], 17 compiled files, 0 differing (the launcher's first line, the absolute interpreter,
+  is excluded as a machine fact), `reproducible=true`; package 29 files, none under a protected path, none differing
+  from `origin/main` outside the package, no machine paths; Node shim 122 lines.
+- Suite (FINITE TEST, one machine): teardown left 0 processes; exhaustive 2048 of 2048 bit-flips rejected, 257
+  structural offsets, 0 class disagreements, 0 assertion failures; negative controls, golden-rust and planted-bugs all
+  agree.
+- Cross_target (the Python and Node programs, both compiled from the one verified `.dfy`): 0 differences on 2317
+  exhaustive + 124 golden (31 `--encode`) + 170 negative-control + 18 planted calls; integer boundaries 88 calls per
+  program with exact decimal digits including 2^63−1; full-cap 65,535-record log ACCEPT, verdict lines equal, exit
+  [0,0]; tail 64/64 ratified on both. This cross-check exists because the Dafny 4.11 JS runtime bitwise miscompile
+  first made the Node program reject every log; it was fixed in Dafny source with `Xor32`/`XorByte128` (prior art
+  dafny-lang/dafny#6584; the owner also filed #6647).
+- Mutations: 27 changed verifier copies, 27 killed (all by test), 0 survivors, control passed; three proof-kill demos
+  (`chain_not_checked`, `amount_le_to_lt`, `torn_tail_accept`) each a genuine Dafny verification ERROR on a named
+  lemma (`RecordBack`, `Verify`, `Finish`), not out-of-resource.
+- What this does NOT establish (so no one rounds it up): PROVED applies ONLY to the named Dafny statements about the
+  refund-log MODEL on ONE machine; the compiled Python/Node programs are a NATIVE CHECK (unverified compiler, see the
+  JS bug above); the suites are a FINITE TEST. The record does NOT establish the binary-refusal path (a binary
+  rejection is ignored), the genesis flag bits, the D1 `refundEnabled` reading beyond the owner's decision, external
+  dispatch, other stores, or anything from a non-zero exit alone. `SinkCoreV3`/`ShellCoreV5` are not reused.
+- Impact: none on any stage label. `end_to_end=false`. M1-B OPEN. `gate_accepted=false`: this is a record, not gate
+  evidence; no gate module, lock or approval changes. Next check: the owner's manual review and merge of the Task V1
+  pull request (the hosted gate is expected not to accept it — there is no approval rule for these additive files).
+  Nothing merged or committed to `main` by the agent.

@@ -1,5 +1,14 @@
 # Stateful refund-log specification: a proposal for the owner's review (2026-11-20)
 
+> **Status note, added 2026-11-20 (later the same day).** This proposal is now RATIFIED. The owner
+> merged pull request 88, which added `spec/refund/RefundLogSpec.dfy` (SHA-256 `1a8c7c2a…bc5a`,
+> byte-equal to `RefundLogSpec.dfy` in this folder) and `spec/refund/RefundLogSpec.lock` to `main`
+> (squash commit `236198b2`). The owner's decisions D1 to D3 are recorded verbatim in `unsure.md`
+> U928. The text below is the proposal as it was written before ratification and is not changed;
+> where it says "NOT approved" or "NOT ratified", that was true when it was written. `unsure.md`
+> U924 also keeps its original wording (the file is append-only). The verifier that is proved
+> against the ratified text is in `verifier/refund_log/` (Task V1).
+
 **This is a SPECIFICATION PROPOSAL.** It is NOT approved and NOT ratified. No protected file changed.
 The lemmas are machine-checked statements about the specification TEXT only (one run, on this
 machine; results below). Nothing here says anything about the engine (`src/silicon_sink/sink.rs`),
