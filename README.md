@@ -15,6 +15,35 @@ Forge is a research prototype, licensed under Apache-2.0 (see `LICENSE`;
 the repository is private at the time of this text).
 **`end_to_end=false`**: no result here is a proof of a deployed system.
 
+## Try it in 30 seconds (no Dafny required)
+
+One of Forge's cores — the escrow-log verifier — is formally **proved**, and you can run it right now
+against real attack inputs with standard `cargo` (no Dafny toolchain):
+
+```sh
+git clone https://github.com/mack-dot/forge && cd forge
+sh proposals/escrow-dual-leg-20261121/demo/try_it.sh
+```
+
+It builds a zero-dependency Rust verifier and checks four committed inputs:
+
+| input | verdict |
+| --- | --- |
+| a valid refund log | `ACCEPT` |
+| a spend over the cap | `REJECT_OVER_CAP` |
+| a forged identity key (`0100…00`) | `REJECT_BAD_KEY` |
+| a replayed duplicate step | `REJECT_DUPLICATE_ID` |
+
+Each verdict is deterministic from the bytes, and the Rust verification math is sub-millisecond (process
+startup dominates the wall time). The same inputs also pass an **independent, Dafny-proved** verifier —
+written in a different language by a different model, frozen before it was compared — and the two legs
+agree on **1,999 / 1,999** differential cases (0 diffs) and catch **14 / 14** planted bugs, one of them
+killed by the proof itself. See [the dual-leg report](proposals/escrow-dual-leg-20261121/REPORT.md).
+
+**Honest scope:** this runs the *proved verifier core* (a **NATIVE CHECK** once compiled) over a **finite**
+set of inputs. `end_to_end=false`. The drop-in `forge wrap` / MCP sidecar that makes this enforcement
+*unbypassable* (Phase 1, links E2/E4 above) is **not built yet** — watch releases for v0.1.
+
 ## What Forge is
 
 Forge is an **airlock between AI agents and irreversible actions**
