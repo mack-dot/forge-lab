@@ -1,0 +1,11 @@
+--- /private/tmp/claude-501/-Users-mackianni-forge/fb0fde47-8987-485d-a625-0e9fdb4facee/scratchpad/leg2-run2/src-extract/leg2-source/src/verify.rs	2026-11-21 15:16:07.000000000 -0500
++++ leg2-copies/L2-M10-drop-cap-check//src/verify.rs	2026-11-21 17:06:47.530004570 -0500
+@@ -304,7 +304,7 @@
+ 
+     // 10. cap: gross_spent <= cap, and gross_refunded <= gross_spent (the second
+     //     conjunct is structurally vacuous in this CLI, Q13.3)
+-    if gross_spent > state.cap || state.gross_refunded > gross_spent {
++    if false { // MUTANT: cap check dropped
+         return Err(Verdict::RejectOverCap);
+     }
+ 

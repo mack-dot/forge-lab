@@ -1,0 +1,11 @@
+--- /private/tmp/claude-501/-Users-mackianni-forge/fb0fde47-8987-485d-a625-0e9fdb4facee/scratchpad/leg2-run2/src-extract/leg2-source/src/verify.rs	2026-11-21 15:16:07.000000000 -0500
++++ leg2-copies/L2-M2-drop-chain-check//src/verify.rs	2026-11-21 17:06:33.830447744 -0500
+@@ -261,7 +261,7 @@
+     }
+ 
+     // 4. prev_hash == tip_hash
+-    if rec.prev_hash() != state.tip_hash {
++    if false { // MUTANT: prev_hash chain check dropped
+         return Err(Verdict::RejectChainBreak);
+     }
+ 

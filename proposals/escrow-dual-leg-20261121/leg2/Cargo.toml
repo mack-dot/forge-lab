@@ -1,0 +1,31 @@
+[package]
+name = "leg2-verify"
+version = "0.2.1"
+edition = "2021"
+description = "Leg 2 independent verifier for the Forge V2 escrow log (128-byte records), built from SPEC.md alone."
+license = "UNLICENSED"
+
+# INDEPENDENCE / TRUSTED BASE (README 1.3): Rust std only.
+# Zero third-party dependencies. SHA-256, SHA-512 and Ed25519 are hand-rolled.
+[dependencies]
+
+[lib]
+name = "leg2_verify"
+path = "src/lib.rs"
+
+[[bin]]
+name = "leg2-verify"
+path = "src/main.rs"
+
+[profile.release]
+# SPEC 1: the ONLY permitted modular wraparound is the 32-bit add inside SHA-256
+# compression (written with explicit wrapping_add). Everywhere else an arithmetic
+# overflow is a bug, so leave the checks ON in release too: a surprise overflow
+# panics, is caught, and becomes UNVERIFIABLE_INTERNAL (exit 3) -- never an ACCEPT.
+overflow-checks = true
+debug-assertions = false
+panic = "unwind"      # required: main catches unwinds and fails closed
+opt-level = 2
+
+[profile.dev]
+overflow-checks = true

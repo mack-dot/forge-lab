@@ -1,0 +1,11 @@
+--- /private/tmp/claude-501/-Users-mackianni-forge/fb0fde47-8987-485d-a625-0e9fdb4facee/scratchpad/leg1-escrow/Leg1Escrow.dfy	2026-11-21 16:36:45.683437427 -0500
++++ leg1-copies/L1-M3-torn-as-accept//Leg1Escrow.dfy	2026-11-21 17:08:32.711846745 -0500
+@@ -557,7 +557,7 @@
+     var refund := cap - finalGross;  // cap >= gross by the OVER_CAP check
+     var eg := hasSteps;              // ACCEPT with steps => expiry gate decided
+ 
+-    if tornBytes > 0 {
++    if false { // MUTANT: torn tail treated as ACCEPT
+       r := Res(Asc("ACCEPT_TORN_TAIL"), 4, records, tornBytes, true, 0,
+                finalGross, payout, refund, lastTipHex, records, eg);
+     } else {

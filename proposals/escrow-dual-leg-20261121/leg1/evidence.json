@@ -1,0 +1,61 @@
+{
+  "artifact": "forge-v2-escrow-leg1-dafny",
+  "role": "Leg 1 (independent second implementation, N-version check)",
+  "date": "2026-11-21",
+  "end_to_end": false,
+  "spec_pin_sha256_SPEC_md": "5e76778454660ca2a7ecd772cf47ebb5c187f2c2296cad1fc145bff89513a63c",
+  "spec_release": "rr4 (Option B genesis envelope-first classification)",
+  "spec_pin_sha256_SPEC_md_prev_rr": "8e972fe4f6f27e1e3cd6326b315e0ccdabf2cb0fe6f44f0e8bc6543806ea1c38",
+  "toolchain": {
+    "dafny": "4.11.0+fcb2042d6d043a2634f0854338c08feeaaaf4ae2",
+    "dafny_path": "/Users/mackianni/forge/.toolchain/dafny-4.11.0/dafny/dafny",
+    "node": "v24.3.0 (/opt/homebrew/bin/node)",
+    "primary_backend": "python",
+    "second_backend": "javascript (cross-check only)"
+  },
+  "dafny_verify": {
+    "command": "dafny verify <file> (one file per single proof slot)",
+    "Sha.dfy": {"verified": 30, "errors": 0},
+    "Ed.dfy": {"verified": 16, "errors": 0},
+    "Leg1Escrow.dfy": {"verified": 40, "errors": 0},
+    "total_verified": 86,
+    "total_errors": 0
+  },
+  "vectors": {
+    "suite": "golden_vectors/vectors.json",
+    "total": 63,
+    "passed": 63,
+    "comparison": "--json object field-for-field AND process exit code vs expected_json"
+  },
+  "backend_cross_check": {
+    "scope": "SHA-256/512 FIPS known-answers + #6584 word-boundary bitwise table",
+    "python_vs_javascript": "IDENTICAL",
+    "note": "Confirms the by-method 16-bit-lane split neutralizes dafny-lang/dafny#6584 on the JS backend."
+  },
+  "self_tests": {
+    "sha256_abc": "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad",
+    "sha256_empty": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "sha512_abc_prefix": "ddaf35a193617aba...",
+    "ed25519_rfc8032_test2": "verified",
+    "ed25519_golden_cosigned_tape": "all 3 records x 2 signatures verify",
+    "ed25519_small_order_badA_pub": "detected as small-order (REJECT_BAD_KEY)"
+  },
+  "labels": {
+    "core": "PROVED",
+    "compiled": "NATIVE CHECK",
+    "suite": "FINITE TEST"
+  },
+  "proved_statements": [
+    "Model.LERoundTrip: decode(encode(v)) == v for v < 256^n (little-endian, both widths)",
+    "Model.LERoundTrip2: encode(decode(s)) == s[off..off+n] (canonical decode)",
+    "Model.HeaderRoundTrip / HeaderRoundTrip2: 16-byte record header encode<->decode both directions",
+    "Model.MoneyFoldSound: an ACCEPTed money-fold conserves value (gross == run + sum(seller amounts)) and never exceeds cap; NO precondition on the input step sequence",
+    "Model.MoneyFoldComplete: a canonical good history (all Money, cumulative <= cap) always folds to ACCEPT",
+    "Sha.Xor32/And32/Or32/Xor64/And64/Or64: the by-method 16-bit-lane split equals the primitive bitwise op for ALL inputs (the #6584 guard is proved equivalent)"
+  ],
+  "not_proved_tested_only": [
+    "SHA-256 / SHA-512 cryptographic correctness (self-tested vs FIPS 180-4 KATs)",
+    "Ed25519 strict profile correctness (self-tested vs RFC 8032 + the spec's own golden signature vectors)",
+    "VerifyCLI end-to-end verdict mapping (validated by the 56 golden vectors)"
+  ]
+}

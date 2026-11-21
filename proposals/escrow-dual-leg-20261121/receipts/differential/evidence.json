@@ -1,0 +1,656 @@
+{
+ "label": "FINITE TEST (large but finite corpus), NOT a proof of equivalence over all inputs. end_to_end=false.",
+ "legs": {
+  "leg1": "/private/tmp/claude-501/-Users-mackianni-forge/fb0fde47-8987-485d-a625-0e9fdb4facee/scratchpad/leg1-escrow/leg1_cli.py",
+  "leg2": "/private/tmp/claude-501/-Users-mackianni-forge/fb0fde47-8987-485d-a625-0e9fdb4facee/scratchpad/leg2-run2/src-extract/leg2-source/target/release/leg2-verify"
+ },
+ "corpus_size": 1999,
+ "golden_cases": 64,
+ "fuzz_cases": 1935,
+ "agreement_count": 1935,
+ "divergence_count": 0,
+ "golden_all_ok": true,
+ "golden_vs_expected": [
+  {
+   "name": "accept_genesis_only",
+   "expected_verdict": "ACCEPT",
+   "leg1_vs_expected_diff": [],
+   "leg2_vs_expected_diff": [],
+   "legs_agree": true,
+   "ok": true,
+   "leg1_exit": 0,
+   "leg2_exit": 0
+  },
+  {
+   "name": "accept_one_step",
+   "expected_verdict": "ACCEPT",
+   "leg1_vs_expected_diff": [],
+   "leg2_vs_expected_diff": [],
+   "legs_agree": true,
+   "ok": true,
+   "leg1_exit": 0,
+   "leg2_exit": 0
+  },
+  {
+   "name": "accept_two_step",
+   "expected_verdict": "ACCEPT",
+   "leg1_vs_expected_diff": [],
+   "leg2_vs_expected_diff": [],
+   "legs_agree": true,
+   "ok": true,
+   "leg1_exit": 0,
+   "leg2_exit": 0
+  },
+  {
+   "name": "accept_cap_boundary_2p63_minus_1",
+   "expected_verdict": "ACCEPT",
+   "leg1_vs_expected_diff": [],
+   "leg2_vs_expected_diff": [],
+   "legs_agree": true,
+   "ok": true,
+   "leg1_exit": 0,
+   "leg2_exit": 0
+  },
+  {
+   "name": "accept_gross_cross_2p53_and_2p63",
+   "expected_verdict": "ACCEPT",
+   "leg1_vs_expected_diff": [],
+   "leg2_vs_expected_diff": [],
+   "legs_agree": true,
+   "ok": true,
+   "leg1_exit": 0,
+   "leg2_exit": 0
+  },
+  {
+   "name": "accept_torn_tail_001",
+   "expected_verdict": "ACCEPT_TORN_TAIL",
+   "leg1_vs_expected_diff": [],
+   "leg2_vs_expected_diff": [],
+   "legs_agree": true,
+   "ok": true,
+   "leg1_exit": 4,
+   "leg2_exit": 4
+  },
+  {
+   "name": "accept_torn_tail_064",
+   "expected_verdict": "ACCEPT_TORN_TAIL",
+   "leg1_vs_expected_diff": [],
+   "leg2_vs_expected_diff": [],
+   "legs_agree": true,
+   "ok": true,
+   "leg1_exit": 4,
+   "leg2_exit": 4
+  },
+  {
+   "name": "accept_torn_tail_127",
+   "expected_verdict": "ACCEPT_TORN_TAIL",
+   "leg1_vs_expected_diff": [],
+   "leg2_vs_expected_diff": [],
+   "legs_agree": true,
+   "ok": true,
+   "leg1_exit": 4,
+   "leg2_exit": 4
+  },
+  {
+   "name": "accept_expect_tip_match",
+   "expected_verdict": "ACCEPT",
+   "leg1_vs_expected_diff": [],
+   "leg2_vs_expected_diff": [],
+   "legs_agree": true,
+   "ok": true,
+   "leg1_exit": 0,
+   "leg2_exit": 0
+  },
+  {
+   "name": "accept_cosigned_tape",
+   "expected_verdict": "ACCEPT",
+   "leg1_vs_expected_diff": [],
+   "leg2_vs_expected_diff": [],
+   "legs_agree": true,
+   "ok": true,
+   "leg1_exit": 0,
+   "leg2_exit": 0
+  },
+  {
+   "name": "reject_duplicate_id",
+   "expected_verdict": "REJECT_DUPLICATE_ID",
+   "leg1_vs_expected_diff": [],
+   "leg2_vs_expected_diff": [],
+   "legs_agree": true,
+   "ok": true,
+   "leg1_exit": 1,
+   "leg2_exit": 1
+  },
+  {
+   "name": "reject_chain_break",
+   "expected_verdict": "REJECT_CHAIN_BREAK",
+   "leg1_vs_expected_diff": [],
+   "leg2_vs_expected_diff": [],
+   "legs_agree": true,
+   "ok": true,
+   "leg1_exit": 1,
+   "leg2_exit": 1
+  },
+  {
+   "name": "reject_over_cap",
+   "expected_verdict": "REJECT_OVER_CAP",
+   "leg1_vs_expected_diff": [],
+   "leg2_vs_expected_diff": [],
+   "legs_agree": true,
+   "ok": true,
+   "leg1_exit": 1,
+   "leg2_exit": 1
+  },
+  {
+   "name": "reject_expired",
+   "expected_verdict": "REJECT_EXPIRED",
+   "leg1_vs_expected_diff": [],
+   "leg2_vs_expected_diff": [],
+   "legs_agree": true,
+   "ok": true,
+   "leg1_exit": 1,
+   "leg2_exit": 1
+  },
+  {
+   "name": "reject_bad_seal",
+   "expected_verdict": "REJECT_BAD_SEAL",
+   "leg1_vs_expected_diff": [],
+   "leg2_vs_expected_diff": [],
+   "legs_agree": true,
+   "ok": true,
+   "leg1_exit": 1,
+   "leg2_exit": 1
+  },
+  {
+   "name": "reject_not_money_2p63",
+   "expected_verdict": "REJECT_AMOUNT_NOT_MONEY",
+   "leg1_vs_expected_diff": [],
+   "leg2_vs_expected_diff": [],
+   "legs_agree": true,
+   "ok": true,
+   "leg1_exit": 1,
+   "leg2_exit": 1
+  },
+  {
+   "name": "reject_genesis_cap_not_money",
+   "expected_verdict": "REJECT_AMOUNT_NOT_MONEY",
+   "leg1_vs_expected_diff": [],
+   "leg2_vs_expected_diff": [],
+   "legs_agree": true,
+   "ok": true,
+   "leg1_exit": 1,
+   "leg2_exit": 1
+  },
+  {
+   "name": "reject_manifest_mismatch",
+   "expected_verdict": "REJECT_BAD_GENESIS",
+   "leg1_vs_expected_diff": [],
+   "leg2_vs_expected_diff": [],
+   "legs_agree": true,
+   "ok": true,
+   "leg1_exit": 1,
+   "leg2_exit": 1
+  },
+  {
+   "name": "reject_bad_domain",
+   "expected_verdict": "REJECT_BAD_DOMAIN",
+   "leg1_vs_expected_diff": [],
+   "leg2_vs_expected_diff": [],
+   "legs_agree": true,
+   "ok": true,
+   "leg1_exit": 1,
+   "leg2_exit": 1
+  },
+  {
+   "name": "reject_seq_mismatch",
+   "expected_verdict": "REJECT_SEQ_MISMATCH",
+   "leg1_vs_expected_diff": [],
+   "leg2_vs_expected_diff": [],
+   "legs_agree": true,
+   "ok": true,
+   "leg1_exit": 1,
+   "leg2_exit": 1
+  },
+  {
+   "name": "reject_empty_id",
+   "expected_verdict": "REJECT_EMPTY_ID",
+   "leg1_vs_expected_diff": [],
+   "leg2_vs_expected_diff": [],
+   "legs_agree": true,
+   "ok": true,
+   "leg1_exit": 1,
+   "leg2_exit": 1
+  },
+  {
+   "name": "reject_malformed_payload_reserved",
+   "expected_verdict": "REJECT_MALFORMED_RECORD",
+   "leg1_vs_expected_diff": [],
+   "leg2_vs_expected_diff": [],
+   "legs_agree": true,
+   "ok": true,
+   "leg1_exit": 1,
+   "leg2_exit": 1
+  },
+  {
+   "name": "reject_expect_tip_mismatch",
+   "expected_verdict": "REJECT_CHAIN_BREAK",
+   "leg1_vs_expected_diff": [],
+   "leg2_vs_expected_diff": [],
+   "legs_agree": true,
+   "ok": true,
+   "leg1_exit": 1,
+   "leg2_exit": 1
+  },
+  {
+   "name": "reject_expect_tip_torn_mismatch",
+   "expected_verdict": "REJECT_CHAIN_BREAK",
+   "leg1_vs_expected_diff": [],
+   "leg2_vs_expected_diff": [],
+   "legs_agree": true,
+   "ok": true,
+   "leg1_exit": 1,
+   "leg2_exit": 1
+  },
+  {
+   "name": "reject_genesis_bad_prevhash",
+   "expected_verdict": "REJECT_BAD_GENESIS",
+   "leg1_vs_expected_diff": [],
+   "leg2_vs_expected_diff": [],
+   "legs_agree": true,
+   "ok": true,
+   "leg1_exit": 1,
+   "leg2_exit": 1
+  },
+  {
+   "name": "reject_genesis_kind_s",
+   "expected_verdict": "REJECT_BAD_GENESIS",
+   "leg1_vs_expected_diff": [],
+   "leg2_vs_expected_diff": [],
+   "legs_agree": true,
+   "ok": true,
+   "leg1_exit": 1,
+   "leg2_exit": 1
+  },
+  {
+   "name": "reject_step_kind_g",
+   "expected_verdict": "REJECT_MALFORMED_RECORD",
+   "leg1_vs_expected_diff": [],
+   "leg2_vs_expected_diff": [],
+   "legs_agree": true,
+   "ok": true,
+   "leg1_exit": 1,
+   "leg2_exit": 1
+  },
+  {
+   "name": "reject_manifest_empty_deal_id",
+   "expected_verdict": "REJECT_EMPTY_ID",
+   "leg1_vs_expected_diff": [],
+   "leg2_vs_expected_diff": [],
+   "legs_agree": true,
+   "ok": true,
+   "leg1_exit": 1,
+   "leg2_exit": 1
+  },
+  {
+   "name": "reject_manifest_wrong_length",
+   "expected_verdict": "REJECT_BAD_GENESIS",
+   "leg1_vs_expected_diff": [],
+   "leg2_vs_expected_diff": [],
+   "legs_agree": true,
+   "ok": true,
+   "leg1_exit": 1,
+   "leg2_exit": 1
+  },
+  {
+   "name": "reject_key_mismatch",
+   "expected_verdict": "REJECT_KEY_MISMATCH",
+   "leg1_vs_expected_diff": [],
+   "leg2_vs_expected_diff": [],
+   "legs_agree": true,
+   "ok": true,
+   "leg1_exit": 1,
+   "leg2_exit": 1
+  },
+  {
+   "name": "reject_bad_key",
+   "expected_verdict": "REJECT_BAD_KEY",
+   "leg1_vs_expected_diff": [],
+   "leg2_vs_expected_diff": [],
+   "legs_agree": true,
+   "ok": true,
+   "leg1_exit": 1,
+   "leg2_exit": 1
+  },
+  {
+   "name": "reject_bad_signature_tape",
+   "expected_verdict": "REJECT_BAD_SIGNATURE",
+   "leg1_vs_expected_diff": [],
+   "leg2_vs_expected_diff": [],
+   "legs_agree": true,
+   "ok": true,
+   "leg1_exit": 1,
+   "leg2_exit": 1
+  },
+  {
+   "name": "reject_bad_signature_small_order_R",
+   "expected_verdict": "REJECT_BAD_SIGNATURE",
+   "leg1_vs_expected_diff": [],
+   "leg2_vs_expected_diff": [],
+   "legs_agree": true,
+   "ok": true,
+   "leg1_exit": 1,
+   "leg2_exit": 1
+  },
+  {
+   "name": "unverifiable_empty_file",
+   "expected_verdict": "UNVERIFIABLE_EMPTY",
+   "leg1_vs_expected_diff": [],
+   "leg2_vs_expected_diff": [],
+   "legs_agree": true,
+   "ok": true,
+   "leg1_exit": 3,
+   "leg2_exit": 3
+  },
+  {
+   "name": "unverifiable_no_record",
+   "expected_verdict": "UNVERIFIABLE_NO_RECORD",
+   "leg1_vs_expected_diff": [],
+   "leg2_vs_expected_diff": [],
+   "legs_agree": true,
+   "ok": true,
+   "leg1_exit": 3,
+   "leg2_exit": 3
+  },
+  {
+   "name": "unverifiable_usage_missing_observed_now",
+   "expected_verdict": "UNVERIFIABLE_USAGE",
+   "leg1_vs_expected_diff": [],
+   "leg2_vs_expected_diff": [],
+   "legs_agree": true,
+   "ok": true,
+   "leg1_exit": 3,
+   "leg2_exit": 3
+  },
+  {
+   "name": "unverifiable_too_large",
+   "expected_verdict": "UNVERIFIABLE_TOO_LARGE",
+   "leg1_vs_expected_diff": [],
+   "leg2_vs_expected_diff": [],
+   "legs_agree": true,
+   "ok": true,
+   "leg1_exit": 3,
+   "leg2_exit": 3
+  },
+  {
+   "name": "unverifiable_usage_missing_pubkeys",
+   "expected_verdict": "UNVERIFIABLE_USAGE",
+   "leg1_vs_expected_diff": [],
+   "leg2_vs_expected_diff": [],
+   "legs_agree": true,
+   "ok": true,
+   "leg1_exit": 3,
+   "leg2_exit": 3
+  },
+  {
+   "name": "money_bound_accept_0",
+   "expected_verdict": "ACCEPT",
+   "leg1_vs_expected_diff": [],
+   "leg2_vs_expected_diff": [],
+   "legs_agree": true,
+   "ok": true,
+   "leg1_exit": 0,
+   "leg2_exit": 0
+  },
+  {
+   "name": "money_bound_accept_1",
+   "expected_verdict": "ACCEPT",
+   "leg1_vs_expected_diff": [],
+   "leg2_vs_expected_diff": [],
+   "legs_agree": true,
+   "ok": true,
+   "leg1_exit": 0,
+   "leg2_exit": 0
+  },
+  {
+   "name": "money_bound_accept_32767",
+   "expected_verdict": "ACCEPT",
+   "leg1_vs_expected_diff": [],
+   "leg2_vs_expected_diff": [],
+   "legs_agree": true,
+   "ok": true,
+   "leg1_exit": 0,
+   "leg2_exit": 0
+  },
+  {
+   "name": "money_bound_accept_32768",
+   "expected_verdict": "ACCEPT",
+   "leg1_vs_expected_diff": [],
+   "leg2_vs_expected_diff": [],
+   "legs_agree": true,
+   "ok": true,
+   "leg1_exit": 0,
+   "leg2_exit": 0
+  },
+  {
+   "name": "money_bound_accept_65535",
+   "expected_verdict": "ACCEPT",
+   "leg1_vs_expected_diff": [],
+   "leg2_vs_expected_diff": [],
+   "legs_agree": true,
+   "ok": true,
+   "leg1_exit": 0,
+   "leg2_exit": 0
+  },
+  {
+   "name": "money_bound_accept_65536",
+   "expected_verdict": "ACCEPT",
+   "leg1_vs_expected_diff": [],
+   "leg2_vs_expected_diff": [],
+   "legs_agree": true,
+   "ok": true,
+   "leg1_exit": 0,
+   "leg2_exit": 0
+  },
+  {
+   "name": "money_bound_accept_2147483647",
+   "expected_verdict": "ACCEPT",
+   "leg1_vs_expected_diff": [],
+   "leg2_vs_expected_diff": [],
+   "legs_agree": true,
+   "ok": true,
+   "leg1_exit": 0,
+   "leg2_exit": 0
+  },
+  {
+   "name": "money_bound_accept_2147483648",
+   "expected_verdict": "ACCEPT",
+   "leg1_vs_expected_diff": [],
+   "leg2_vs_expected_diff": [],
+   "legs_agree": true,
+   "ok": true,
+   "leg1_exit": 0,
+   "leg2_exit": 0
+  },
+  {
+   "name": "money_bound_accept_4294967295",
+   "expected_verdict": "ACCEPT",
+   "leg1_vs_expected_diff": [],
+   "leg2_vs_expected_diff": [],
+   "legs_agree": true,
+   "ok": true,
+   "leg1_exit": 0,
+   "leg2_exit": 0
+  },
+  {
+   "name": "money_bound_accept_4294967296",
+   "expected_verdict": "ACCEPT",
+   "leg1_vs_expected_diff": [],
+   "leg2_vs_expected_diff": [],
+   "legs_agree": true,
+   "ok": true,
+   "leg1_exit": 0,
+   "leg2_exit": 0
+  },
+  {
+   "name": "money_bound_accept_9007199254740991",
+   "expected_verdict": "ACCEPT",
+   "leg1_vs_expected_diff": [],
+   "leg2_vs_expected_diff": [],
+   "legs_agree": true,
+   "ok": true,
+   "leg1_exit": 0,
+   "leg2_exit": 0
+  },
+  {
+   "name": "money_bound_accept_9007199254740992",
+   "expected_verdict": "ACCEPT",
+   "leg1_vs_expected_diff": [],
+   "leg2_vs_expected_diff": [],
+   "legs_agree": true,
+   "ok": true,
+   "leg1_exit": 0,
+   "leg2_exit": 0
+  },
+  {
+   "name": "money_bound_accept_9223372036854775807",
+   "expected_verdict": "ACCEPT",
+   "leg1_vs_expected_diff": [],
+   "leg2_vs_expected_diff": [],
+   "legs_agree": true,
+   "ok": true,
+   "leg1_exit": 0,
+   "leg2_exit": 0
+  },
+  {
+   "name": "money_bound_reject_9223372036854775808",
+   "expected_verdict": "REJECT_AMOUNT_NOT_MONEY",
+   "leg1_vs_expected_diff": [],
+   "leg2_vs_expected_diff": [],
+   "legs_agree": true,
+   "ok": true,
+   "leg1_exit": 1,
+   "leg2_exit": 1
+  },
+  {
+   "name": "money_bound_reject_18446744073709551615",
+   "expected_verdict": "REJECT_AMOUNT_NOT_MONEY",
+   "leg1_vs_expected_diff": [],
+   "leg2_vs_expected_diff": [],
+   "legs_agree": true,
+   "ok": true,
+   "leg1_exit": 1,
+   "leg2_exit": 1
+  },
+  {
+   "name": "demo_sabotage_replay",
+   "expected_verdict": "REJECT_DUPLICATE_ID",
+   "leg1_vs_expected_diff": [],
+   "leg2_vs_expected_diff": [],
+   "legs_agree": true,
+   "ok": true,
+   "leg1_exit": 1,
+   "leg2_exit": 1
+  },
+  {
+   "name": "demo_sabotage_altered_amount",
+   "expected_verdict": "REJECT_CHAIN_BREAK",
+   "leg1_vs_expected_diff": [],
+   "leg2_vs_expected_diff": [],
+   "legs_agree": true,
+   "ok": true,
+   "leg1_exit": 1,
+   "leg2_exit": 1
+  },
+  {
+   "name": "demo_sabotage_over_cap",
+   "expected_verdict": "REJECT_OVER_CAP",
+   "leg1_vs_expected_diff": [],
+   "leg2_vs_expected_diff": [],
+   "legs_agree": true,
+   "ok": true,
+   "leg1_exit": 1,
+   "leg2_exit": 1
+  },
+  {
+   "name": "reject_genesis_bad_magic",
+   "expected_verdict": "REJECT_MALFORMED_RECORD",
+   "leg1_vs_expected_diff": [],
+   "leg2_vs_expected_diff": [],
+   "legs_agree": true,
+   "ok": true,
+   "leg1_exit": 1,
+   "leg2_exit": 1
+  },
+  {
+   "name": "reject_genesis_bad_version",
+   "expected_verdict": "REJECT_MALFORMED_RECORD",
+   "leg1_vs_expected_diff": [],
+   "leg2_vs_expected_diff": [],
+   "legs_agree": true,
+   "ok": true,
+   "leg1_exit": 1,
+   "leg2_exit": 1
+  },
+  {
+   "name": "reject_genesis_bad_reserved",
+   "expected_verdict": "REJECT_MALFORMED_RECORD",
+   "leg1_vs_expected_diff": [],
+   "leg2_vs_expected_diff": [],
+   "legs_agree": true,
+   "ok": true,
+   "leg1_exit": 1,
+   "leg2_exit": 1
+  },
+  {
+   "name": "reject_genesis_bad_seqno",
+   "expected_verdict": "REJECT_SEQ_MISMATCH",
+   "leg1_vs_expected_diff": [],
+   "leg2_vs_expected_diff": [],
+   "legs_agree": true,
+   "ok": true,
+   "leg1_exit": 1,
+   "leg2_exit": 1
+  },
+  {
+   "name": "reject_genesis_bad_domain",
+   "expected_verdict": "REJECT_BAD_DOMAIN",
+   "leg1_vs_expected_diff": [],
+   "leg2_vs_expected_diff": [],
+   "legs_agree": true,
+   "ok": true,
+   "leg1_exit": 1,
+   "leg2_exit": 1
+  },
+  {
+   "name": "accept_records_eq_max",
+   "expected_verdict": "ACCEPT",
+   "leg1_vs_expected_diff": [],
+   "leg2_vs_expected_diff": [],
+   "legs_agree": true,
+   "ok": true,
+   "leg1_exit": 0,
+   "leg2_exit": 0
+  },
+  {
+   "name": "reject_record_ts_decreasing",
+   "expected_verdict": "REJECT_SEQ_MISMATCH",
+   "leg1_vs_expected_diff": [],
+   "leg2_vs_expected_diff": [],
+   "legs_agree": true,
+   "ok": true,
+   "leg1_exit": 1,
+   "leg2_exit": 1
+  },
+  {
+   "name": "reject_genesis_step_at_index0",
+   "expected_verdict": "REJECT_BAD_GENESIS",
+   "leg1_vs_expected_diff": [],
+   "leg2_vs_expected_diff": [],
+   "legs_agree": true,
+   "ok": true,
+   "leg1_exit": 1,
+   "leg2_exit": 1
+  }
+ ],
+ "divergences": []
+}

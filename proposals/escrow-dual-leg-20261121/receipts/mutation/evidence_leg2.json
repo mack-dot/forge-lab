@@ -1,0 +1,324 @@
+{
+  "leg": "Leg 2 (Rust, independent impl)",
+  "planted": 14,
+  "killed": 14,
+  "survivors": [],
+  "by_proof": 0,
+  "by_build": 0,
+  "by_test": 14,
+  "by_differential": 14,
+  "note": "On the 56 frozen golden vectors the unmutated Leg 1 output equals expected_json for every case, so every killed_by_test divergence is simultaneously a differential divergence vs the unmutated other leg. by_differential counts that overlap, not an exclusive set.",
+  "per_mutant": [
+    {
+      "name": "L2-M1-money-threshold-weaken",
+      "spec_rule": "SPEC.1 Money(v) <= 2^63-1",
+      "how_killed": "killed_by_test",
+      "n_cases": 4,
+      "first_case": "reject_not_money_2p63",
+      "detail_vs_expected": [
+        "verdict: 'REJECT_OVER_CAP' vs 'REJECT_AMOUNT_NOT_MONEY'"
+      ],
+      "detail_vs_other_leg": [
+        "verdict: 'REJECT_OVER_CAP' vs 'REJECT_AMOUNT_NOT_MONEY'"
+      ]
+    },
+    {
+      "name": "L2-M2-drop-chain-check",
+      "spec_rule": "SPEC.5.2 step4 prev_hash==tip_hash",
+      "how_killed": "killed_by_test",
+      "n_cases": 1,
+      "first_case": "reject_chain_break",
+      "detail_vs_expected": [
+        "verdict: 'ACCEPT' vs 'REJECT_CHAIN_BREAK'",
+        "exit_code: 0 vs 1",
+        "fail_index: None vs 2",
+        "final_balances: {'gross_spent': 200, 'seller_payout': 200, 'buyer_refund': 300} vs {'gross_spent': 0, 'seller_payout': 0, 'buyer_refund': 0}",
+        "tip: '30b3e4bf0bc46e9e4347178ae94be47baaf39f301b4394abc35f60f3f8c3f79e' vs ''",
+        "epoch: 3 vs 0",
+        "expiry_gate_evaluated: True vs False",
+        "process_exit: 0 vs 1"
+      ],
+      "detail_vs_other_leg": [
+        "verdict: 'ACCEPT' vs 'REJECT_CHAIN_BREAK'",
+        "exit_code: 0 vs 1",
+        "fail_index: None vs 2",
+        "final_balances: {'gross_spent': 200, 'seller_payout': 200, 'buyer_refund': 300} vs {'gross_spent': 0, 'seller_payout': 0, 'buyer_refund': 0}",
+        "tip: '30b3e4bf0bc46e9e4347178ae94be47baaf39f301b4394abc35f60f3f8c3f79e' vs ''",
+        "epoch: 3 vs 0",
+        "expiry_gate_evaluated: True vs False",
+        "process_exit: 0 vs 1"
+      ]
+    },
+    {
+      "name": "L2-M3-torn-as-accept",
+      "spec_rule": "SPEC.8/Q13.6 ACCEPT_TORN_TAIL",
+      "how_killed": "killed_by_test",
+      "n_cases": 3,
+      "first_case": "accept_torn_tail_001",
+      "detail_vs_expected": [
+        "verdict: 'ACCEPT' vs 'ACCEPT_TORN_TAIL'",
+        "exit_code: 0 vs 4",
+        "process_exit: 0 vs 4"
+      ],
+      "detail_vs_other_leg": [
+        "verdict: 'ACCEPT' vs 'ACCEPT_TORN_TAIL'",
+        "exit_code: 0 vs 4",
+        "process_exit: 0 vs 4"
+      ]
+    },
+    {
+      "name": "L2-M4-drop-step-seal",
+      "spec_rule": "SPEC.5.2 step5 record_seal",
+      "how_killed": "killed_by_test",
+      "n_cases": 1,
+      "first_case": "reject_bad_seal",
+      "detail_vs_expected": [
+        "verdict: 'ACCEPT' vs 'REJECT_BAD_SEAL'",
+        "exit_code: 0 vs 1",
+        "fail_index: None vs 1",
+        "final_balances: {'gross_spent': 100, 'seller_payout': 100, 'buyer_refund': 400} vs {'gross_spent': 0, 'seller_payout': 0, 'buyer_refund': 0}",
+        "tip: 'e6ec9be9133c44e783988dcc0c93414726a77640783a06acd7ef9b430dd2aa8c' vs ''",
+        "epoch: 2 vs 0",
+        "expiry_gate_evaluated: True vs False",
+        "process_exit: 0 vs 1"
+      ],
+      "detail_vs_other_leg": [
+        "verdict: 'ACCEPT' vs 'REJECT_BAD_SEAL'",
+        "exit_code: 0 vs 1",
+        "fail_index: None vs 1",
+        "final_balances: {'gross_spent': 100, 'seller_payout': 100, 'buyer_refund': 400} vs {'gross_spent': 0, 'seller_payout': 0, 'buyer_refund': 0}",
+        "tip: 'e6ec9be9133c44e783988dcc0c93414726a77640783a06acd7ef9b430dd2aa8c' vs ''",
+        "epoch: 2 vs 0",
+        "expiry_gate_evaluated: True vs False",
+        "process_exit: 0 vs 1"
+      ]
+    },
+    {
+      "name": "L2-M5-weaken-small-order-A",
+      "spec_rule": "SPEC.3.2 step6/Q14 reject small-order A",
+      "how_killed": "killed_by_test",
+      "n_cases": 1,
+      "first_case": "reject_bad_key",
+      "detail_vs_expected": [
+        "verdict: 'ACCEPT' vs 'REJECT_BAD_KEY'",
+        "exit_code: 0 vs 1",
+        "fail_index: None vs 0",
+        "final_balances: {'gross_spent': 0, 'seller_payout': 0, 'buyer_refund': 500} vs {'gross_spent': 0, 'seller_payout': 0, 'buyer_refund': 0}",
+        "tip: '6b9c630ce8d72335c09da388e60479e5c09ac1669d971247d3e1c8756e8e5a60' vs ''",
+        "epoch: 1 vs 0",
+        "process_exit: 0 vs 1"
+      ],
+      "detail_vs_other_leg": [
+        "verdict: 'ACCEPT' vs 'REJECT_BAD_KEY'",
+        "exit_code: 0 vs 1",
+        "fail_index: None vs 0",
+        "final_balances: {'gross_spent': 0, 'seller_payout': 0, 'buyer_refund': 500} vs {'gross_spent': 0, 'seller_payout': 0, 'buyer_refund': 0}",
+        "tip: '6b9c630ce8d72335c09da388e60479e5c09ac1669d971247d3e1c8756e8e5a60' vs ''",
+        "epoch: 1 vs 0",
+        "process_exit: 0 vs 1"
+      ]
+    },
+    {
+      "name": "L2-M6-drop-key-crosscheck",
+      "spec_rule": "SPEC.3.2 step7/Q5 pinned key cross-check",
+      "how_killed": "killed_by_test",
+      "n_cases": 1,
+      "first_case": "reject_key_mismatch",
+      "detail_vs_expected": [
+        "verdict: 'ACCEPT' vs 'REJECT_KEY_MISMATCH'",
+        "exit_code: 0 vs 1",
+        "fail_index: None vs 0",
+        "final_balances: {'gross_spent': 0, 'seller_payout': 0, 'buyer_refund': 500} vs {'gross_spent': 0, 'seller_payout': 0, 'buyer_refund': 0}",
+        "tip: '6ba24f8f29c82d74d32331c987bd752895b9d9aeaaf895b8f7ff264bb70e4ee9' vs ''",
+        "epoch: 1 vs 0",
+        "process_exit: 0 vs 1"
+      ],
+      "detail_vs_other_leg": [
+        "verdict: 'ACCEPT' vs 'REJECT_KEY_MISMATCH'",
+        "exit_code: 0 vs 1",
+        "fail_index: None vs 0",
+        "final_balances: {'gross_spent': 0, 'seller_payout': 0, 'buyer_refund': 500} vs {'gross_spent': 0, 'seller_payout': 0, 'buyer_refund': 0}",
+        "tip: '6ba24f8f29c82d74d32331c987bd752895b9d9aeaaf895b8f7ff264bb70e4ee9' vs ''",
+        "epoch: 1 vs 0",
+        "process_exit: 0 vs 1"
+      ]
+    },
+    {
+      "name": "L2-M7-drop-seq-check",
+      "spec_rule": "SPEC.5.2 step3 seq_no==i",
+      "how_killed": "killed_by_test",
+      "n_cases": 1,
+      "first_case": "reject_seq_mismatch",
+      "detail_vs_expected": [
+        "verdict: 'ACCEPT' vs 'REJECT_SEQ_MISMATCH'",
+        "exit_code: 0 vs 1",
+        "fail_index: None vs 1",
+        "final_balances: {'gross_spent': 100, 'seller_payout': 100, 'buyer_refund': 400} vs {'gross_spent': 0, 'seller_payout': 0, 'buyer_refund': 0}",
+        "tip: '3c9c127f298ac625ca45994d05aafe49635e4106874e468186a0a402c897fe1b' vs ''",
+        "epoch: 2 vs 0",
+        "expiry_gate_evaluated: True vs False",
+        "process_exit: 0 vs 1"
+      ],
+      "detail_vs_other_leg": [
+        "verdict: 'ACCEPT' vs 'REJECT_SEQ_MISMATCH'",
+        "exit_code: 0 vs 1",
+        "fail_index: None vs 1",
+        "final_balances: {'gross_spent': 100, 'seller_payout': 100, 'buyer_refund': 400} vs {'gross_spent': 0, 'seller_payout': 0, 'buyer_refund': 0}",
+        "tip: '3c9c127f298ac625ca45994d05aafe49635e4106874e468186a0a402c897fe1b' vs ''",
+        "epoch: 2 vs 0",
+        "expiry_gate_evaluated: True vs False",
+        "process_exit: 0 vs 1"
+      ]
+    },
+    {
+      "name": "L2-M8-drop-duplicate-id",
+      "spec_rule": "SPEC.5.2 step11 at-most-once",
+      "how_killed": "killed_by_test",
+      "n_cases": 2,
+      "first_case": "reject_duplicate_id",
+      "detail_vs_expected": [
+        "verdict: 'ACCEPT' vs 'REJECT_DUPLICATE_ID'",
+        "exit_code: 0 vs 1",
+        "fail_index: None vs 3",
+        "final_balances: {'gross_spent': 300, 'seller_payout': 300, 'buyer_refund': 200} vs {'gross_spent': 0, 'seller_payout': 0, 'buyer_refund': 0}",
+        "tip: '39bb958d61643e80b3c00f74b622ce55e70679a07300b772e929fb58254f3b47' vs ''",
+        "epoch: 4 vs 0",
+        "expiry_gate_evaluated: True vs False",
+        "process_exit: 0 vs 1"
+      ],
+      "detail_vs_other_leg": [
+        "verdict: 'ACCEPT' vs 'REJECT_DUPLICATE_ID'",
+        "exit_code: 0 vs 1",
+        "fail_index: None vs 3",
+        "final_balances: {'gross_spent': 300, 'seller_payout': 300, 'buyer_refund': 200} vs {'gross_spent': 0, 'seller_payout': 0, 'buyer_refund': 0}",
+        "tip: '39bb958d61643e80b3c00f74b622ce55e70679a07300b772e929fb58254f3b47' vs ''",
+        "epoch: 4 vs 0",
+        "expiry_gate_evaluated: True vs False",
+        "process_exit: 0 vs 1"
+      ]
+    },
+    {
+      "name": "L2-M9-expiry-boundary",
+      "spec_rule": "SPEC.5.2 step12 observed_now>=expires_at",
+      "how_killed": "killed_by_test",
+      "n_cases": 1,
+      "first_case": "reject_expired",
+      "detail_vs_expected": [
+        "verdict: 'ACCEPT' vs 'REJECT_EXPIRED'",
+        "exit_code: 0 vs 1",
+        "fail_index: None vs 1",
+        "final_balances: {'gross_spent': 100, 'seller_payout': 100, 'buyer_refund': 400} vs {'gross_spent': 0, 'seller_payout': 0, 'buyer_refund': 0}",
+        "tip: '67c730b0c7987a94abfc76b3fde1e640469758cc7ecffa7c3c2e325f3e31bf67' vs ''",
+        "epoch: 2 vs 0",
+        "process_exit: 0 vs 1"
+      ],
+      "detail_vs_other_leg": [
+        "verdict: 'ACCEPT' vs 'REJECT_EXPIRED'",
+        "exit_code: 0 vs 1",
+        "fail_index: None vs 1",
+        "final_balances: {'gross_spent': 100, 'seller_payout': 100, 'buyer_refund': 400} vs {'gross_spent': 0, 'seller_payout': 0, 'buyer_refund': 0}",
+        "tip: '67c730b0c7987a94abfc76b3fde1e640469758cc7ecffa7c3c2e325f3e31bf67' vs ''",
+        "epoch: 2 vs 0",
+        "process_exit: 0 vs 1"
+      ]
+    },
+    {
+      "name": "L2-M10-drop-cap-check",
+      "spec_rule": "SPEC.5.2 step10 gross_spent<=cap",
+      "how_killed": "killed_by_test",
+      "n_cases": 2,
+      "first_case": "reject_over_cap",
+      "detail_vs_expected": [
+        "verdict: 'UNVERIFIABLE_INTERNAL' vs 'REJECT_OVER_CAP'",
+        "exit_code: 3 vs 1",
+        "fail_index: None vs 1",
+        "process_exit: 3 vs 1"
+      ],
+      "detail_vs_other_leg": [
+        "verdict: 'UNVERIFIABLE_INTERNAL' vs 'REJECT_OVER_CAP'",
+        "exit_code: 3 vs 1",
+        "fail_index: None vs 1",
+        "process_exit: 3 vs 1"
+      ]
+    },
+    {
+      "name": "L2-M11-cap-strict-boundary",
+      "spec_rule": "SPEC.5.2 step10 gross_spent<=cap boundary",
+      "how_killed": "killed_by_test",
+      "n_cases": 3,
+      "first_case": "accept_cap_boundary_2p63_minus_1",
+      "detail_vs_expected": [
+        "verdict: 'REJECT_OVER_CAP' vs 'ACCEPT'",
+        "exit_code: 1 vs 0",
+        "fail_index: 1 vs None",
+        "final_balances: {'gross_spent': 0, 'seller_payout': 0, 'buyer_refund': 0} vs {'gross_spent': 9223372036854775807, 'seller_payout': 9223372036854775807, 'buyer_refund': 0}",
+        "tip: '' vs '790c325cf01ee6ac11d02e181f6744b39bc1cb2350375105566a19826c0e6b34'",
+        "epoch: 0 vs 2",
+        "expiry_gate_evaluated: False vs True",
+        "process_exit: 1 vs 0"
+      ],
+      "detail_vs_other_leg": [
+        "verdict: 'REJECT_OVER_CAP' vs 'ACCEPT'",
+        "exit_code: 1 vs 0",
+        "fail_index: 1 vs None",
+        "final_balances: {'gross_spent': 0, 'seller_payout': 0, 'buyer_refund': 0} vs {'gross_spent': 9223372036854775807, 'seller_payout': 9223372036854775807, 'buyer_refund': 0}",
+        "tip: '' vs '790c325cf01ee6ac11d02e181f6744b39bc1cb2350375105566a19826c0e6b34'",
+        "epoch: 0 vs 2",
+        "expiry_gate_evaluated: False vs True",
+        "process_exit: 1 vs 0"
+      ]
+    },
+    {
+      "name": "L2-P1-maxrecords-ceiling-gte",
+      "spec_rule": "SPEC.9.4/Q8 records<=max_records ceiling (boundary records==max)",
+      "how_killed": "killed_by_test",
+      "n_cases": 1,
+      "first_case": "accept_records_eq_max",
+      "detail_vs_expected": [
+        "verdict: 'UNVERIFIABLE_TOO_LARGE' vs 'ACCEPT'",
+        "exit_code: 3 vs 0",
+        "final_balances: {'gross_spent': 0, 'seller_payout': 0, 'buyer_refund': 0} vs {'gross_spent': 100, 'seller_payout': 100, 'buyer_refund': 400}",
+        "tip: '' vs '864be94a3057191266b89d1bb1ed1888457a11b854bc631c2fc5b68c595f5090'",
+        "epoch: 0 vs 2",
+        "expiry_gate_evaluated: False vs True",
+        "process_exit: 3 vs 0"
+      ]
+    },
+    {
+      "name": "L2-P2-drop-genesis-domain",
+      "spec_rule": "SPEC.3.2 genesis domain_id==2 (index 0)",
+      "how_killed": "killed_by_test",
+      "n_cases": 1,
+      "first_case": "reject_genesis_bad_domain",
+      "detail_vs_expected": [
+        "verdict: 'ACCEPT' vs 'REJECT_BAD_DOMAIN'",
+        "exit_code: 0 vs 1",
+        "fail_index: None vs 0",
+        "final_balances: {'gross_spent': 0, 'seller_payout': 0, 'buyer_refund': 500} vs {'gross_spent': 0, 'seller_payout': 0, 'buyer_refund': 0}",
+        "tip: '403f442eb67c10496f67d3d98e6a2c53cc0263e5fdc6ea89f3b9e7285bdf79cc' vs ''",
+        "epoch: 1 vs 0",
+        "process_exit: 0 vs 1"
+      ]
+    },
+    {
+      "name": "L2-P3-drop-record-ts-monotonic",
+      "spec_rule": "SPEC.5.2 step8 record_ts non-decreasing",
+      "how_killed": "killed_by_test",
+      "n_cases": 1,
+      "first_case": "reject_record_ts_decreasing",
+      "detail_vs_expected": [
+        "verdict: 'ACCEPT' vs 'REJECT_SEQ_MISMATCH'",
+        "exit_code: 0 vs 1",
+        "fail_index: None vs 2",
+        "final_balances: {'gross_spent': 200, 'seller_payout': 200, 'buyer_refund': 300} vs {'gross_spent': 0, 'seller_payout': 0, 'buyer_refund': 0}",
+        "tip: 'ab7ad4d744f663accb76f85b11b7227dfa4472830afc7cbfd95057ba0ffb7775' vs ''",
+        "epoch: 3 vs 0",
+        "expiry_gate_evaluated: True vs False",
+        "process_exit: 0 vs 1"
+      ]
+    }
+  ],
+  "end_to_end": false,
+  "kill_rate": "14/14",
+  "vectors_suite_count": 64
+}

@@ -1,0 +1,1821 @@
+{
+  "schema": "forge-v2-leg2-golden-vectors",
+  "ratification": "RATIFICATION_2026-11-21.md (Q1-Q14)",
+  "status": "FROZEN",
+  "end_to_end": false,
+  "magic_hex": "465632",
+  "money_max": 9223372036854775807,
+  "cap_default": 500,
+  "manifest_layout_bytes": 176,
+  "default_max_records": 1048576,
+  "tape_signed_message": "record_seal bytes [96..128]",
+  "ed25519_profile": "strict (cofactorless, reject non-canonical A/R, S>=L, small-order A)",
+  "json_schema_keys": [
+    "verdict",
+    "exit_code",
+    "records",
+    "torn_bytes",
+    "fail_index",
+    "final_balances",
+    "tip",
+    "epoch",
+    "expiry_gate_evaluated",
+    "notes"
+  ],
+  "note": "Black-box vectors: input bytes + witness + pubkeys (+ optional tape) -> expected --json. torn_bytes = len mod 128 ALWAYS (Q13.6). observed_now null means the flag is omitted. Zero Leg-1 content.",
+  "count": 64,
+  "cases": [
+    {
+      "name": "accept_genesis_only",
+      "description": "Valid genesis only, no steps; observed_now omitted (Q6/Q13.1: genesis-only ACCEPTs regardless of observed_now, no expiry gate).",
+      "log_file": "accept_genesis_only.log.bin",
+      "manifest_file": "accept_genesis_only.manifest.bin",
+      "tape_file": null,
+      "pubkeys_file": "a.pub,b.pub",
+      "observed_now": null,
+      "expect_tip": null,
+      "max_records": null,
+      "expected_json": {
+        "verdict": "ACCEPT",
+        "exit_code": 0,
+        "records": 1,
+        "torn_bytes": 0,
+        "fail_index": null,
+        "final_balances": {
+          "gross_spent": 0,
+          "seller_payout": 0,
+          "buyer_refund": 500
+        },
+        "tip": "bcf6ad2520fe7fbcaa00f79c2041420decbd0598dfa2e20726c15f6a2ddd6902",
+        "epoch": 1,
+        "expiry_gate_evaluated": false,
+        "notes": ""
+      },
+      "note": null
+    },
+    {
+      "name": "accept_one_step",
+      "description": "Genesis + one clean step of 100 (gross 100 <= cap 500).",
+      "log_file": "accept_one_step.log.bin",
+      "manifest_file": "accept_one_step.manifest.bin",
+      "tape_file": null,
+      "pubkeys_file": "a.pub,b.pub",
+      "observed_now": 1700000500,
+      "expect_tip": null,
+      "max_records": null,
+      "expected_json": {
+        "verdict": "ACCEPT",
+        "exit_code": 0,
+        "records": 2,
+        "torn_bytes": 0,
+        "fail_index": null,
+        "final_balances": {
+          "gross_spent": 100,
+          "seller_payout": 100,
+          "buyer_refund": 400
+        },
+        "tip": "864be94a3057191266b89d1bb1ed1888457a11b854bc631c2fc5b68c595f5090",
+        "epoch": 2,
+        "expiry_gate_evaluated": true,
+        "notes": ""
+      },
+      "note": null
+    },
+    {
+      "name": "accept_two_step",
+      "description": "Genesis + two clean steps (gross 200 <= cap 500).",
+      "log_file": "accept_two_step.log.bin",
+      "manifest_file": "accept_two_step.manifest.bin",
+      "tape_file": null,
+      "pubkeys_file": "a.pub,b.pub",
+      "observed_now": 1700000500,
+      "expect_tip": null,
+      "max_records": null,
+      "expected_json": {
+        "verdict": "ACCEPT",
+        "exit_code": 0,
+        "records": 3,
+        "torn_bytes": 0,
+        "fail_index": null,
+        "final_balances": {
+          "gross_spent": 200,
+          "seller_payout": 200,
+          "buyer_refund": 300
+        },
+        "tip": "dafdc98c917f893a843d55ddc8c53987415606f27bee3e439ac19a79d0edeaf3",
+        "epoch": 3,
+        "expiry_gate_evaluated": true,
+        "notes": ""
+      },
+      "note": null
+    },
+    {
+      "name": "accept_cap_boundary_2p63_minus_1",
+      "description": "cap = 2^63-1; one step spends exactly the cap. ACCEPT.",
+      "log_file": "accept_cap_boundary_2p63_minus_1.log.bin",
+      "manifest_file": "accept_cap_boundary_2p63_minus_1.manifest.bin",
+      "tape_file": null,
+      "pubkeys_file": "a.pub,b.pub",
+      "observed_now": 1700000500,
+      "expect_tip": null,
+      "max_records": null,
+      "expected_json": {
+        "verdict": "ACCEPT",
+        "exit_code": 0,
+        "records": 2,
+        "torn_bytes": 0,
+        "fail_index": null,
+        "final_balances": {
+          "gross_spent": 9223372036854775807,
+          "seller_payout": 9223372036854775807,
+          "buyer_refund": 0
+        },
+        "tip": "790c325cf01ee6ac11d02e181f6744b39bc1cb2350375105566a19826c0e6b34",
+        "epoch": 2,
+        "expiry_gate_evaluated": true,
+        "notes": ""
+      },
+      "note": null
+    },
+    {
+      "name": "accept_gross_cross_2p53_and_2p63",
+      "description": "Cumulative gross crosses 2^53 then lands on 2^63-1 under a 2^63-1 cap (catches float drift). ACCEPT.",
+      "log_file": "accept_gross_cross_2p53_and_2p63.log.bin",
+      "manifest_file": "accept_gross_cross_2p53_and_2p63.manifest.bin",
+      "tape_file": null,
+      "pubkeys_file": "a.pub,b.pub",
+      "observed_now": 1700000500,
+      "expect_tip": null,
+      "max_records": null,
+      "expected_json": {
+        "verdict": "ACCEPT",
+        "exit_code": 0,
+        "records": 4,
+        "torn_bytes": 0,
+        "fail_index": null,
+        "final_balances": {
+          "gross_spent": 9223372036854775807,
+          "seller_payout": 9223372036854775807,
+          "buyer_refund": 0
+        },
+        "tip": "1f68f88daab9848244adb33f15b4a7f465443fb9302131bec1aff64fe860cff3",
+        "epoch": 4,
+        "expiry_gate_evaluated": true,
+        "notes": ""
+      },
+      "note": null
+    },
+    {
+      "name": "accept_torn_tail_001",
+      "description": "Genesis + one step + 1 trailing partial bytes. ACCEPT_TORN_TAIL.",
+      "log_file": "accept_torn_tail_001.log.bin",
+      "manifest_file": "accept_torn_tail_001.manifest.bin",
+      "tape_file": null,
+      "pubkeys_file": "a.pub,b.pub",
+      "observed_now": 1700000500,
+      "expect_tip": null,
+      "max_records": null,
+      "expected_json": {
+        "verdict": "ACCEPT_TORN_TAIL",
+        "exit_code": 4,
+        "records": 2,
+        "torn_bytes": 1,
+        "fail_index": null,
+        "final_balances": {
+          "gross_spent": 100,
+          "seller_payout": 100,
+          "buyer_refund": 400
+        },
+        "tip": "864be94a3057191266b89d1bb1ed1888457a11b854bc631c2fc5b68c595f5090",
+        "epoch": 2,
+        "expiry_gate_evaluated": true,
+        "notes": ""
+      },
+      "note": null
+    },
+    {
+      "name": "accept_torn_tail_064",
+      "description": "Genesis + one step + 64 trailing partial bytes. ACCEPT_TORN_TAIL.",
+      "log_file": "accept_torn_tail_064.log.bin",
+      "manifest_file": "accept_torn_tail_064.manifest.bin",
+      "tape_file": null,
+      "pubkeys_file": "a.pub,b.pub",
+      "observed_now": 1700000500,
+      "expect_tip": null,
+      "max_records": null,
+      "expected_json": {
+        "verdict": "ACCEPT_TORN_TAIL",
+        "exit_code": 4,
+        "records": 2,
+        "torn_bytes": 64,
+        "fail_index": null,
+        "final_balances": {
+          "gross_spent": 100,
+          "seller_payout": 100,
+          "buyer_refund": 400
+        },
+        "tip": "864be94a3057191266b89d1bb1ed1888457a11b854bc631c2fc5b68c595f5090",
+        "epoch": 2,
+        "expiry_gate_evaluated": true,
+        "notes": ""
+      },
+      "note": null
+    },
+    {
+      "name": "accept_torn_tail_127",
+      "description": "Genesis + one step + 127 trailing partial bytes. ACCEPT_TORN_TAIL.",
+      "log_file": "accept_torn_tail_127.log.bin",
+      "manifest_file": "accept_torn_tail_127.manifest.bin",
+      "tape_file": null,
+      "pubkeys_file": "a.pub,b.pub",
+      "observed_now": 1700000500,
+      "expect_tip": null,
+      "max_records": null,
+      "expected_json": {
+        "verdict": "ACCEPT_TORN_TAIL",
+        "exit_code": 4,
+        "records": 2,
+        "torn_bytes": 127,
+        "fail_index": null,
+        "final_balances": {
+          "gross_spent": 100,
+          "seller_payout": 100,
+          "buyer_refund": 400
+        },
+        "tip": "864be94a3057191266b89d1bb1ed1888457a11b854bc631c2fc5b68c595f5090",
+        "epoch": 2,
+        "expiry_gate_evaluated": true,
+        "notes": ""
+      },
+      "note": null
+    },
+    {
+      "name": "accept_expect_tip_match",
+      "description": "Two clean steps with --expect-tip = SHA-256 of the last whole record.",
+      "log_file": "accept_expect_tip_match.log.bin",
+      "manifest_file": "accept_expect_tip_match.manifest.bin",
+      "tape_file": null,
+      "pubkeys_file": "a.pub,b.pub",
+      "observed_now": 1700000500,
+      "expect_tip": "dafdc98c917f893a843d55ddc8c53987415606f27bee3e439ac19a79d0edeaf3",
+      "max_records": null,
+      "expected_json": {
+        "verdict": "ACCEPT",
+        "exit_code": 0,
+        "records": 3,
+        "torn_bytes": 0,
+        "fail_index": null,
+        "final_balances": {
+          "gross_spent": 200,
+          "seller_payout": 200,
+          "buyer_refund": 300
+        },
+        "tip": "dafdc98c917f893a843d55ddc8c53987415606f27bee3e439ac19a79d0edeaf3",
+        "epoch": 3,
+        "expiry_gate_evaluated": true,
+        "notes": ""
+      },
+      "note": null
+    },
+    {
+      "name": "accept_cosigned_tape",
+      "description": "Genesis + two steps WITH --tape: real Ed25519 co-signatures (sig_A+sig_B per record, signed message = 32-byte record_seal). ACCEPT.",
+      "log_file": "accept_cosigned_tape.log.bin",
+      "manifest_file": "accept_cosigned_tape.manifest.bin",
+      "tape_file": "accept_cosigned_tape.tape.bin",
+      "pubkeys_file": "a.pub,b.pub",
+      "observed_now": 1700000500,
+      "expect_tip": null,
+      "max_records": null,
+      "expected_json": {
+        "verdict": "ACCEPT",
+        "exit_code": 0,
+        "records": 3,
+        "torn_bytes": 0,
+        "fail_index": null,
+        "final_balances": {
+          "gross_spent": 200,
+          "seller_payout": 200,
+          "buyer_refund": 300
+        },
+        "tip": "dafdc98c917f893a843d55ddc8c53987415606f27bee3e439ac19a79d0edeaf3",
+        "epoch": 3,
+        "expiry_gate_evaluated": true,
+        "notes": ""
+      },
+      "note": null
+    },
+    {
+      "name": "reject_duplicate_id",
+      "description": "Third step replays step_id 'part-0001' -> REJECT_DUPLICATE_ID at index 3.",
+      "log_file": "reject_duplicate_id.log.bin",
+      "manifest_file": "reject_duplicate_id.manifest.bin",
+      "tape_file": null,
+      "pubkeys_file": "a.pub,b.pub",
+      "observed_now": 1700000500,
+      "expect_tip": null,
+      "max_records": null,
+      "expected_json": {
+        "verdict": "REJECT_DUPLICATE_ID",
+        "exit_code": 1,
+        "records": 4,
+        "torn_bytes": 0,
+        "fail_index": 3,
+        "final_balances": {
+          "gross_spent": 0,
+          "seller_payout": 0,
+          "buyer_refund": 0
+        },
+        "tip": "",
+        "epoch": 0,
+        "expiry_gate_evaluated": false,
+        "notes": ""
+      },
+      "note": null
+    },
+    {
+      "name": "reject_chain_break",
+      "description": "Step 2 prev_hash is 32 zeros, not SHA-256(record 1) -> REJECT_CHAIN_BREAK at index 2.",
+      "log_file": "reject_chain_break.log.bin",
+      "manifest_file": "reject_chain_break.manifest.bin",
+      "tape_file": null,
+      "pubkeys_file": "a.pub,b.pub",
+      "observed_now": 1700000500,
+      "expect_tip": null,
+      "max_records": null,
+      "expected_json": {
+        "verdict": "REJECT_CHAIN_BREAK",
+        "exit_code": 1,
+        "records": 3,
+        "torn_bytes": 0,
+        "fail_index": 2,
+        "final_balances": {
+          "gross_spent": 0,
+          "seller_payout": 0,
+          "buyer_refund": 0
+        },
+        "tip": "",
+        "epoch": 0,
+        "expiry_gate_evaluated": false,
+        "notes": ""
+      },
+      "note": null
+    },
+    {
+      "name": "reject_over_cap",
+      "description": "One step gross_spent 600 > cap 500 -> REJECT_OVER_CAP at index 1.",
+      "log_file": "reject_over_cap.log.bin",
+      "manifest_file": "reject_over_cap.manifest.bin",
+      "tape_file": null,
+      "pubkeys_file": "a.pub,b.pub",
+      "observed_now": 1700000500,
+      "expect_tip": null,
+      "max_records": null,
+      "expected_json": {
+        "verdict": "REJECT_OVER_CAP",
+        "exit_code": 1,
+        "records": 2,
+        "torn_bytes": 0,
+        "fail_index": 1,
+        "final_balances": {
+          "gross_spent": 0,
+          "seller_payout": 0,
+          "buyer_refund": 0
+        },
+        "tip": "",
+        "epoch": 0,
+        "expiry_gate_evaluated": false,
+        "notes": ""
+      },
+      "note": null
+    },
+    {
+      "name": "reject_expired",
+      "description": "observed_now == expires_at (>= expires_at) -> REJECT_EXPIRED at index 1. Expiry keys on observed_now (Q6), not record_ts.",
+      "log_file": "reject_expired.log.bin",
+      "manifest_file": "reject_expired.manifest.bin",
+      "tape_file": null,
+      "pubkeys_file": "a.pub,b.pub",
+      "observed_now": 2000000000,
+      "expect_tip": null,
+      "max_records": null,
+      "expected_json": {
+        "verdict": "REJECT_EXPIRED",
+        "exit_code": 1,
+        "records": 2,
+        "torn_bytes": 0,
+        "fail_index": 1,
+        "final_balances": {
+          "gross_spent": 0,
+          "seller_payout": 0,
+          "buyer_refund": 0
+        },
+        "tip": "",
+        "epoch": 0,
+        "expiry_gate_evaluated": true,
+        "notes": ""
+      },
+      "note": null
+    },
+    {
+      "name": "reject_bad_seal",
+      "description": "Whole step record with a corrupted record_seal -> REJECT_BAD_SEAL at index 1 (NOT torn: a whole record that fails its seal is a REJECT).",
+      "log_file": "reject_bad_seal.log.bin",
+      "manifest_file": "reject_bad_seal.manifest.bin",
+      "tape_file": null,
+      "pubkeys_file": "a.pub,b.pub",
+      "observed_now": 1700000500,
+      "expect_tip": null,
+      "max_records": null,
+      "expected_json": {
+        "verdict": "REJECT_BAD_SEAL",
+        "exit_code": 1,
+        "records": 2,
+        "torn_bytes": 0,
+        "fail_index": 1,
+        "final_balances": {
+          "gross_spent": 0,
+          "seller_payout": 0,
+          "buyer_refund": 0
+        },
+        "tip": "",
+        "epoch": 0,
+        "expiry_gate_evaluated": false,
+        "notes": ""
+      },
+      "note": null
+    },
+    {
+      "name": "reject_not_money_2p63",
+      "description": "seller_amount = 2^63 (>= 2^63) -> REJECT_AMOUNT_NOT_MONEY at index 1.",
+      "log_file": "reject_not_money_2p63.log.bin",
+      "manifest_file": "reject_not_money_2p63.manifest.bin",
+      "tape_file": null,
+      "pubkeys_file": "a.pub,b.pub",
+      "observed_now": 1700000500,
+      "expect_tip": null,
+      "max_records": null,
+      "expected_json": {
+        "verdict": "REJECT_AMOUNT_NOT_MONEY",
+        "exit_code": 1,
+        "records": 2,
+        "torn_bytes": 0,
+        "fail_index": 1,
+        "final_balances": {
+          "gross_spent": 0,
+          "seller_payout": 0,
+          "buyer_refund": 0
+        },
+        "tip": "",
+        "epoch": 0,
+        "expiry_gate_evaluated": false,
+        "notes": ""
+      },
+      "note": null
+    },
+    {
+      "name": "reject_genesis_cap_not_money",
+      "description": "Genesis cap = 2^63 -> REJECT_AMOUNT_NOT_MONEY at index 0 (cap IS money-gated).",
+      "log_file": "reject_genesis_cap_not_money.log.bin",
+      "manifest_file": "reject_genesis_cap_not_money.manifest.bin",
+      "tape_file": null,
+      "pubkeys_file": "a.pub,b.pub",
+      "observed_now": null,
+      "expect_tip": null,
+      "max_records": null,
+      "expected_json": {
+        "verdict": "REJECT_AMOUNT_NOT_MONEY",
+        "exit_code": 1,
+        "records": 1,
+        "torn_bytes": 0,
+        "fail_index": 0,
+        "final_balances": {
+          "gross_spent": 0,
+          "seller_payout": 0,
+          "buyer_refund": 0
+        },
+        "tip": "",
+        "epoch": 0,
+        "expiry_gate_evaluated": false,
+        "notes": ""
+      },
+      "note": null
+    },
+    {
+      "name": "reject_manifest_mismatch",
+      "description": "Supplied manifest witness does not hash to payload manifest_sha256 -> REJECT_BAD_GENESIS at index 0.",
+      "log_file": "reject_manifest_mismatch.log.bin",
+      "manifest_file": "reject_manifest_mismatch.manifest.bin",
+      "tape_file": null,
+      "pubkeys_file": "a.pub,b.pub",
+      "observed_now": null,
+      "expect_tip": null,
+      "max_records": null,
+      "expected_json": {
+        "verdict": "REJECT_BAD_GENESIS",
+        "exit_code": 1,
+        "records": 1,
+        "torn_bytes": 0,
+        "fail_index": 0,
+        "final_balances": {
+          "gross_spent": 0,
+          "seller_payout": 0,
+          "buyer_refund": 0
+        },
+        "tip": "",
+        "epoch": 0,
+        "expiry_gate_evaluated": false,
+        "notes": ""
+      },
+      "note": null
+    },
+    {
+      "name": "reject_bad_domain",
+      "description": "Step with domain_id = 9 -> REJECT_BAD_DOMAIN at index 1.",
+      "log_file": "reject_bad_domain.log.bin",
+      "manifest_file": "reject_bad_domain.manifest.bin",
+      "tape_file": null,
+      "pubkeys_file": "a.pub,b.pub",
+      "observed_now": 1700000500,
+      "expect_tip": null,
+      "max_records": null,
+      "expected_json": {
+        "verdict": "REJECT_BAD_DOMAIN",
+        "exit_code": 1,
+        "records": 2,
+        "torn_bytes": 0,
+        "fail_index": 1,
+        "final_balances": {
+          "gross_spent": 0,
+          "seller_payout": 0,
+          "buyer_refund": 0
+        },
+        "tip": "",
+        "epoch": 0,
+        "expiry_gate_evaluated": false,
+        "notes": ""
+      },
+      "note": null
+    },
+    {
+      "name": "reject_seq_mismatch",
+      "description": "Step at index 1 carries seq_no = 5 -> REJECT_SEQ_MISMATCH at index 1.",
+      "log_file": "reject_seq_mismatch.log.bin",
+      "manifest_file": "reject_seq_mismatch.manifest.bin",
+      "tape_file": null,
+      "pubkeys_file": "a.pub,b.pub",
+      "observed_now": 1700000500,
+      "expect_tip": null,
+      "max_records": null,
+      "expected_json": {
+        "verdict": "REJECT_SEQ_MISMATCH",
+        "exit_code": 1,
+        "records": 2,
+        "torn_bytes": 0,
+        "fail_index": 1,
+        "final_balances": {
+          "gross_spent": 0,
+          "seller_payout": 0,
+          "buyer_refund": 0
+        },
+        "tip": "",
+        "epoch": 0,
+        "expiry_gate_evaluated": false,
+        "notes": ""
+      },
+      "note": null
+    },
+    {
+      "name": "reject_empty_id",
+      "description": "Step with an all-zero step_id -> REJECT_EMPTY_ID at index 1.",
+      "log_file": "reject_empty_id.log.bin",
+      "manifest_file": "reject_empty_id.manifest.bin",
+      "tape_file": null,
+      "pubkeys_file": "a.pub,b.pub",
+      "observed_now": 1700000500,
+      "expect_tip": null,
+      "max_records": null,
+      "expected_json": {
+        "verdict": "REJECT_EMPTY_ID",
+        "exit_code": 1,
+        "records": 2,
+        "torn_bytes": 0,
+        "fail_index": 1,
+        "final_balances": {
+          "gross_spent": 0,
+          "seller_payout": 0,
+          "buyer_refund": 0
+        },
+        "tip": "",
+        "epoch": 0,
+        "expiry_gate_evaluated": false,
+        "notes": ""
+      },
+      "note": null
+    },
+    {
+      "name": "reject_malformed_payload_reserved",
+      "description": "Step payload reserved[40..48] has a non-zero byte and the record_seal is now STALE; reserved is checked BEFORE the seal -> REJECT_MALFORMED_RECORD at index 1 (Q2c; NOT BAD_SEAL).",
+      "log_file": "reject_malformed_payload_reserved.log.bin",
+      "manifest_file": "reject_malformed_payload_reserved.manifest.bin",
+      "tape_file": null,
+      "pubkeys_file": "a.pub,b.pub",
+      "observed_now": 1700000500,
+      "expect_tip": null,
+      "max_records": null,
+      "expected_json": {
+        "verdict": "REJECT_MALFORMED_RECORD",
+        "exit_code": 1,
+        "records": 2,
+        "torn_bytes": 0,
+        "fail_index": 1,
+        "final_balances": {
+          "gross_spent": 0,
+          "seller_payout": 0,
+          "buyer_refund": 0
+        },
+        "tip": "",
+        "epoch": 0,
+        "expiry_gate_evaluated": false,
+        "notes": ""
+      },
+      "note": null
+    },
+    {
+      "name": "reject_expect_tip_mismatch",
+      "description": "Two clean steps, fold succeeds, but --expect-tip is wrong -> REJECT_CHAIN_BREAK (Q10a; anchor folds under CHAIN_BREAK, no record index).",
+      "log_file": "reject_expect_tip_mismatch.log.bin",
+      "manifest_file": "reject_expect_tip_mismatch.manifest.bin",
+      "tape_file": null,
+      "pubkeys_file": "a.pub,b.pub",
+      "observed_now": 1700000500,
+      "expect_tip": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+      "max_records": null,
+      "expected_json": {
+        "verdict": "REJECT_CHAIN_BREAK",
+        "exit_code": 1,
+        "records": 3,
+        "torn_bytes": 0,
+        "fail_index": null,
+        "final_balances": {
+          "gross_spent": 0,
+          "seller_payout": 0,
+          "buyer_refund": 0
+        },
+        "tip": "",
+        "epoch": 0,
+        "expiry_gate_evaluated": false,
+        "notes": ""
+      },
+      "note": "Post-fold anchor mismatch; fail_index is null (not a per-record fold failure)."
+    },
+    {
+      "name": "reject_expect_tip_torn_mismatch",
+      "description": "Genesis + one step + 64 torn bytes; would be ACCEPT_TORN_TAIL, but --expect-tip (wrong) is checked against the last WHOLE record -> REJECT_CHAIN_BREAK (Q10b).",
+      "log_file": "reject_expect_tip_torn_mismatch.log.bin",
+      "manifest_file": "reject_expect_tip_torn_mismatch.manifest.bin",
+      "tape_file": null,
+      "pubkeys_file": "a.pub,b.pub",
+      "observed_now": 1700000500,
+      "expect_tip": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+      "max_records": null,
+      "expected_json": {
+        "verdict": "REJECT_CHAIN_BREAK",
+        "exit_code": 1,
+        "records": 2,
+        "torn_bytes": 64,
+        "fail_index": null,
+        "final_balances": {
+          "gross_spent": 0,
+          "seller_payout": 0,
+          "buyer_refund": 0
+        },
+        "tip": "",
+        "epoch": 0,
+        "expiry_gate_evaluated": false,
+        "notes": ""
+      },
+      "note": null
+    },
+    {
+      "name": "reject_genesis_bad_prevhash",
+      "description": "Genesis prev_hash is non-zero -> REJECT_BAD_GENESIS at index 0 (Q1; overrides a provisional CHAIN_BREAK).",
+      "log_file": "reject_genesis_bad_prevhash.log.bin",
+      "manifest_file": "reject_genesis_bad_prevhash.manifest.bin",
+      "tape_file": null,
+      "pubkeys_file": "a.pub,b.pub",
+      "observed_now": null,
+      "expect_tip": null,
+      "max_records": null,
+      "expected_json": {
+        "verdict": "REJECT_BAD_GENESIS",
+        "exit_code": 1,
+        "records": 1,
+        "torn_bytes": 0,
+        "fail_index": 0,
+        "final_balances": {
+          "gross_spent": 0,
+          "seller_payout": 0,
+          "buyer_refund": 0
+        },
+        "tip": "",
+        "epoch": 0,
+        "expiry_gate_evaluated": false,
+        "notes": ""
+      },
+      "note": null
+    },
+    {
+      "name": "reject_genesis_kind_s",
+      "description": "Index 0 carries kind 'S' -> REJECT_BAD_GENESIS at index 0 (Q2a).",
+      "log_file": "reject_genesis_kind_s.log.bin",
+      "manifest_file": "reject_genesis_kind_s.manifest.bin",
+      "tape_file": null,
+      "pubkeys_file": "a.pub,b.pub",
+      "observed_now": null,
+      "expect_tip": null,
+      "max_records": null,
+      "expected_json": {
+        "verdict": "REJECT_BAD_GENESIS",
+        "exit_code": 1,
+        "records": 1,
+        "torn_bytes": 0,
+        "fail_index": 0,
+        "final_balances": {
+          "gross_spent": 0,
+          "seller_payout": 0,
+          "buyer_refund": 0
+        },
+        "tip": "",
+        "epoch": 0,
+        "expiry_gate_evaluated": false,
+        "notes": ""
+      },
+      "note": null
+    },
+    {
+      "name": "reject_step_kind_g",
+      "description": "Index 1 carries kind 'G' -> REJECT_MALFORMED_RECORD at index 1 (Q2b).",
+      "log_file": "reject_step_kind_g.log.bin",
+      "manifest_file": "reject_step_kind_g.manifest.bin",
+      "tape_file": null,
+      "pubkeys_file": "a.pub,b.pub",
+      "observed_now": 1700000500,
+      "expect_tip": null,
+      "max_records": null,
+      "expected_json": {
+        "verdict": "REJECT_MALFORMED_RECORD",
+        "exit_code": 1,
+        "records": 2,
+        "torn_bytes": 0,
+        "fail_index": 1,
+        "final_balances": {
+          "gross_spent": 0,
+          "seller_payout": 0,
+          "buyer_refund": 0
+        },
+        "tip": "",
+        "epoch": 0,
+        "expiry_gate_evaluated": false,
+        "notes": ""
+      },
+      "note": null
+    },
+    {
+      "name": "reject_manifest_empty_deal_id",
+      "description": "Manifest deal_id is all-zero -> REJECT_EMPTY_ID at index 0, checked AFTER manifest-hash agreement (Q4).",
+      "log_file": "reject_manifest_empty_deal_id.log.bin",
+      "manifest_file": "reject_manifest_empty_deal_id.manifest.bin",
+      "tape_file": null,
+      "pubkeys_file": "a.pub,b.pub",
+      "observed_now": null,
+      "expect_tip": null,
+      "max_records": null,
+      "expected_json": {
+        "verdict": "REJECT_EMPTY_ID",
+        "exit_code": 1,
+        "records": 1,
+        "torn_bytes": 0,
+        "fail_index": 0,
+        "final_balances": {
+          "gross_spent": 0,
+          "seller_payout": 0,
+          "buyer_refund": 0
+        },
+        "tip": "",
+        "epoch": 0,
+        "expiry_gate_evaluated": false,
+        "notes": ""
+      },
+      "note": null
+    },
+    {
+      "name": "reject_manifest_wrong_length",
+      "description": "Manifest witness is 170 bytes (not 176); cannot hash to manifest_sha256 -> REJECT_BAD_GENESIS at index 0 (Q13.2).",
+      "log_file": "reject_manifest_wrong_length.log.bin",
+      "manifest_file": "reject_manifest_wrong_length.manifest.bin",
+      "tape_file": null,
+      "pubkeys_file": "a.pub,b.pub",
+      "observed_now": null,
+      "expect_tip": null,
+      "max_records": null,
+      "expected_json": {
+        "verdict": "REJECT_BAD_GENESIS",
+        "exit_code": 1,
+        "records": 1,
+        "torn_bytes": 0,
+        "fail_index": 0,
+        "final_balances": {
+          "gross_spent": 0,
+          "seller_payout": 0,
+          "buyer_refund": 0
+        },
+        "tip": "",
+        "epoch": 0,
+        "expiry_gate_evaluated": false,
+        "notes": ""
+      },
+      "note": null
+    },
+    {
+      "name": "reject_key_mismatch",
+      "description": "Pinned --pubkeys (a.pub,b.pub) != manifest key_A,key_B -> REJECT_KEY_MISMATCH at index 0 (Q5).",
+      "log_file": "reject_key_mismatch.log.bin",
+      "manifest_file": "reject_key_mismatch.manifest.bin",
+      "tape_file": null,
+      "pubkeys_file": "a.pub,b.pub",
+      "observed_now": null,
+      "expect_tip": null,
+      "max_records": null,
+      "expected_json": {
+        "verdict": "REJECT_KEY_MISMATCH",
+        "exit_code": 1,
+        "records": 1,
+        "torn_bytes": 0,
+        "fail_index": 0,
+        "final_balances": {
+          "gross_spent": 0,
+          "seller_payout": 0,
+          "buyer_refund": 0
+        },
+        "tip": "",
+        "epoch": 0,
+        "expiry_gate_evaluated": false,
+        "notes": ""
+      },
+      "note": null
+    },
+    {
+      "name": "reject_bad_key",
+      "description": "Manifest key_A is a small-order Ed25519 point -> REJECT_BAD_KEY at index 0 (Q14). Pinned --pubkeys = badA.pub,b.pub (match the manifest).",
+      "log_file": "reject_bad_key.log.bin",
+      "manifest_file": "reject_bad_key.manifest.bin",
+      "tape_file": null,
+      "pubkeys_file": "badA.pub,b.pub",
+      "observed_now": null,
+      "expect_tip": null,
+      "max_records": null,
+      "expected_json": {
+        "verdict": "REJECT_BAD_KEY",
+        "exit_code": 1,
+        "records": 1,
+        "torn_bytes": 0,
+        "fail_index": 0,
+        "final_balances": {
+          "gross_spent": 0,
+          "seller_payout": 0,
+          "buyer_refund": 0
+        },
+        "tip": "",
+        "epoch": 0,
+        "expiry_gate_evaluated": false,
+        "notes": ""
+      },
+      "note": null
+    },
+    {
+      "name": "reject_bad_signature_tape",
+      "description": "Genesis + two steps WITH --tape, but sig_B(record 1) is corrupted -> REJECT_BAD_SIGNATURE at index 1 (Q11).",
+      "log_file": "reject_bad_signature_tape.log.bin",
+      "manifest_file": "reject_bad_signature_tape.manifest.bin",
+      "tape_file": "reject_bad_signature_tape.tape.bin",
+      "pubkeys_file": "a.pub,b.pub",
+      "observed_now": 1700000500,
+      "expect_tip": null,
+      "max_records": null,
+      "expected_json": {
+        "verdict": "REJECT_BAD_SIGNATURE",
+        "exit_code": 1,
+        "records": 3,
+        "torn_bytes": 0,
+        "fail_index": 1,
+        "final_balances": {
+          "gross_spent": 0,
+          "seller_payout": 0,
+          "buyer_refund": 0
+        },
+        "tip": "",
+        "epoch": 0,
+        "expiry_gate_evaluated": false,
+        "notes": ""
+      },
+      "note": null
+    },
+    {
+      "name": "reject_bad_signature_small_order_R",
+      "description": "Genesis + two steps WITH --tape; sig_A(record 1) carries a small-order R (order-8 point) -> REJECT_BAD_SIGNATURE at index 1 (Q11 strict profile: reject small-order R; a cofactored Ed25519 library would ACCEPT and diverge).",
+      "log_file": "reject_bad_signature_small_order_R.log.bin",
+      "manifest_file": "reject_bad_signature_small_order_R.manifest.bin",
+      "tape_file": "reject_bad_signature_small_order_R.tape.bin",
+      "pubkeys_file": "a.pub,b.pub",
+      "observed_now": 1700000500,
+      "expect_tip": null,
+      "max_records": null,
+      "expected_json": {
+        "verdict": "REJECT_BAD_SIGNATURE",
+        "exit_code": 1,
+        "records": 3,
+        "torn_bytes": 0,
+        "fail_index": 1,
+        "final_balances": {
+          "gross_spent": 0,
+          "seller_payout": 0,
+          "buyer_refund": 0
+        },
+        "tip": "",
+        "epoch": 0,
+        "expiry_gate_evaluated": false,
+        "notes": ""
+      },
+      "note": null
+    },
+    {
+      "name": "unverifiable_empty_file",
+      "description": "Empty log file -> UNVERIFIABLE_EMPTY (exit 3).",
+      "log_file": "unverifiable_empty_file.log.bin",
+      "manifest_file": "unverifiable_empty_file.manifest.bin",
+      "tape_file": null,
+      "pubkeys_file": "a.pub,b.pub",
+      "observed_now": null,
+      "expect_tip": null,
+      "max_records": null,
+      "expected_json": {
+        "verdict": "UNVERIFIABLE_EMPTY",
+        "exit_code": 3,
+        "records": 0,
+        "torn_bytes": 0,
+        "fail_index": null,
+        "final_balances": {
+          "gross_spent": 0,
+          "seller_payout": 0,
+          "buyer_refund": 0
+        },
+        "tip": "",
+        "epoch": 0,
+        "expiry_gate_evaluated": false,
+        "notes": ""
+      },
+      "note": null
+    },
+    {
+      "name": "unverifiable_no_record",
+      "description": "50 bytes, no whole 128-byte record -> UNVERIFIABLE_NO_RECORD (exit 3).",
+      "log_file": "unverifiable_no_record.log.bin",
+      "manifest_file": "unverifiable_no_record.manifest.bin",
+      "tape_file": null,
+      "pubkeys_file": "a.pub,b.pub",
+      "observed_now": null,
+      "expect_tip": null,
+      "max_records": null,
+      "expected_json": {
+        "verdict": "UNVERIFIABLE_NO_RECORD",
+        "exit_code": 3,
+        "records": 0,
+        "torn_bytes": 50,
+        "fail_index": null,
+        "final_balances": {
+          "gross_spent": 0,
+          "seller_payout": 0,
+          "buyer_refund": 0
+        },
+        "tip": "",
+        "epoch": 0,
+        "expiry_gate_evaluated": false,
+        "notes": ""
+      },
+      "note": null
+    },
+    {
+      "name": "unverifiable_usage_missing_observed_now",
+      "description": "Log has a step but observed_now is omitted -> UNVERIFIABLE_USAGE (exit 3, Q6: observed_now REQUIRED when >=1 step).",
+      "log_file": "unverifiable_usage_missing_observed_now.log.bin",
+      "manifest_file": "unverifiable_usage_missing_observed_now.manifest.bin",
+      "tape_file": null,
+      "pubkeys_file": "a.pub,b.pub",
+      "observed_now": null,
+      "expect_tip": null,
+      "max_records": null,
+      "expected_json": {
+        "verdict": "UNVERIFIABLE_USAGE",
+        "exit_code": 3,
+        "records": 2,
+        "torn_bytes": 0,
+        "fail_index": null,
+        "final_balances": {
+          "gross_spent": 0,
+          "seller_payout": 0,
+          "buyer_refund": 0
+        },
+        "tip": "",
+        "epoch": 0,
+        "expiry_gate_evaluated": false,
+        "notes": ""
+      },
+      "note": null
+    },
+    {
+      "name": "unverifiable_too_large",
+      "description": "Two whole records but --max-records 1 -> UNVERIFIABLE_TOO_LARGE (exit 3, Q8; decided before any fold). Demonstrates the ceiling without a 128 MiB file.",
+      "log_file": "unverifiable_too_large.log.bin",
+      "manifest_file": "unverifiable_too_large.manifest.bin",
+      "tape_file": null,
+      "pubkeys_file": "a.pub,b.pub",
+      "observed_now": 1700000500,
+      "expect_tip": null,
+      "max_records": 1,
+      "expected_json": {
+        "verdict": "UNVERIFIABLE_TOO_LARGE",
+        "exit_code": 3,
+        "records": 2,
+        "torn_bytes": 0,
+        "fail_index": null,
+        "final_balances": {
+          "gross_spent": 0,
+          "seller_payout": 0,
+          "buyer_refund": 0
+        },
+        "tip": "",
+        "epoch": 0,
+        "expiry_gate_evaluated": false,
+        "notes": ""
+      },
+      "note": null
+    },
+    {
+      "name": "unverifiable_usage_missing_pubkeys",
+      "description": "Invoked with NO --pubkeys -> UNVERIFIABLE_USAGE (exit 3), decided before any record is read (SPEC 9.1). --manifest is still supplied.",
+      "log_file": "unverifiable_usage_missing_pubkeys.log.bin",
+      "manifest_file": "unverifiable_usage_missing_pubkeys.manifest.bin",
+      "tape_file": null,
+      "pubkeys_file": null,
+      "observed_now": null,
+      "expect_tip": null,
+      "max_records": null,
+      "expected_json": {
+        "verdict": "UNVERIFIABLE_USAGE",
+        "exit_code": 3,
+        "records": 1,
+        "torn_bytes": 0,
+        "fail_index": null,
+        "final_balances": {
+          "gross_spent": 0,
+          "seller_payout": 0,
+          "buyer_refund": 0
+        },
+        "tip": "",
+        "epoch": 0,
+        "expiry_gate_evaluated": false,
+        "notes": ""
+      },
+      "note": null
+    },
+    {
+      "name": "money_bound_accept_0",
+      "description": "seller_amount = 0 (<= 2^63-1) under cap 2^63-1 -> ACCEPT.",
+      "log_file": "money_bound_accept_0.log.bin",
+      "manifest_file": "money_bound_accept_0.manifest.bin",
+      "tape_file": null,
+      "pubkeys_file": "a.pub,b.pub",
+      "observed_now": 1700000500,
+      "expect_tip": null,
+      "max_records": null,
+      "expected_json": {
+        "verdict": "ACCEPT",
+        "exit_code": 0,
+        "records": 2,
+        "torn_bytes": 0,
+        "fail_index": null,
+        "final_balances": {
+          "gross_spent": 0,
+          "seller_payout": 0,
+          "buyer_refund": 9223372036854775807
+        },
+        "tip": "7402fcc2d379ce8b86704cd52e3a2b27b9874d8e46d535f593857aae79d5b840",
+        "epoch": 2,
+        "expiry_gate_evaluated": true,
+        "notes": ""
+      },
+      "note": null
+    },
+    {
+      "name": "money_bound_accept_1",
+      "description": "seller_amount = 1 (<= 2^63-1) under cap 2^63-1 -> ACCEPT.",
+      "log_file": "money_bound_accept_1.log.bin",
+      "manifest_file": "money_bound_accept_1.manifest.bin",
+      "tape_file": null,
+      "pubkeys_file": "a.pub,b.pub",
+      "observed_now": 1700000500,
+      "expect_tip": null,
+      "max_records": null,
+      "expected_json": {
+        "verdict": "ACCEPT",
+        "exit_code": 0,
+        "records": 2,
+        "torn_bytes": 0,
+        "fail_index": null,
+        "final_balances": {
+          "gross_spent": 1,
+          "seller_payout": 1,
+          "buyer_refund": 9223372036854775806
+        },
+        "tip": "975af1c44f992dfe5d3a35e5b4897f75eeacef9e7fb9ad93ecd6ab9198e004da",
+        "epoch": 2,
+        "expiry_gate_evaluated": true,
+        "notes": ""
+      },
+      "note": null
+    },
+    {
+      "name": "money_bound_accept_32767",
+      "description": "seller_amount = 32767 (<= 2^63-1) under cap 2^63-1 -> ACCEPT.",
+      "log_file": "money_bound_accept_32767.log.bin",
+      "manifest_file": "money_bound_accept_32767.manifest.bin",
+      "tape_file": null,
+      "pubkeys_file": "a.pub,b.pub",
+      "observed_now": 1700000500,
+      "expect_tip": null,
+      "max_records": null,
+      "expected_json": {
+        "verdict": "ACCEPT",
+        "exit_code": 0,
+        "records": 2,
+        "torn_bytes": 0,
+        "fail_index": null,
+        "final_balances": {
+          "gross_spent": 32767,
+          "seller_payout": 32767,
+          "buyer_refund": 9223372036854743040
+        },
+        "tip": "306cdeaede1cd5fcd5a6466894a8392654dcad2e8cdcf3800f40f9d2ca904930",
+        "epoch": 2,
+        "expiry_gate_evaluated": true,
+        "notes": ""
+      },
+      "note": null
+    },
+    {
+      "name": "money_bound_accept_32768",
+      "description": "seller_amount = 32768 (<= 2^63-1) under cap 2^63-1 -> ACCEPT.",
+      "log_file": "money_bound_accept_32768.log.bin",
+      "manifest_file": "money_bound_accept_32768.manifest.bin",
+      "tape_file": null,
+      "pubkeys_file": "a.pub,b.pub",
+      "observed_now": 1700000500,
+      "expect_tip": null,
+      "max_records": null,
+      "expected_json": {
+        "verdict": "ACCEPT",
+        "exit_code": 0,
+        "records": 2,
+        "torn_bytes": 0,
+        "fail_index": null,
+        "final_balances": {
+          "gross_spent": 32768,
+          "seller_payout": 32768,
+          "buyer_refund": 9223372036854743039
+        },
+        "tip": "db4323d80b30461ad1df101eb55532306a2aa59ba27b35ce2bbb5ea5ea34eb0b",
+        "epoch": 2,
+        "expiry_gate_evaluated": true,
+        "notes": ""
+      },
+      "note": null
+    },
+    {
+      "name": "money_bound_accept_65535",
+      "description": "seller_amount = 65535 (<= 2^63-1) under cap 2^63-1 -> ACCEPT.",
+      "log_file": "money_bound_accept_65535.log.bin",
+      "manifest_file": "money_bound_accept_65535.manifest.bin",
+      "tape_file": null,
+      "pubkeys_file": "a.pub,b.pub",
+      "observed_now": 1700000500,
+      "expect_tip": null,
+      "max_records": null,
+      "expected_json": {
+        "verdict": "ACCEPT",
+        "exit_code": 0,
+        "records": 2,
+        "torn_bytes": 0,
+        "fail_index": null,
+        "final_balances": {
+          "gross_spent": 65535,
+          "seller_payout": 65535,
+          "buyer_refund": 9223372036854710272
+        },
+        "tip": "ab75f2a24fcc715719e8a180afd992f488531e3c980010e5e5124d7dee78d053",
+        "epoch": 2,
+        "expiry_gate_evaluated": true,
+        "notes": ""
+      },
+      "note": null
+    },
+    {
+      "name": "money_bound_accept_65536",
+      "description": "seller_amount = 65536 (<= 2^63-1) under cap 2^63-1 -> ACCEPT.",
+      "log_file": "money_bound_accept_65536.log.bin",
+      "manifest_file": "money_bound_accept_65536.manifest.bin",
+      "tape_file": null,
+      "pubkeys_file": "a.pub,b.pub",
+      "observed_now": 1700000500,
+      "expect_tip": null,
+      "max_records": null,
+      "expected_json": {
+        "verdict": "ACCEPT",
+        "exit_code": 0,
+        "records": 2,
+        "torn_bytes": 0,
+        "fail_index": null,
+        "final_balances": {
+          "gross_spent": 65536,
+          "seller_payout": 65536,
+          "buyer_refund": 9223372036854710271
+        },
+        "tip": "971197ec4fb55e2e6be63469f6ea6ea7627b046a80ec1b1af36804723fee03d1",
+        "epoch": 2,
+        "expiry_gate_evaluated": true,
+        "notes": ""
+      },
+      "note": null
+    },
+    {
+      "name": "money_bound_accept_2147483647",
+      "description": "seller_amount = 2147483647 (<= 2^63-1) under cap 2^63-1 -> ACCEPT.",
+      "log_file": "money_bound_accept_2147483647.log.bin",
+      "manifest_file": "money_bound_accept_2147483647.manifest.bin",
+      "tape_file": null,
+      "pubkeys_file": "a.pub,b.pub",
+      "observed_now": 1700000500,
+      "expect_tip": null,
+      "max_records": null,
+      "expected_json": {
+        "verdict": "ACCEPT",
+        "exit_code": 0,
+        "records": 2,
+        "torn_bytes": 0,
+        "fail_index": null,
+        "final_balances": {
+          "gross_spent": 2147483647,
+          "seller_payout": 2147483647,
+          "buyer_refund": 9223372034707292160
+        },
+        "tip": "5dc656c8e8c5865053829bec3c6e30b4aa5b23130bd45e71f91c23d9799c1eb6",
+        "epoch": 2,
+        "expiry_gate_evaluated": true,
+        "notes": ""
+      },
+      "note": null
+    },
+    {
+      "name": "money_bound_accept_2147483648",
+      "description": "seller_amount = 2147483648 (<= 2^63-1) under cap 2^63-1 -> ACCEPT.",
+      "log_file": "money_bound_accept_2147483648.log.bin",
+      "manifest_file": "money_bound_accept_2147483648.manifest.bin",
+      "tape_file": null,
+      "pubkeys_file": "a.pub,b.pub",
+      "observed_now": 1700000500,
+      "expect_tip": null,
+      "max_records": null,
+      "expected_json": {
+        "verdict": "ACCEPT",
+        "exit_code": 0,
+        "records": 2,
+        "torn_bytes": 0,
+        "fail_index": null,
+        "final_balances": {
+          "gross_spent": 2147483648,
+          "seller_payout": 2147483648,
+          "buyer_refund": 9223372034707292159
+        },
+        "tip": "0e3164933facc423b7a6ea55d1a04f0dc01495c6dc5d65d45a01bef23e2e9b83",
+        "epoch": 2,
+        "expiry_gate_evaluated": true,
+        "notes": ""
+      },
+      "note": null
+    },
+    {
+      "name": "money_bound_accept_4294967295",
+      "description": "seller_amount = 4294967295 (<= 2^63-1) under cap 2^63-1 -> ACCEPT.",
+      "log_file": "money_bound_accept_4294967295.log.bin",
+      "manifest_file": "money_bound_accept_4294967295.manifest.bin",
+      "tape_file": null,
+      "pubkeys_file": "a.pub,b.pub",
+      "observed_now": 1700000500,
+      "expect_tip": null,
+      "max_records": null,
+      "expected_json": {
+        "verdict": "ACCEPT",
+        "exit_code": 0,
+        "records": 2,
+        "torn_bytes": 0,
+        "fail_index": null,
+        "final_balances": {
+          "gross_spent": 4294967295,
+          "seller_payout": 4294967295,
+          "buyer_refund": 9223372032559808512
+        },
+        "tip": "0c15e841d1b062e22acdd66bd733437c80dfd1b30f9aad1f7d56748a2f81ab75",
+        "epoch": 2,
+        "expiry_gate_evaluated": true,
+        "notes": ""
+      },
+      "note": null
+    },
+    {
+      "name": "money_bound_accept_4294967296",
+      "description": "seller_amount = 4294967296 (<= 2^63-1) under cap 2^63-1 -> ACCEPT.",
+      "log_file": "money_bound_accept_4294967296.log.bin",
+      "manifest_file": "money_bound_accept_4294967296.manifest.bin",
+      "tape_file": null,
+      "pubkeys_file": "a.pub,b.pub",
+      "observed_now": 1700000500,
+      "expect_tip": null,
+      "max_records": null,
+      "expected_json": {
+        "verdict": "ACCEPT",
+        "exit_code": 0,
+        "records": 2,
+        "torn_bytes": 0,
+        "fail_index": null,
+        "final_balances": {
+          "gross_spent": 4294967296,
+          "seller_payout": 4294967296,
+          "buyer_refund": 9223372032559808511
+        },
+        "tip": "11cd48ea7daace9d69fc59191a58c88aa343e7bac49299735c51016be3c314f2",
+        "epoch": 2,
+        "expiry_gate_evaluated": true,
+        "notes": ""
+      },
+      "note": null
+    },
+    {
+      "name": "money_bound_accept_9007199254740991",
+      "description": "seller_amount = 9007199254740991 (<= 2^63-1) under cap 2^63-1 -> ACCEPT.",
+      "log_file": "money_bound_accept_9007199254740991.log.bin",
+      "manifest_file": "money_bound_accept_9007199254740991.manifest.bin",
+      "tape_file": null,
+      "pubkeys_file": "a.pub,b.pub",
+      "observed_now": 1700000500,
+      "expect_tip": null,
+      "max_records": null,
+      "expected_json": {
+        "verdict": "ACCEPT",
+        "exit_code": 0,
+        "records": 2,
+        "torn_bytes": 0,
+        "fail_index": null,
+        "final_balances": {
+          "gross_spent": 9007199254740991,
+          "seller_payout": 9007199254740991,
+          "buyer_refund": 9214364837600034816
+        },
+        "tip": "c795ab4ce9f50360998725fe54d1acbbadeae2895d063a744aaa4e90e5e4d5fd",
+        "epoch": 2,
+        "expiry_gate_evaluated": true,
+        "notes": ""
+      },
+      "note": null
+    },
+    {
+      "name": "money_bound_accept_9007199254740992",
+      "description": "seller_amount = 9007199254740992 (<= 2^63-1) under cap 2^63-1 -> ACCEPT.",
+      "log_file": "money_bound_accept_9007199254740992.log.bin",
+      "manifest_file": "money_bound_accept_9007199254740992.manifest.bin",
+      "tape_file": null,
+      "pubkeys_file": "a.pub,b.pub",
+      "observed_now": 1700000500,
+      "expect_tip": null,
+      "max_records": null,
+      "expected_json": {
+        "verdict": "ACCEPT",
+        "exit_code": 0,
+        "records": 2,
+        "torn_bytes": 0,
+        "fail_index": null,
+        "final_balances": {
+          "gross_spent": 9007199254740992,
+          "seller_payout": 9007199254740992,
+          "buyer_refund": 9214364837600034815
+        },
+        "tip": "93e9bdb18892ec95b677c049d3df792ae5d8c8fbd9e838d5b5d43c214d1bc572",
+        "epoch": 2,
+        "expiry_gate_evaluated": true,
+        "notes": ""
+      },
+      "note": null
+    },
+    {
+      "name": "money_bound_accept_9223372036854775807",
+      "description": "seller_amount = 9223372036854775807 (<= 2^63-1) under cap 2^63-1 -> ACCEPT.",
+      "log_file": "money_bound_accept_9223372036854775807.log.bin",
+      "manifest_file": "money_bound_accept_9223372036854775807.manifest.bin",
+      "tape_file": null,
+      "pubkeys_file": "a.pub,b.pub",
+      "observed_now": 1700000500,
+      "expect_tip": null,
+      "max_records": null,
+      "expected_json": {
+        "verdict": "ACCEPT",
+        "exit_code": 0,
+        "records": 2,
+        "torn_bytes": 0,
+        "fail_index": null,
+        "final_balances": {
+          "gross_spent": 9223372036854775807,
+          "seller_payout": 9223372036854775807,
+          "buyer_refund": 0
+        },
+        "tip": "21a35e8edc729d538094fdfb2666d770f703a0d91ea47f53e6d7dfbdda840338",
+        "epoch": 2,
+        "expiry_gate_evaluated": true,
+        "notes": ""
+      },
+      "note": null
+    },
+    {
+      "name": "money_bound_reject_9223372036854775808",
+      "description": "seller_amount = 9223372036854775808 (>= 2^63) -> REJECT_AMOUNT_NOT_MONEY at index 1.",
+      "log_file": "money_bound_reject_9223372036854775808.log.bin",
+      "manifest_file": "money_bound_reject_9223372036854775808.manifest.bin",
+      "tape_file": null,
+      "pubkeys_file": "a.pub,b.pub",
+      "observed_now": 1700000500,
+      "expect_tip": null,
+      "max_records": null,
+      "expected_json": {
+        "verdict": "REJECT_AMOUNT_NOT_MONEY",
+        "exit_code": 1,
+        "records": 2,
+        "torn_bytes": 0,
+        "fail_index": 1,
+        "final_balances": {
+          "gross_spent": 0,
+          "seller_payout": 0,
+          "buyer_refund": 0
+        },
+        "tip": "",
+        "epoch": 0,
+        "expiry_gate_evaluated": false,
+        "notes": ""
+      },
+      "note": null
+    },
+    {
+      "name": "money_bound_reject_18446744073709551615",
+      "description": "seller_amount = 18446744073709551615 (>= 2^63) -> REJECT_AMOUNT_NOT_MONEY at index 1.",
+      "log_file": "money_bound_reject_18446744073709551615.log.bin",
+      "manifest_file": "money_bound_reject_18446744073709551615.manifest.bin",
+      "tape_file": null,
+      "pubkeys_file": "a.pub,b.pub",
+      "observed_now": 1700000500,
+      "expect_tip": null,
+      "max_records": null,
+      "expected_json": {
+        "verdict": "REJECT_AMOUNT_NOT_MONEY",
+        "exit_code": 1,
+        "records": 2,
+        "torn_bytes": 0,
+        "fail_index": 1,
+        "final_balances": {
+          "gross_spent": 0,
+          "seller_payout": 0,
+          "buyer_refund": 0
+        },
+        "tip": "",
+        "epoch": 0,
+        "expiry_gate_evaluated": false,
+        "notes": ""
+      },
+      "note": null
+    },
+    {
+      "name": "demo_sabotage_replay",
+      "description": "Demo 4b replay: a second step_id 'part-0001' at seq 3 -> REJECT_DUPLICATE_ID at index 3.",
+      "log_file": "demo_sabotage_replay.log.bin",
+      "manifest_file": "demo_sabotage_replay.manifest.bin",
+      "tape_file": null,
+      "pubkeys_file": "a.pub,b.pub",
+      "observed_now": 1700000500,
+      "expect_tip": null,
+      "max_records": null,
+      "expected_json": {
+        "verdict": "REJECT_DUPLICATE_ID",
+        "exit_code": 1,
+        "records": 4,
+        "torn_bytes": 0,
+        "fail_index": 3,
+        "final_balances": {
+          "gross_spent": 0,
+          "seller_payout": 0,
+          "buyer_refund": 0
+        },
+        "tip": "",
+        "epoch": 0,
+        "expiry_gate_evaluated": false,
+        "notes": ""
+      },
+      "note": null
+    },
+    {
+      "name": "demo_sabotage_altered_amount",
+      "description": "Demo 4b alter #1: record 1 rewritten to seller_amount 10 (recomputed seal), but record 2 prev_hash points at the original record 1 -> REJECT_CHAIN_BREAK at index 2.",
+      "log_file": "demo_sabotage_altered_amount.log.bin",
+      "manifest_file": "demo_sabotage_altered_amount.manifest.bin",
+      "tape_file": null,
+      "pubkeys_file": "a.pub,b.pub",
+      "observed_now": 1700000500,
+      "expect_tip": null,
+      "max_records": null,
+      "expected_json": {
+        "verdict": "REJECT_CHAIN_BREAK",
+        "exit_code": 1,
+        "records": 3,
+        "torn_bytes": 0,
+        "fail_index": 2,
+        "final_balances": {
+          "gross_spent": 0,
+          "seller_payout": 0,
+          "buyer_refund": 0
+        },
+        "tip": "",
+        "epoch": 0,
+        "expiry_gate_evaluated": false,
+        "notes": ""
+      },
+      "note": null
+    },
+    {
+      "name": "demo_sabotage_over_cap",
+      "description": "Demo 4b over-cap: step seller_amount 600, gross_spent 800 on top of gross 200 -> REJECT_OVER_CAP at index 3 (800 > cap 500).",
+      "log_file": "demo_sabotage_over_cap.log.bin",
+      "manifest_file": "demo_sabotage_over_cap.manifest.bin",
+      "tape_file": null,
+      "pubkeys_file": "a.pub,b.pub",
+      "observed_now": 1700000500,
+      "expect_tip": null,
+      "max_records": null,
+      "expected_json": {
+        "verdict": "REJECT_OVER_CAP",
+        "exit_code": 1,
+        "records": 4,
+        "torn_bytes": 0,
+        "fail_index": 3,
+        "final_balances": {
+          "gross_spent": 0,
+          "seller_payout": 0,
+          "buyer_refund": 0
+        },
+        "tip": "",
+        "epoch": 0,
+        "expiry_gate_evaluated": false,
+        "notes": ""
+      },
+      "note": null
+    },
+    {
+      "name": "reject_genesis_bad_magic",
+      "description": "Genesis magic != 'FV2' (seal valid) -> REJECT_MALFORMED_RECORD at index 0 (rr4 Option B: wire-envelope check runs at genesis too).",
+      "log_file": "reject_genesis_bad_magic.log.bin",
+      "manifest_file": "reject_genesis_bad_magic.manifest.bin",
+      "tape_file": null,
+      "pubkeys_file": "a.pub,b.pub",
+      "observed_now": null,
+      "expect_tip": null,
+      "max_records": null,
+      "expected_json": {
+        "verdict": "REJECT_MALFORMED_RECORD",
+        "exit_code": 1,
+        "records": 1,
+        "torn_bytes": 0,
+        "fail_index": 0,
+        "final_balances": {
+          "gross_spent": 0,
+          "seller_payout": 0,
+          "buyer_refund": 0
+        },
+        "tip": "",
+        "epoch": 0,
+        "expiry_gate_evaluated": false,
+        "notes": ""
+      },
+      "note": null
+    },
+    {
+      "name": "reject_genesis_bad_version",
+      "description": "Genesis version != 2 (seal valid) -> REJECT_MALFORMED_RECORD at index 0 (rr4 Option B).",
+      "log_file": "reject_genesis_bad_version.log.bin",
+      "manifest_file": "reject_genesis_bad_version.manifest.bin",
+      "tape_file": null,
+      "pubkeys_file": "a.pub,b.pub",
+      "observed_now": null,
+      "expect_tip": null,
+      "max_records": null,
+      "expected_json": {
+        "verdict": "REJECT_MALFORMED_RECORD",
+        "exit_code": 1,
+        "records": 1,
+        "torn_bytes": 0,
+        "fail_index": 0,
+        "final_balances": {
+          "gross_spent": 0,
+          "seller_payout": 0,
+          "buyer_refund": 0
+        },
+        "tip": "",
+        "epoch": 0,
+        "expiry_gate_evaluated": false,
+        "notes": ""
+      },
+      "note": null
+    },
+    {
+      "name": "reject_genesis_bad_reserved",
+      "description": "Genesis header reserved [6..8) != 0 (seal valid) -> REJECT_MALFORMED_RECORD at index 0 (rr4 Option B).",
+      "log_file": "reject_genesis_bad_reserved.log.bin",
+      "manifest_file": "reject_genesis_bad_reserved.manifest.bin",
+      "tape_file": null,
+      "pubkeys_file": "a.pub,b.pub",
+      "observed_now": null,
+      "expect_tip": null,
+      "max_records": null,
+      "expected_json": {
+        "verdict": "REJECT_MALFORMED_RECORD",
+        "exit_code": 1,
+        "records": 1,
+        "torn_bytes": 0,
+        "fail_index": 0,
+        "final_balances": {
+          "gross_spent": 0,
+          "seller_payout": 0,
+          "buyer_refund": 0
+        },
+        "tip": "",
+        "epoch": 0,
+        "expiry_gate_evaluated": false,
+        "notes": ""
+      },
+      "note": null
+    },
+    {
+      "name": "reject_genesis_bad_seqno",
+      "description": "Genesis seq_no != 0 (seal valid) -> REJECT_SEQ_MISMATCH at index 0 (rr4 Option B: seq_no != index applies at genesis).",
+      "log_file": "reject_genesis_bad_seqno.log.bin",
+      "manifest_file": "reject_genesis_bad_seqno.manifest.bin",
+      "tape_file": null,
+      "pubkeys_file": "a.pub,b.pub",
+      "observed_now": null,
+      "expect_tip": null,
+      "max_records": null,
+      "expected_json": {
+        "verdict": "REJECT_SEQ_MISMATCH",
+        "exit_code": 1,
+        "records": 1,
+        "torn_bytes": 0,
+        "fail_index": 0,
+        "final_balances": {
+          "gross_spent": 0,
+          "seller_payout": 0,
+          "buyer_refund": 0
+        },
+        "tip": "",
+        "epoch": 0,
+        "expiry_gate_evaluated": false,
+        "notes": ""
+      },
+      "note": null
+    },
+    {
+      "name": "reject_genesis_bad_domain",
+      "description": "Genesis domain_id != 2 (seal valid) -> REJECT_BAD_DOMAIN at index 0 (rr4).",
+      "log_file": "reject_genesis_bad_domain.log.bin",
+      "manifest_file": "reject_genesis_bad_domain.manifest.bin",
+      "tape_file": null,
+      "pubkeys_file": "a.pub,b.pub",
+      "observed_now": null,
+      "expect_tip": null,
+      "max_records": null,
+      "expected_json": {
+        "verdict": "REJECT_BAD_DOMAIN",
+        "exit_code": 1,
+        "records": 1,
+        "torn_bytes": 0,
+        "fail_index": 0,
+        "final_balances": {
+          "gross_spent": 0,
+          "seller_payout": 0,
+          "buyer_refund": 0
+        },
+        "tip": "",
+        "epoch": 0,
+        "expiry_gate_evaluated": false,
+        "notes": ""
+      },
+      "note": null
+    },
+    {
+      "name": "accept_records_eq_max",
+      "description": "Two whole records with --max-records 2 (records == ceiling) -> ACCEPT (rr4; the ceiling is inclusive).",
+      "log_file": "accept_records_eq_max.log.bin",
+      "manifest_file": "accept_records_eq_max.manifest.bin",
+      "tape_file": null,
+      "pubkeys_file": "a.pub,b.pub",
+      "observed_now": 1700000500,
+      "expect_tip": null,
+      "max_records": 2,
+      "expected_json": {
+        "verdict": "ACCEPT",
+        "exit_code": 0,
+        "records": 2,
+        "torn_bytes": 0,
+        "fail_index": null,
+        "final_balances": {
+          "gross_spent": 100,
+          "seller_payout": 100,
+          "buyer_refund": 400
+        },
+        "tip": "864be94a3057191266b89d1bb1ed1888457a11b854bc631c2fc5b68c595f5090",
+        "epoch": 2,
+        "expiry_gate_evaluated": true,
+        "notes": ""
+      },
+      "note": null
+    },
+    {
+      "name": "reject_record_ts_decreasing",
+      "description": "Step 2 record_ts (TS1) < step 1 record_ts (TS2) -> REJECT_SEQ_MISMATCH at index 2 (rr4; non-decreasing record_ts rule, SPEC 5.2 step 8).",
+      "log_file": "reject_record_ts_decreasing.log.bin",
+      "manifest_file": "reject_record_ts_decreasing.manifest.bin",
+      "tape_file": null,
+      "pubkeys_file": "a.pub,b.pub",
+      "observed_now": 1700000500,
+      "expect_tip": null,
+      "max_records": null,
+      "expected_json": {
+        "verdict": "REJECT_SEQ_MISMATCH",
+        "exit_code": 1,
+        "records": 3,
+        "torn_bytes": 0,
+        "fail_index": 2,
+        "final_balances": {
+          "gross_spent": 0,
+          "seller_payout": 0,
+          "buyer_refund": 0
+        },
+        "tip": "",
+        "epoch": 0,
+        "expiry_gate_evaluated": false,
+        "notes": ""
+      },
+      "note": null
+    },
+    {
+      "name": "reject_genesis_step_at_index0",
+      "description": "A well-formed step record (kind='S', seq_no=1, valid seal) placed as the sole record at index 0 -> REJECT_BAD_GENESIS at index 0 (rr5: the genesis kind-gate precedes the seq_no check).",
+      "log_file": "reject_genesis_step_at_index0.log.bin",
+      "manifest_file": "reject_genesis_step_at_index0.manifest.bin",
+      "tape_file": null,
+      "pubkeys_file": "a.pub,b.pub",
+      "observed_now": 1700000500,
+      "expect_tip": null,
+      "max_records": null,
+      "expected_json": {
+        "verdict": "REJECT_BAD_GENESIS",
+        "exit_code": 1,
+        "records": 1,
+        "torn_bytes": 0,
+        "fail_index": 0,
+        "final_balances": {
+          "gross_spent": 0,
+          "seller_payout": 0,
+          "buyer_refund": 0
+        },
+        "tip": "",
+        "epoch": 0,
+        "expiry_gate_evaluated": false,
+        "notes": ""
+      },
+      "note": null
+    }
+  ]
+}

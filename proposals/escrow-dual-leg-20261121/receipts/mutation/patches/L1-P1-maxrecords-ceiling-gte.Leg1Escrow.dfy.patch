@@ -1,0 +1,11 @@
+--- /private/tmp/claude-501/-Users-mackianni-forge/fb0fde47-8987-485d-a625-0e9fdb4facee/scratchpad/leg1-escrow/Leg1Escrow.dfy	2026-11-21 16:36:45.683437427 -0500
++++ leg1-copies/L1-P1-maxrecords-ceiling-gte//Leg1Escrow.dfy	2026-11-21 17:12:52.597614206 -0500
+@@ -337,7 +337,7 @@
+       r := r.(verdict := Asc("UNVERIFIABLE_NO_RECORD"), exitCode := 3); return;
+     }
+     // (3) TOO_LARGE
+-    if records > maxRecords {
++    if records >= maxRecords { // PROBE: ceiling off-by-one
+       r := r.(verdict := Asc("UNVERIFIABLE_TOO_LARGE"), exitCode := 3); return;
+     }
+     // (4) observed_now required when >=1 step (records >= 2). SPEC §5/Q6.

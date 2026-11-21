@@ -1,0 +1,11 @@
+--- /private/tmp/claude-501/-Users-mackianni-forge/fb0fde47-8987-485d-a625-0e9fdb4facee/scratchpad/leg2-run2/src-extract/leg2-source/src/verify.rs	2026-11-21 15:16:07.000000000 -0500
++++ leg2-copies/L2-M6-drop-key-crosscheck//src/verify.rs	2026-11-21 17:06:40.717337006 -0500
+@@ -183,7 +183,7 @@
+     }
+ 
+     // --- step 7: pinned-key cross-check (Q5), mandatory --------------------
+-    if m_key_a != inp.key_a || m_key_b != inp.key_b {
++    if false { // MUTANT: pinned --pubkeys==manifest cross-check dropped
+         return Err(Verdict::RejectKeyMismatch);
+     }
+ 
