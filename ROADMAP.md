@@ -52,7 +52,7 @@ a FINITE TEST in its suites. `end_to_end=false`.
 | suite (one machine, FINITE TEST) |pass|2048 of 2048 flips rejected, 257 offsets, 0 class disagreements, 0 leftover processes |
 | cross_target Python vs Node |0 diffs|2317+124+170+18 calls; full-cap 65,535 ACCEPT exit [0,0]; tail 64/64; 2^63−1 exact digits |
 | mutations (27 changed copies) |27 killed|0 survivors; 3 proof-kill demos each a named-lemma Dafny ERROR |
-| scratch-clone regression (28 Stage EXIT cases; frozen PR-gate; links) |PENDING (this step)| |
+| scratch-clone regression of `596ed36d` (clone; 25 Stage EXIT cases; frozen PR-gate; links; V1 clean-clone repro) |24 of 25 exit 0; gate 0; links 0,0,0; repro 0,0|0 protected paths changed; the one non-zero is a transient GitHub network error on `stage 4 unapproved-spec` ("Remote end closed connection"), not V1; stage 11's 3 eval cases not run; V1 clean-clone `--case proofs` (1447 verified, spec pin `1a8c7c2a…`, `git diff origin/main -- spec/` empty) and `--case build` (reproducible) both exit 0 |
 | hosted gate on the pull request |expected: not accepted (no approval rule for these additive files); NOT observed yet| |
 
 ## Ratification proposal applied: stateful refund-log specification under `spec/refund/` (owner decisions D1 to D3 of 2026-11-20; the owner's merge is the ratification) — U928
