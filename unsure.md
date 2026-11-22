@@ -21277,3 +21277,35 @@ curl: (6) Could not resolve host: github.com
   evidence; no gate module, lock or approval changes. Next check: the owner's manual review and merge of the Task V1
   pull request (the hosted gate is expected not to accept it — there is no approval rule for these additive files).
   Nothing merged or committed to `main` by the agent.
+
+## U931 — Dafny 4.11 does not check refinement when an abstract import is replaced: gate/ContractBinding.dfy alone does not bind the implementation to LedgerSpec
+
+- Refs U930 (the last ID in use, on `main` by pull request 91 and in open pull request 89). No earlier entry names this
+  behaviour. Found while testing a Claude Code mod that wraps the Forge proof check; the finding is about Dafny and
+  `gate/ContractBinding.dfy`, not about the mod.
+- Evidence (one machine, macOS arm64, `.toolchain/dafny-4.11.0`, the gate's `OPTIONS` from `gate/backends/dafny.py`,
+  in a scratch copy, nothing in the repository changed):
+  - Minimal case: `abstract module Spec { method M() returns (x: int) ensures x == 1 }`,
+    `module Other { method M() returns (x: int) { x := 2; } }`, `abstract module BindA { import L : Spec }`,
+    `module Bind refines BindA { import L = Other }`. `dafny verify` → exit 0, 1 verified, 0 errors; `dafny resolve`
+    → exit 0. `Other` does not refine `Spec` and its `M` breaks `Spec`'s `ensures`.
+  - Gate case: `impl/Ledger.dfy` replaced by a file that includes `../spec/LedgerSpec.dfy` and a new
+    `../spec/WeakSpec.dfy` (same datatypes, `WellFormed` = `true`, `Apply` with no `ensures`) and declares
+    `module Ledger refines WeakSpec { method Apply ... { next := LedgerState(map[], map[]); outcome := Ok; } }` (it
+    deletes every balance). `dafny verify impl/Ledger.dfy gate/ContractBinding.dfy <gate OPTIONS>` → exit 0, 8
+    verified, 0 errors. Control with the real `impl/Ledger.dfy` → exit 0, 13 verified, 0 errors.
+    `gate/ContractBinding.dfy` SHA-256 `575dca825c948f866fde2d1a41d081801e4c6551f6caf3cc34dc68f4ca9d38af`.
+- Reading: `RequiredLedger { import L : LedgerSpec }` / `BoundLedger refines RequiredLedger { import L = Ledger }` does
+  NOT make Dafny 4.11 check that `Ledger` refines `LedgerSpec`. The file's first comment ("Dafny resolves this import
+  against the approved interface") overstates what Dafny does. Its second line is the real control: "The gate also
+  requires an explicit Ledger refines LedgerSpec declaration".
+- Impact: none found on a stage result. The Ledger gate rejects the case above before Dafny runs:
+  `gate/backends/dafny.py` lines 133–137 require the exact bytes `include "../spec/LedgerSpec.dfy"\n\nmodule Ledger
+  refines LedgerSpec {\n` and exactly one `include` (`SOURCE_SCOPE`). `gate/incremental.py`, `gate/refund.py` and
+  `gate/booking.py` have the same kind of prefix check. NOT checked here: every other gate path and every later
+  slice that may rely on an abstract-import binding without a byte-level prefix check. Not reported upstream; not
+  searched in the Dafny tracker (see the rule to check prior art before calling a tool bug novel).
+- Next checks: (1) search the repository for `import [A-Za-z_]+ *: *[A-Za-z_]+` in abstract modules and confirm each
+  use has a byte-level prefix check or another real binding; (2) search dafny-lang/dafny for prior reports before
+  any outreach; (3) the comment in `gate/ContractBinding.dfy` is protected; any change is an exact-diff proposal for
+  the owner. `end_to_end=false`. No protected file changed. Nothing merged by the agent.
