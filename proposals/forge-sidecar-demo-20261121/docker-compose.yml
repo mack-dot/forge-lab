@@ -6,22 +6,20 @@ services:
     volumes: ["./stripe_mock.py:/app/x.py:ro"]
     command: python /app/x.py
   sidecar:
-    image: python:3.12-slim
+    build: ./sidecar
     networks: [internal, egress]
     environment:
       - STRIPE_KEY=sk_live_SECRET_MONOPOLY_abc123
       - CAP_CENTS=5000
       - STRIPE_URL=http://stripe-mock:9000/charge
-    volumes: ["./sidecar.py:/app/x.py:ro"]
-    command: python /app/x.py
     depends_on: [stripe-mock]
   agent:
     image: python:3.12-slim
-    networks: [internal]          # internal-only: NO egress, NO stripe-mock, NO internet
-    environment: [SIDECAR_URL=http://sidecar:8000]   # NOTE: no STRIPE_KEY here
+    networks: [internal]
+    environment: [SIDECAR_URL=http://sidecar:8000]
     volumes: ["./agent.py:/app/x.py:ro"]
     command: python /app/x.py
     depends_on: [sidecar]
 networks:
-  internal: {internal: true}      # the key line: no route out
+  internal: {internal: true}
   egress: {}
