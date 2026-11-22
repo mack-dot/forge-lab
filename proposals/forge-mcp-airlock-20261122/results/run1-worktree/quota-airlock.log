@@ -1,0 +1,57 @@
+[airlock] demo source repository built at /state/source (3 commits)
+[airlock] workspace: built from 3 commits; 3 hidden paths absent; 2 entries dropped; 3 read-only files, 3 closed dirs
+[airlock] log deploy: created cap=3 expires_at=1795475175
+[airlock] log run_query: created cap=1000 expires_at=1795475176
+[airlock] log slow_job: created cap=2 expires_at=1795475176
+[airlock] up on :8700; 4 tools exposed; 3 gate logs; 7 upstream tools seen; canary PENDING
+[airlock] refuse 'drop_database': FORGE_TOOL_BLOCKED tool 'drop_database' is denied by policy
+[airlock] refuse 'charge': FORGE_TOOL_BLOCKED tool 'charge' is not listed in policy (default deny)
+[airlock] refuse 'drop_database': FORGE_TOOL_BLOCKED tool 'drop_database' is denied by policy
+[airlock] refuse 'rotate_keys': FORGE_TOOL_BLOCKED tool 'rotate_keys' is not listed in policy (default deny)
+[airlock] refuse 'forge_canary_no_such_tool': FORGE_TOOL_BLOCKED tool 'forge_canary_no_such_tool' is not listed in policy (default deny)
+[airlock] canary report: PASSED; breaches=[]
+[airlock] refuse 'rotate_keys': FORGE_TOOL_BLOCKED tool 'rotate_keys' is not listed in policy (default deny)
+[airlock] refuse 'drop_database': FORGE_TOOL_BLOCKED tool 'drop_database' is denied by policy
+[airlock] refuse 'charge': FORGE_TOOL_BLOCKED tool 'charge' is not listed in policy (default deny)
+[airlock] refuse 'deploy': FORGE_ARG_REFUSED argument 'env' refused: must be one of ['staging']
+[airlock] refuse 'deploy': FORGE_ARG_REFUSED argument 'branch' refused: must not be one of ['main', 'master']
+[airlock] refuse 'deploy': FORGE_ARG_REFUSED argument 'branch' refused: must fully match /[a-z0-9][a-z0-9/_-]{0,63}/
+[airlock] refuse 'deploy': FORGE_ARG_REFUSED argument 'env' is required by policy
+[airlock] refuse 'deploy': FORGE_GATE_REFUSED gate deploy: verifier verdict REJECT_OVER_CAP
+[airlock] refuse 'run_query': FORGE_GATE_REFUSED rows=500 > per_call_max 400
+[airlock] refuse 'run_query': FORGE_CHECKER_REFUSED checker exit 1: only one SELECT statement is allowed
+[airlock] refuse 'run_query': FORGE_ARG_REFUSED 'rows' must be an integer in [0, 2^63-1]
+[airlock] refuse 'run_query': FORGE_GATE_REFUSED gate run_query: verifier verdict REJECT_OVER_CAP
+[airlock] refuse 'slow_job': FORGE_UPSTREAM_FAILED ops: TimeoutError: timed out; the gate step stays spent (seq 1)
+[airlock] refuse 'slow_job': FORGE_UPSTREAM_FAILED ops: TimeoutError: timed out; the gate step stays spent (seq 2)
+[airlock] refuse 'slow_job': FORGE_GATE_REFUSED gate slow_job: verifier verdict REJECT_OVER_CAP
+[airlock] workspace: re-verified (hidden content absent) at /ws
+[airlock] log deploy: reloaded 3 steps gross=3 cap=3 re-verified ACCEPT
+[airlock] log run_query: reloaded 3 steps gross=1000 cap=1000 re-verified ACCEPT
+[airlock] log slow_job: reloaded 2 steps gross=2 cap=2 re-verified ACCEPT
+[airlock] up on :8700; 4 tools exposed; 3 gate logs; 7 upstream tools seen; canary PENDING
+[airlock] workspace: re-verified (hidden content absent) at /ws
+[airlock] log deploy: reloaded 3 steps gross=3 cap=3 re-verified ACCEPT
+[airlock] log run_query: reloaded 3 steps gross=1000 cap=1000 re-verified ACCEPT
+[airlock] log slow_job: reloaded 2 steps gross=2 cap=2 re-verified ACCEPT
+[airlock] up on :8700; 4 tools exposed; 3 gate logs; 7 upstream tools seen; canary PENDING
+[airlock] refuse 'drop_database': FORGE_TOOL_BLOCKED tool 'drop_database' is denied by policy
+[airlock] refuse 'charge': FORGE_TOOL_BLOCKED tool 'charge' is not listed in policy (default deny)
+[airlock] refuse 'drop_database': FORGE_TOOL_BLOCKED tool 'drop_database' is denied by policy
+[airlock] refuse 'rotate_keys': FORGE_TOOL_BLOCKED tool 'rotate_keys' is not listed in policy (default deny)
+[airlock] refuse 'forge_canary_no_such_tool': FORGE_TOOL_BLOCKED tool 'forge_canary_no_such_tool' is not listed in policy (default deny)
+[airlock] canary report: PASSED; breaches=[]
+[airlock] refuse 'deploy': FORGE_GATE_REFUSED gate deploy: verifier verdict REJECT_OVER_CAP
+[airlock] refuse 'run_query': FORGE_GATE_REFUSED gate run_query: verifier verdict REJECT_OVER_CAP
+[airlock] refuse 'slow_job': FORGE_GATE_REFUSED gate slow_job: verifier verdict REJECT_OVER_CAP
+[airlock] workspace: re-verified (hidden content absent) at /ws
+[airlock] log deploy: reloaded 3 steps gross=3 cap=3 re-verified ACCEPT
+[airlock] log run_query: reloaded 3 steps gross=1000 cap=1000 re-verified ACCEPT
+[airlock] log slow_job: reloaded 2 steps gross=2 cap=2 re-verified ACCEPT
+[airlock] up on :8700; 4 tools exposed; 3 gate logs; 7 upstream tools seen; canary PENDING
+[airlock] refuse 'drop_database': FORGE_TOOL_BLOCKED tool 'drop_database' is denied by policy
+[airlock] refuse 'charge': FORGE_TOOL_BLOCKED tool 'charge' is not listed in policy (default deny)
+[airlock] refuse 'drop_database': FORGE_TOOL_BLOCKED tool 'drop_database' is denied by policy
+[airlock] refuse 'rotate_keys': FORGE_TOOL_BLOCKED tool 'rotate_keys' is not listed in policy (default deny)
+[airlock] refuse 'forge_canary_no_such_tool': FORGE_TOOL_BLOCKED tool 'forge_canary_no_such_tool' is not listed in policy (default deny)
+[airlock] canary report: BREACH; breaches=["egress connection succeeded: mock-http:9100", "DNS resolution succeeded: mock-http"]

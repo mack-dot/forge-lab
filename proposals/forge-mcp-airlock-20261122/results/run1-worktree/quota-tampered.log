@@ -1,0 +1,3 @@
+[airlock] workspace: re-verified (hidden content absent) at /ws
+[airlock] FATAL (fail closed): gate log: deploy: stored log does not verify (REJECT_BAD_SEAL); refusing to start
+

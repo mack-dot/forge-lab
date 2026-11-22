@@ -1,0 +1,76 @@
+{
+ "proxy": {
+  "mode": "proxy",
+  "fs_read": {
+   "n": 120,
+   "median_ms": 3.12,
+   "p95_ms": 10.1,
+   "max_ms": 24.03
+  },
+  "http_pass": {
+   "n": 120,
+   "median_ms": 3.03,
+   "p95_ms": 6.81,
+   "max_ms": 12.1
+  },
+  "http_gate": {
+   "n": 120,
+   "median_ms": 317.8,
+   "p95_ms": 537.78,
+   "max_ms": 1031.18
+  }
+ },
+ "direct": {
+  "mode": "direct",
+  "fs_read": {
+   "n": 120,
+   "median_ms": 1.06,
+   "p95_ms": 4.18,
+   "max_ms": 27.05
+  },
+  "http_pass": {
+   "n": 120,
+   "median_ms": 1.72,
+   "p95_ms": 3.32,
+   "max_ms": 12.18
+  },
+  "http_gate": {
+   "n": 120,
+   "median_ms": 1.48,
+   "p95_ms": 3.04,
+   "max_ms": 5.01
+  }
+ },
+ "rows": [
+  {
+   "call": "read_text_file (real fs server, stdio), allowed pass-through",
+   "n": 120,
+   "direct_median_ms": 1.06,
+   "direct_p95_ms": 4.18,
+   "proxy_median_ms": 3.12,
+   "proxy_p95_ms": 10.1,
+   "overhead_median_ms": 2.06,
+   "overhead_p95_ms": 5.92
+  },
+  {
+   "call": "get_status (mock HTTP), allowed pass-through",
+   "n": 120,
+   "direct_median_ms": 1.72,
+   "direct_p95_ms": 3.32,
+   "proxy_median_ms": 3.03,
+   "proxy_p95_ms": 6.81,
+   "overhead_median_ms": 1.31,
+   "overhead_p95_ms": 3.49
+  },
+  {
+   "call": "charge amount=1 (mock HTTP), gated by the compiled verifier",
+   "n": 120,
+   "direct_median_ms": 1.48,
+   "direct_p95_ms": 3.04,
+   "proxy_median_ms": 317.8,
+   "proxy_p95_ms": 537.78,
+   "overhead_median_ms": 316.32,
+   "overhead_p95_ms": 534.74
+  }
+ ]
+}

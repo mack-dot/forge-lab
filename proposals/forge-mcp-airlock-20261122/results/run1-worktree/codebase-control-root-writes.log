@@ -1,0 +1,13 @@
+ Container forgeair-codebase-mock-http-1  Running
+ Container forgeair-codebase-airlock-1  Running
+ Container forgeair-codebase-mock-http-1  Waiting
+ Container forgeair-codebase-mock-http-1  Healthy
+[canary] scanned 6326 text files
+[canary] BREACH: read-only file chmod: .forge/notes.md
+[canary] BREACH: read-only file chmod: spec/api.md
+[canary] BREACH: read-only file chmod: tests/ui.test.ts
+[canary] BREACH: read-only dir renamed: .forge
+[canary] BREACH: read-only dir renamed: spec
+[canary] BREACH: read-only dir renamed: tests
+[canary] BREACH: 6656 checks, 6 breaches, 5.24s; airlock state={'state': 'BREACH'}
+
