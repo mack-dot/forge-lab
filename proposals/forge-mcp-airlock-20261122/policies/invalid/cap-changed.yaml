@@ -1,0 +1,39 @@
+# INVALID on purpose (fail-closed load test): deploy cap 3 -> 4 does not match the stored log genesis.
+# Domain 2: quota + argument rules on an ops/database service.
+version: 1
+upstreams:
+  - name: ops
+    transport: http
+    url: http://mock-http:9100/mcp
+    headers:
+      Authorization: "Bearer FAKE_ops_key_DEMO_ONLY_not_real_0001"
+    timeout_s: 2
+tools:
+  allow:
+    - tool: get_status
+  deny: [drop_database]
+  # rotate_keys and charge are offered by the upstream but not listed: default deny.
+  gate:
+    - tool: deploy                # count gate: at most 3 deploys
+      unit: count
+      cap: 4
+      expires_in_s: 86400
+      arg_rules:
+        env: {in: [staging]}
+        branch: {not_in: [main, master], regex: "[a-z0-9][a-z0-9/_-]{0,63}"}
+    - tool: run_query             # value gate: at most 1000 rows in total, 400 per call
+      unit: value
+      value_field: rows
+      cap: 1000
+      per_call_max: 400
+      expires_in_s: 86400
+      checker:                    # any external verifier; exit 0 = allowed
+        command: [python3, -I, /forge/checkers/sql_select_only.py]
+        timeout_s: 5
+    - tool: slow_job              # count gate on a slow upstream (timeout -> ABORTED, still spent)
+      unit: count
+      cap: 2
+      expires_in_s: 86400
+paths:
+  hidden_paths: ["src/proprietary/**", "**/algo.ts", ".env*"]
+  readonly_paths: ["tests/**", "spec/**", ".forge/**"]
