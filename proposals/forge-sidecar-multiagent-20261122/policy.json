@@ -1,0 +1,9 @@
+{
+  "swarm_cap_cents": 2000,
+  "admin_token": "admin-demo-token-not-secret",
+  "agents": {
+    "tok-support-7f3a": { "name": "support",  "cap_cents": 2000, "expires_in_s": 3600, "tools": ["stripe.refund"], "max_calls": 10 },
+    "tok-research-91c2": { "name": "research", "cap_cents": 200,  "expires_in_s": 1800, "tools": ["x402.fetch"],    "max_calls": 40 },
+    "tok-coder-55be":    { "name": "coder",    "cap_cents": 100,  "expires_in_s": 1200, "tools": ["x402.fetch"],    "max_calls": 40 }
+  }
+}
