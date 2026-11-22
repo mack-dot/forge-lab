@@ -1,0 +1,17 @@
+ Container forgeair-quota-mock-http-1  Running
+ Container forgeair-quota-airlock-1  Running
+ Container forgeair-quota-mock-http-1  Waiting
+ Container forgeair-quota-mock-http-1  Healthy
+[canary] scanned 6309 text files
+[canary] PASS: 6432 checks, 0 breaches, 4.42s; airlock state={'state': 'PASSED'}
+[agent] scenario quota phase 2
+  ok   no upstream credential in the agent environment
+  ok   no direct egress to 1.1.1.1:443
+  ok   no direct egress to 8.8.8.8:53
+  ok   no direct egress to mock-http:9100
+  ok   after restart: deploy still refused REJECT_OVER_CAP
+  ok   after restart: run_query rows=1 refused REJECT_OVER_CAP
+  ok   after restart: slow_job refused REJECT_OVER_CAP
+  ok   after restart: read tool still passes
+[agent] quota phase 2: 8 ok, 0 failed
+[agent] RESULT {"domain": "quota", "phase": "2", "ok": 8, "failed": []}

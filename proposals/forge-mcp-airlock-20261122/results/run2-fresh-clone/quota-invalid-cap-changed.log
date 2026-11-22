@@ -1,0 +1,3 @@
+[airlock] workspace: re-verified (hidden content absent) at /ws
+[airlock] FATAL (fail closed): gate log: deploy: stored cap 3 != policy cap 4
+
