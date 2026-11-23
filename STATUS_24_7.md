@@ -5,7 +5,7 @@ only those measured in a named checkout; anything else is marked as an estimate 
 
 **`end_to_end=false`.** Open named links: S1 (hardware human approval: code in PR #11, real-key test pending the owner), hardware VM boundary (Linux: Kata microVM battery 35/35 in PR #13; macOS: blocked), E2/E4, M1-B. None is merged and verified as a whole yet.
 
-Last updated: 2026-11-23 (owner merge order and vfkit decision recorded; M2.2, M2.3 probes, M5.1, visibleTo, M4b vfkit IN_PROGRESS; end_to_end=false).
+Last updated: 2026-11-23 (owner merge order and vfkit decision recorded; M2.2, M2.3 probes, M5.1, recursive-rule acid test, M4b vfkit IN_PROGRESS; end_to_end=false).
 
 ## Repositories
 
@@ -45,25 +45,25 @@ Found and fixed on the way: PR #6 gave false APP_SYNTAX_ERROR on Node < 22.13 an
 | M5.1 stateful trace fuzzing | PR_OPEN (#15) | CI 6/6; 108 cases. examples/subscription-machine (Dafny model, clauses M1–M7). 4 planted bugs caught in JS and Python, shrunk to 2, 4, 2, 2 events; correct wrapper 0 disagreements over 50,000 traces (~275,000 steps) per language; 50,000 traces JS 11.6–21.4 s, Python 11.2–17.0 s (5 runs, one machine, load varied). Negative controls: max_len 1 finds none; restart 0 misses the restart bug; unknown key exit 2 | owner review. Not built: Go/Rust/Java/C# trace mode, time going backwards, several rules over one state; pause-expiry bug is seed-sensitive |
 | M5.2 M1-B verified native core | NOT_STARTED | M1-B OPEN in the research record | — |
 
-## Owner feedback queue (2026-11-23, from the chronicle session), not in the directive's list
+## Owner feedback queue (2026-11-23, from dogfooding on the owner's private app), not in the directive's list
 
 | Item | Status |
 | --- | --- |
-| Bypass scan (owner's top pick) | PR #4 open, CI green; on the chronicle copy names gate.ts:83 mayRetract, companion.ts:186, :224; upgrade to hard gate UNAPPROVED_BYPASS + allowedBypasses in progress |
+| Bypass scan (owner's top pick) | PR #4 open, CI green; on a scratch copy of the owner's private app it names 3 real places outside the rule; upgrade to hard gate UNAPPROVED_BYPASS + allowedBypasses in progress |
 | Scope-honest status | PR #6 |
-| Messy-input wrapper fuzz | PR #5, CI green; chronicle copy: `entry.householdId = undefined: THROWS_ON_MESSY_INPUT (TypeError)` + 23 more throws; JS/Python only |
-| Build syntax step (files + importers) | PR #6; chronicle copy: missing brace in sandbox/server.ts flagged |
-| DECISION_NOTE_STALE | PR #6; chronicle copy: keyword.ts change flagged; note fixed without re-approval |
+| Messy-input wrapper fuzz | PR #5, CI green; private-app copy: 24 THROWS_ON_MESSY_INPUT (TypeError on a missing field); JS/Python only |
+| Build syntax step (files + importers) | PR #6; private-app copy: a planted missing brace flagged |
+| DECISION_NOTE_STALE | PR #6; private-app copy: a code change flagged; note fixed without re-approval |
 | Fast generated JS module + string cache; serviceTest live-call check | IN_PROGRESS (agent, `feat/fast-js-wrapper`) |
-| Normative approval hashes; compact approval digest | PR #6; chronicle approval screen 26,214 → 1,404 characters |
-| Next-rule suggestion | PR #6; chronicle copy suggests `visibleTo()` (gate.ts) |
+| Normative approval hashes; compact approval digest | PR #6; private-app approval screen 26,214 → 1,404 characters |
+| Next-rule suggestion | PR #6; private-app copy: suggests the recursive visibility function as the next rule |
 
 ## Owner decisions 2026-11-23 (second batch)
 
 - macOS agent VM: vfkit.
 - Merge order (owner): forge-claude-mod #2 → #3 → #10 → #12 → #9 → #11 → #13, plus forge #99; the agent merges `main` into each later branch to fix conflicts (no force-push); v0.14.0 after all are in. Rehearsal from `bd23da9`: conflicts expected in #10 (tests/run_cs_diff.py), #9, #11 (CHANGELOG.md, hooks/register.ts, tests/run_tests.py), #13 (CHANGELOG.md).
 - S1 physical YubiKey test: PENDING until the owner runs it; 27/27 software-forgery checks are not a hardware result.
-- visibleTo() acid test: scratch copy of the owner's app only, synthetic fixture in the suite (`feat/visibleto-acid`), IN_PROGRESS.
+- recursive-rule acid test: scratch copy of the owner's app only, synthetic fixture in the suite (`feat/visibleto-acid`), IN_PROGRESS.
 
 ## Blocked, needs the owner
 
