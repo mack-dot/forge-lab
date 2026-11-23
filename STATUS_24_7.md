@@ -5,14 +5,14 @@ only those measured in a named checkout; anything else is marked as an estimate 
 
 **`end_to_end=false`.** Open named links: S1 (hardware human approval), hardware VM boundary, E2/E4, M1-B.
 
-Last updated: 2026-11-23 (M0.3 measured; M1.1 pull request #3 green; airlock sync-back CRITICAL found, fix in progress).
+Last updated: 2026-11-23 (owner feedback PRs #4, #5, #6 open; red-team fixes and model proxy combined locally; prove_release running).
 
 ## Repositories
 
 | Repository | Visibility | `main` | Open pull requests |
 | --- | --- | --- | --- |
 | mack-dot/forge | private | `4aef55d0` (#97 airlock merged) | #98 private airlock plugin (pushed by the owner), #89, #76, #37, #36, #34, #15, #14, #5, #3, #2, #1 |
-| mack-dot/forge-claude-mod | public | `0c1c496` (tag v0.12.2) | #2 (M0.2), #3 (M1.1) |
+| mack-dot/forge-claude-mod | public | `0c1c496` (tag v0.12.2) | #2 (M0.2), #3 (M1.1), #4 (bypass), #5 (messy-input fuzz), #6 (scope, stale notes, syntax step, digest) |
 
 Process note: plugin releases v0.9.0–v0.12.2 were made before this directive by fast-forwarding `main` and tagging
 from `wip/*` branches. From now on (Law 2) every milestone is a `feat/<milestone-id>` branch with a pull request;
@@ -23,9 +23,9 @@ the agent merges and tags nothing.
 | Item | Where | State |
 | --- | --- | --- |
 | Single-plugin airlock (`airlock/`, `/forge:airlock`, `forge_airlock.py up`, `prove_release.sh`) | scratch clone `fcm-unified`, branch `wip/unified-airlock`, `5056699` | 7 gates passed twice on `2881584` (both exit 0; G6 gated call 300–370 ms → 16–21 ms median); merged with v0.12.1 since; not re-run after the merge |
-| Model proxy (`llm` section, no key in the agent box) | copy `fcm-llm-proxy` | agent running |
+| Combined airlock branch `wip/airlock-combined` in `fcm-unified` (`49602f0`): sync-back alias fix `ecdf8be` + protocol fixes F1–F8 `6c2324d` + model proxy `adc2521`/`8782301` | scratch `fcm-unified` | unit suite 149/149 exit 0 after the merge; prove_release.sh (8 gates) running twice. Before the merge: model proxy branch prove_release run 2 exit 0 (806 s; run 1 exit 1 on a cleanup count of another agent's containers); proto branch validate.sh 33/33; FS fix: G3 exit 1 twice on leftover-container counts only |
 | Red team: filesystem | copy `fcm-redteam-fs` | DONE. 1 CRITICAL: sync-back guards are case- and Unicode-sensitive, the macOS host is not; `Forge.yaml`, `.GIT/hooks/post-checkout`, `TESTS/…` (read-only), `SRC/proprietary/…` (hidden) all written to the real repo (host code execution through a git hook). Host-side unit suite 67/67 passed and does not cover it. Fix + regression tests in progress in `fcm-unified` |
-| Red team: protocol and gates | copy `fcm-redteam-proto` | agent running |
+| Red team: protocol and gates | copy `fcm-redteam-proto` | DONE. 8 findings (F1 HIGH: negative Content-Length → OOM kill; F2–F4 MEDIUM: log flood, untyped deny-list bypass, replay ids by encoding; F5–F8 LOW). All fixed with regressions: 36 of 47 fail on old code, 49/49 pass on new. Cap held in every attack (64 parallel charges: exactly 9 accepted); memo on/off 0 disagreements over 1,800 logs |
 | Sealed scan benchmark A and B | scratch `scan-bench/` (outside both repositories) | DONE, see M0.3 |
 
 ## Milestones
@@ -38,9 +38,9 @@ the agent merges and tags nothing.
 | M1.1 Go, Rust, Java, C# evaluators | PR_OPEN | forge-claude-mod #3: 3 planted bugs per language in all 6 languages; negative control per language (fixed code: no logic disagreement); local 50/50, CI run 45097752640 exit 0 (C# 373 ms). The first CI run failed on a wrong C# negative control (inputs above 2^63 cannot reach `long` code), corrected | owner review and merge |
 | M1.2 coverage (c8, coverage.py) and `mutate --app` | NOT_STARTED | — | — |
 | M1.3 forge-ci Action hardening | PARTIAL | Action runs check, `APPROVAL_CHANGED`, `build --check`, `invariants --check`; included files verified and scanned | add a configurable 50,000-input diff sweep and a zero-config workflow |
-| M2.1 `/llm` proxy, no key in the box | IN_PROGRESS | agent running | — |
+| M2.1 `/llm` proxy, no key in the box | DONE_LOCAL | G8: key absent from env, /proc and 10,843 files; 20 concurrent streams → exactly 7 forwarded (= floor(room/R)); error, cut stream, SIGKILL keep full reservation; restart keeps the cap; real-API smoke 19 tokens settled, HTTP 200. PROVED: verifier verdict on the log; NATIVE CHECK: estimate, settlement, proxy. Owner decision: estimate 1 or 2 bytes per token | publish decision is the owner's |
 | M2.2 MCP Streamable HTTP, multi-upstream, roles | NOT_STARTED | HTTP side of #97 is a subset of MCP | start after M2.1 (same proxy code) |
-| M2.3 red-team swarm | IN_PROGRESS | filesystem: 1 CRITICAL (see above), fix in progress; protocol agent running; in-box /proc, git-object and fd probes NOT yet run | fixes + regression tests in prove_release.sh G5 |
+| M2.3 red-team swarm | IN_PROGRESS | filesystem CRITICAL fixed (16 alias cases; 14 fail on old code; G5 requires them); protocol F1–F8 fixed; in-box /proc, git-object, fd and Docker end-to-end alias probes NOT yet run; Windows names, homoglyph folding open | combined prove_release, then in-box probes |
 | M3 S1 hardware approval | NOT_STARTED | — | needs the owner's hardware key or Touch ID for the positive test |
 | M4 microVM / gVisor | NOT_STARTED | — | gVisor and Firecracker need a Linux host; Apple Virtualization.framework is the local route |
 | M5.1 stateful trace fuzzing | NOT_STARTED | — | — |
@@ -50,14 +50,14 @@ the agent merges and tags nothing.
 
 | Item | Status |
 | --- | --- |
-| Bypass scan: list code outside the proved rule that decides on the same fields (owner's top pick) | IN_PROGRESS (agent, `feat/bypass-scan`) |
-| Status says what VERIFIED covers (model / compiled code fuzzed / wrapper not proved / callers outside) | IN_PROGRESS |
-| Fuzz the wrapper with raw values (null, undefined, missing, numbers); wrapper must fail closed | IN_PROGRESS |
-| Build sanity step (tsc --noEmit, node --check, py_compile) | IN_PROGRESS |
-| Stale decision records when described code changes | IN_PROGRESS |
-| Clean ES module at build time (no runtime new Function); Rust→wasm later | NOT_STARTED |
-| Approval hashes only normative parts of decision records | NOT_STARTED |
-| Suggest the next rule that closes the largest gap | NOT_STARTED |
+| Bypass scan (owner's top pick) | PR #4 open, CI green; on the chronicle copy names gate.ts:83 mayRetract, companion.ts:186, :224; upgrade to hard gate UNAPPROVED_BYPASS + allowedBypasses in progress |
+| Scope-honest status | PR #6 |
+| Messy-input wrapper fuzz | PR #5, CI green; chronicle copy: `entry.householdId = undefined: THROWS_ON_MESSY_INPUT (TypeError)` + 23 more throws; JS/Python only |
+| Build syntax step (files + importers) | PR #6; chronicle copy: missing brace in sandbox/server.ts flagged |
+| DECISION_NOTE_STALE | PR #6; chronicle copy: keyword.ts change flagged; note fixed without re-approval |
+| Fast generated JS module + string cache; serviceTest live-call check | IN_PROGRESS (agent, `feat/fast-js-wrapper`) |
+| Normative approval hashes; compact approval digest | PR #6; chronicle approval screen 26,214 → 1,404 characters |
+| Next-rule suggestion | PR #6; chronicle copy suggests `visibleTo()` (gate.ts) |
 
 ## Blocked, needs the owner
 
