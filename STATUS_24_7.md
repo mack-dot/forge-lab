@@ -40,7 +40,7 @@ Found and fixed on the way: PR #6 gave false APP_SYNTAX_ERROR on Node < 22.13 an
 | M2.1 `/llm` proxy, no key in the box | DONE (v0.13.0) | G8: key absent from env, /proc and 10,843 files; 20 concurrent streams → exactly 7 forwarded (= floor(room/R)); error, cut stream, SIGKILL keep full reservation; restart keeps the cap; real-API smoke 19 tokens settled, HTTP 200. PROVED: verifier verdict on the log; NATIVE CHECK: estimate, settlement, proxy. Owner decision 2026-11-23: strict 1 byte/token default, override in forge.yaml | — |
 | M2.2 MCP Streamable HTTP, multi-upstream, roles | NOT_STARTED | HTTP side of #97 is a subset of MCP | start after M2.1 (same proxy code) |
 | M2.3 red-team swarm | IN_PROGRESS | filesystem CRITICAL fixed (16 alias cases; 14 fail on old code; G5 requires them); protocol F1–F8 fixed; in-box /proc, git-object, fd and Docker end-to-end alias probes NOT yet run; Windows names, homoglyph folding open | combined prove_release, then in-box probes |
-| M3 S1 hardware approval | IN_PROGRESS (agent, `feat/M3-hardware-approval`) | — | software-key tests + rogue-agent negative controls; real YubiKey/Touch ID positive test needs the owner |
+| M3 S1 hardware approval | PR_OPEN (#11); real-hardware positive test BLOCKED_NEEDS_HUMAN | CI 6/6, 126 cases; rogue-agent negative controls 27/27 exit 2 (spec, forge.yaml, INVARIANTS.md, approved.json, .sig, signing switched off, own key added and re-signed, all at once; anchor outside the project and at --base); owner-signed positive control exit 0 (software ed25519 key, FINITE TEST); airlock require_human_approval: hardware 16 unit + 6/6 Docker e2e; mutants of the verifier code fail 7–8 cases each | owner: run the YubiKey steps in PR #11 (Homebrew openssh; macOS ssh-keygen has no FIDO provider). Follow-up: Action input for FORGE_ALLOWED_SIGNERS on push runs. Still trusted: ssh-keygen, the anchor file or base-branch protection, key custody, no rollback dates |
 | M4 microVM / gVisor | IN_PROGRESS (agent, `feat/M4-isolation`) | — | gVisor in a Linux CI workflow; microVM scaffold (Virtualization.framework / Firecracker if CI has KVM) |
 | M5.1 stateful trace fuzzing | NOT_STARTED | — | — |
 | M5.2 M1-B verified native core | NOT_STARTED | M1-B OPEN in the research record | — |
@@ -62,5 +62,5 @@ Found and fixed on the way: PR #6 gave false APP_SYNTAX_ERROR on Node < 22.13 an
 
 | Item | Why | What is needed |
 | --- | --- | --- |
-| M3 positive test | a hardware signature needs a person's key or finger | the owner's YubiKey or Touch ID session |
+| M3 positive test | a hardware signature needs a person's key or finger | the owner runs the steps in forge-claude-mod PR #11 with a YubiKey (or tries Touch ID via ssh-keychain.dylib) |
 | M4 on Linux backends | this machine is macOS | a Linux host or CI runner with KVM |
