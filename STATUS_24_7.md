@@ -5,7 +5,7 @@ only those measured in a named checkout; anything else is marked as an estimate 
 
 **`end_to_end=false`.** Open named links: S1 (hardware human approval), hardware VM boundary, E2/E4, M1-B.
 
-Last updated: 2026-11-23 (v0.13.0 released: PRs #4–#8 merged on the owner's explicit authorization; clean-clone test passed).
+Last updated: 2026-11-23 (v0.13.0 released; M1.1b, M1.3, M3, M4 started in parallel worktrees).
 
 ## Repositories
 
@@ -34,13 +34,14 @@ Found and fixed on the way: PR #6 gave false APP_SYNTAX_ERROR on Node < 22.13 an
 | M0.2 TRIAL.md pre-registration | PR_OPEN | forge-claude-mod pull request #2 (`feat/M0.2`): the five metrics by name, definitions, `trial-results.csv` template; 2 secret scans, 0 findings | owner review and merge |
 | M0.3 sealed 40-bug benchmark | DONE (baseline) | v0.12.2, 49 bugs, 14 repos, 63 scans all exit 0, sealed 2026-11-23T01:49Z (sealed-A.json, sealed-B.json in scratch `scan-bench/`, sha256 files beside them). **Top-5 recall 33/49 (67 %), top-7 37/49 (76 %).** A (auth, money; 7 repos): 21/25 top-5 (strict, no alias names: 18/25), 23/25 top-7, HEAD top-5 rows real rules 35/35, median 74.9 s. B (parsing, time, state machines; 7 repos): 12/24 top-5, 14/24 top-7, median 81.1 s; JavaScript semver 0/4. Post-cutoff (cannot be remembered): A 6/9, B 2/4. Weak spots: rule-building code (grant authoring), parsers' loose paths, small helpers, run-to-run variance. Caveats: one scan per checkout, grading by the harvesting agent (not blind), near-duplicate clusters | do not tune scan.md on these bugs; next scan change is measured on a NEW sealed set |
 | M1.1 Go, Rust, Java, C# evaluators | PR_OPEN | forge-claude-mod #3: 3 planted bugs per language in all 6 languages; negative control per language (fixed code: no logic disagreement); local 50/50, CI run 45097752640 exit 0 (C# 373 ms). The first CI run failed on a wrong C# negative control (inputs above 2^63 cannot reach `long` code), corrected | owner review and merge |
-| M1.2 coverage (c8, coverage.py) and `mutate --app` | NOT_STARTED | — | — |
-| M1.3 forge-ci Action hardening | PARTIAL | Action runs check, `APPROVAL_CHANGED`, `build --check`, `invariants --check`; included files verified and scanned | add a configurable 50,000-input diff sweep and a zero-config workflow |
+| M1.1b messy fuzz for Go/Rust/Java/C# + warm-time gate | IN_PROGRESS (agent, `feat/M1.1b-compiled-messy`) | — | — |
+| M1.2 coverage (c8, coverage.py) and `mutate --app` | NOT_STARTED | — | after M1.1b (same files) |
+| M1.3 forge-ci Action hardening | IN_PROGRESS (agent, `feat/M1.3-forge-ci`) | Action runs check, APPROVAL_CHANGED, build --check, invariants --check | zero-config workflow, 50k sweep, job summary, negative controls in CI |
 | M2.1 `/llm` proxy, no key in the box | DONE (v0.13.0) | G8: key absent from env, /proc and 10,843 files; 20 concurrent streams → exactly 7 forwarded (= floor(room/R)); error, cut stream, SIGKILL keep full reservation; restart keeps the cap; real-API smoke 19 tokens settled, HTTP 200. PROVED: verifier verdict on the log; NATIVE CHECK: estimate, settlement, proxy. Owner decision 2026-11-23: strict 1 byte/token default, override in forge.yaml | — |
 | M2.2 MCP Streamable HTTP, multi-upstream, roles | NOT_STARTED | HTTP side of #97 is a subset of MCP | start after M2.1 (same proxy code) |
 | M2.3 red-team swarm | IN_PROGRESS | filesystem CRITICAL fixed (16 alias cases; 14 fail on old code; G5 requires them); protocol F1–F8 fixed; in-box /proc, git-object, fd and Docker end-to-end alias probes NOT yet run; Windows names, homoglyph folding open | combined prove_release, then in-box probes |
-| M3 S1 hardware approval | NOT_STARTED | — | needs the owner's hardware key or Touch ID for the positive test |
-| M4 microVM / gVisor | NOT_STARTED | — | gVisor and Firecracker need a Linux host; Apple Virtualization.framework is the local route |
+| M3 S1 hardware approval | IN_PROGRESS (agent, `feat/M3-hardware-approval`) | — | software-key tests + rogue-agent negative controls; real YubiKey/Touch ID positive test needs the owner |
+| M4 microVM / gVisor | IN_PROGRESS (agent, `feat/M4-isolation`) | — | gVisor in a Linux CI workflow; microVM scaffold (Virtualization.framework / Firecracker if CI has KVM) |
 | M5.1 stateful trace fuzzing | NOT_STARTED | — | — |
 | M5.2 M1-B verified native core | NOT_STARTED | M1-B OPEN in the research record | — |
 
