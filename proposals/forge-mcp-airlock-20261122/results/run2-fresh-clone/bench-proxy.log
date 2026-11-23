@@ -1,0 +1,7 @@
+ Container forgeair-bench-mock-http-1  Running
+ Container forgeair-bench-airlock-1  Running
+ Container forgeair-bench-mock-http-1  Waiting
+ Container forgeair-bench-mock-http-1  Healthy
+[canary] scanned 6309 text files
+[canary] PASS: 6459 checks, 0 breaches, 4.66s; airlock state={'state': 'PASSED'}
+[bench] RESULT {"mode": "proxy", "fs_read": {"n": 120, "median_ms": 1.81, "p95_ms": 19.4, "max_ms": 87.03}, "http_pass": {"n": 120, "median_ms": 2.53, "p95_ms": 7.96, "max_ms": 13.24}, "http_gate": {"n": 120, "median_ms": 298.35, "p95_ms": 495.75, "max_ms": 511.34}}

@@ -1,0 +1,58 @@
+[airlock] demo source repository built at /state/source (3 commits)
+[airlock] workspace: built from 3 commits; 3 hidden paths absent; 2 entries dropped; 1 read-only files, 1 closed dirs
+[airlock] log charge: created cap=1000 expires_at=1795392618
+[airlock] log deploy: created cap=5 expires_at=1795392618
+[airlock] up on :8700; 3 tools exposed; 2 gate logs; 7 upstream tools seen; canary PENDING
+[airlock] refuse 'drop_database': FORGE_TOOL_BLOCKED tool 'drop_database' is not listed in policy (default deny)
+[airlock] refuse 'rotate_keys': FORGE_TOOL_BLOCKED tool 'rotate_keys' is not listed in policy (default deny)
+[airlock] refuse 'run_query': FORGE_TOOL_BLOCKED tool 'run_query' is not listed in policy (default deny)
+[airlock] refuse 'slow_job': FORGE_TOOL_BLOCKED tool 'slow_job' is not listed in policy (default deny)
+[airlock] refuse 'forge_canary_no_such_tool': FORGE_TOOL_BLOCKED tool 'forge_canary_no_such_tool' is not listed in policy (default deny)
+[airlock] canary report: PASSED; breaches=[]
+[airlock] refuse 'charge': FORGE_GATE_REFUSED gate charge: verifier verdict REJECT_DUPLICATE_ID
+[airlock] refuse 'charge': FORGE_GATE_REFUSED gate charge: verifier verdict REJECT_DUPLICATE_ID
+[airlock] refuse 'charge': FORGE_GATE_REFUSED gate charge: verifier verdict REJECT_DUPLICATE_ID
+[airlock] refuse 'charge': FORGE_GATE_REFUSED gate charge: verifier verdict REJECT_DUPLICATE_ID
+[airlock] refuse 'charge': FORGE_GATE_REFUSED gate charge: verifier verdict REJECT_DUPLICATE_ID
+[airlock] refuse 'charge': FORGE_GATE_REFUSED gate charge: verifier verdict REJECT_DUPLICATE_ID
+[airlock] refuse 'charge': FORGE_GATE_REFUSED gate charge: verifier verdict REJECT_DUPLICATE_ID
+[airlock] refuse 'charge': FORGE_GATE_REFUSED gate charge: verifier verdict REJECT_DUPLICATE_ID
+[airlock] refuse 'charge': FORGE_GATE_REFUSED gate charge: verifier verdict REJECT_DUPLICATE_ID
+[airlock] refuse 'charge': FORGE_GATE_REFUSED gate charge: verifier verdict REJECT_DUPLICATE_ID
+[airlock] refuse 'charge': FORGE_GATE_REFUSED gate charge: verifier verdict REJECT_DUPLICATE_ID
+[airlock] refuse 'charge': FORGE_GATE_REFUSED gate charge: verifier verdict REJECT_DUPLICATE_ID
+[airlock] refuse 'charge': FORGE_GATE_REFUSED gate charge: verifier verdict REJECT_OVER_CAP
+[airlock] refuse 'charge': FORGE_GATE_REFUSED gate charge: verifier verdict REJECT_OVER_CAP
+[airlock] refuse 'charge': FORGE_GATE_REFUSED gate charge: verifier verdict REJECT_OVER_CAP
+[airlock] refuse 'charge': FORGE_GATE_REFUSED gate charge: verifier verdict REJECT_OVER_CAP
+[airlock] refuse 'charge': FORGE_GATE_REFUSED gate charge: verifier verdict REJECT_OVER_CAP
+[airlock] refuse 'charge': FORGE_GATE_REFUSED gate charge: verifier verdict REJECT_OVER_CAP
+[airlock] refuse 'charge': FORGE_GATE_REFUSED gate charge: verifier verdict REJECT_OVER_CAP
+[airlock] refuse 'charge': FORGE_GATE_REFUSED gate charge: verifier verdict REJECT_OVER_CAP
+[airlock] refuse 'charge': FORGE_GATE_REFUSED gate charge: verifier verdict REJECT_OVER_CAP
+[airlock] refuse 'charge': FORGE_GATE_REFUSED gate charge: verifier verdict REJECT_OVER_CAP
+[airlock] refuse 'charge': FORGE_GATE_REFUSED gate charge: verifier verdict REJECT_OVER_CAP
+[airlock] refuse 'charge': FORGE_GATE_REFUSED gate charge: verifier verdict REJECT_OVER_CAP
+[airlock] refuse 'charge': FORGE_GATE_REFUSED gate charge: verifier verdict REJECT_OVER_CAP
+[airlock] refuse 'charge': FORGE_GATE_REFUSED gate charge: verifier verdict REJECT_OVER_CAP
+[airlock] refuse 'charge': FORGE_GATE_REFUSED amount=101 > per_call_max 100
+[airlock] refuse 'charge': FORGE_ARG_REFUSED 'amount' must be an integer in [0, 2^63-1]
+[airlock] refuse 'deploy': FORGE_GATE_REFUSED gate deploy: verifier verdict REJECT_OVER_CAP
+[airlock] refuse 'deploy': FORGE_GATE_REFUSED gate deploy: verifier verdict REJECT_OVER_CAP
+[airlock] refuse 'deploy': FORGE_GATE_REFUSED gate deploy: verifier verdict REJECT_OVER_CAP
+[airlock] refuse 'deploy': FORGE_GATE_REFUSED gate deploy: verifier verdict REJECT_OVER_CAP
+[airlock] refuse 'deploy': FORGE_GATE_REFUSED gate deploy: verifier verdict REJECT_OVER_CAP
+[airlock] refuse 'deploy': FORGE_GATE_REFUSED gate deploy: verifier verdict REJECT_OVER_CAP
+[airlock] refuse 'deploy': FORGE_GATE_REFUSED gate deploy: verifier verdict REJECT_OVER_CAP
+[airlock] refuse 'deploy': FORGE_GATE_REFUSED gate deploy: verifier verdict REJECT_OVER_CAP
+[airlock] refuse 'deploy': FORGE_GATE_REFUSED gate deploy: verifier verdict REJECT_OVER_CAP
+[airlock] refuse 'deploy': FORGE_GATE_REFUSED gate deploy: verifier verdict REJECT_OVER_CAP
+[airlock] refuse 'deploy': FORGE_GATE_REFUSED gate deploy: verifier verdict REJECT_OVER_CAP
+[airlock] refuse 'deploy': FORGE_GATE_REFUSED gate deploy: verifier verdict REJECT_OVER_CAP
+[airlock] refuse 'deploy': FORGE_GATE_REFUSED gate deploy: verifier verdict REJECT_OVER_CAP
+[airlock] refuse 'deploy': FORGE_GATE_REFUSED gate deploy: verifier verdict REJECT_OVER_CAP
+[airlock] refuse 'deploy': FORGE_GATE_REFUSED gate deploy: verifier verdict REJECT_OVER_CAP
+[airlock] workspace: re-verified (hidden content absent) at /ws
+[airlock] log charge: reloaded 14 steps gross=1000 cap=1000 re-verified ACCEPT
+[airlock] log deploy: reloaded 5 steps gross=5 cap=5 re-verified ACCEPT
+[airlock] up on :8700; 3 tools exposed; 2 gate logs; 7 upstream tools seen; canary PENDING

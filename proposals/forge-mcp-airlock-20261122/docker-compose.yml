@@ -1,0 +1,112 @@
+# Forge MCP airlock demo. FORGE_DOMAIN selects the policy (codebase | quota | concurrency).
+#   FORGE_DOMAIN=codebase docker compose up --build --exit-code-from agent
+# Both networks are internal (no route out). The agent sees only the airlock.
+x-image: &img
+  build: .
+  image: forge-mcp-airlock:local
+
+x-agent: &agent
+  <<: *img
+  user: "1000:1000"
+  read_only: true
+  tmpfs: [/tmp]
+  cap_drop: [ALL]
+  security_opt: ["no-new-privileges:true"]
+  environment:
+    FORGE_AIRLOCK: http://airlock:8700
+    HOME: /tmp
+    FORGE_DOMAIN: ${FORGE_DOMAIN:-codebase}
+    FORGE_PHASE: ${FORGE_PHASE:-1}
+  volumes:
+    - ws:/workspace
+  networks: [agentnet]
+  depends_on:
+    airlock: {condition: service_healthy}
+
+services:
+  mock-http:
+    <<: *img
+    command: ["python3", "-I", "/forge/mocks/mock_http_mcp.py"]
+    environment:
+      EXPECTED_KEY: FAKE_ops_key_DEMO_ONLY_not_real_0001
+    volumes: ["mockdata:/mockdata"]
+    networks: [upstream]
+    healthcheck:
+      test: ["CMD", "python3", "-c", "import socket; socket.create_connection(('127.0.0.1', 9100), 1)"]
+      interval: 1s
+      retries: 60
+
+  airlock:
+    <<: *img
+    command: ["python3", "-I", "/forge/airlock/gateway.py"]
+    environment:
+      FORGE_DEMO_FIXTURES: /forge-fixtures
+    volumes:
+      - ./policies/${FORGE_DOMAIN:-codebase}.yaml:/forge/forge.yaml:ro
+      - ./fixtures:/forge-fixtures:ro
+      - logs:/data
+      - state:/state
+      - ws:/ws
+    networks: [agentnet, upstream]
+    depends_on:
+      mock-http: {condition: service_healthy}
+    healthcheck:
+      test: ["CMD", "python3", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8700/healthz', timeout=1)"]
+      interval: 1s
+      retries: 120
+
+  agent:
+    <<: *agent
+    command: ["sh", "-c", "python3 -I /forge/agent/canary.py && exec python3 -I /forge/agent/scenario.py"]
+
+  # ---- planted-breach controls: each one MUST make the canary exit 10 ----
+  control-env-secret:
+    <<: *agent
+    profiles: [controls]
+    environment:
+      FORGE_AIRLOCK: http://airlock:8700
+      HOME: /tmp
+      LEAKED_TOKEN: FAKE_repo_token_DEMO_ONLY_not_real_0002   # the codebase policy's repo credential
+    command: ["python3", "-I", "/forge/agent/canary.py"]
+  control-hidden-mount:
+    <<: *agent
+    profiles: [controls]
+    volumes:
+      - ws:/workspace
+      - ./fixtures/repo/src/proprietary:/opt/leak:ro
+    command: ["python3", "-I", "/forge/agent/canary.py"]
+  control-egress:
+    <<: *agent
+    profiles: [controls]
+    networks: [agentnet, upstream]
+    command: ["python3", "-I", "/forge/agent/canary.py"]
+  control-root-writes:
+    <<: *agent
+    profiles: [controls]
+    user: "0:0"
+    command: ["python3", "-I", "/forge/agent/canary.py"]
+
+  # ---- overhead benchmark (FORGE_DOMAIN=bench) ----
+  agent-bench:
+    <<: *agent
+    profiles: [bench]
+    command: ["sh", "-c", "python3 -I /forge/agent/canary.py && exec python3 -I /forge/agent/bench.py proxy"]
+  bench-direct:  # NOT an agent: a harness on the upstream network that holds the fake key
+    <<: *img
+    profiles: [bench]
+    user: "1000:1000"
+    environment:
+      BENCH_UPSTREAM_KEY: FAKE_ops_key_DEMO_ONLY_not_real_0001
+    volumes: ["ws:/ws:ro"]
+    networks: [upstream]
+    command: ["python3", "-I", "/forge/agent/bench.py", "direct"]
+
+networks:
+  agentnet: {internal: true}
+  upstream: {internal: true}
+
+volumes:
+  logs: {}
+  state: {}
+  ws: {}
+  mockdata: {}

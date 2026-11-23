@@ -1,0 +1,9 @@
+ Container forgeair-quota-mock-http-1  Running
+ Container forgeair-quota-airlock-1  Running
+ Container forgeair-quota-mock-http-1  Waiting
+ Container forgeair-quota-mock-http-1  Healthy
+[canary] scanned 6309 text files
+[canary] BREACH: egress connection succeeded: mock-http:9100
+[canary] BREACH: DNS resolution succeeded: mock-http
+[canary] BREACH: 6430 checks, 2 breaches, 6.39s; airlock state={'state': 'BREACH'}
+

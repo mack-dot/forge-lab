@@ -1,0 +1,106 @@
+ Network forgeair-concurrency_agentnet  Creating
+ Network forgeair-concurrency_agentnet  Created
+ Network forgeair-concurrency_upstream  Creating
+ Network forgeair-concurrency_upstream  Created
+ Volume forgeair-concurrency_state  Creating
+ Volume forgeair-concurrency_state  Created
+ Volume forgeair-concurrency_ws  Creating
+ Volume forgeair-concurrency_ws  Created
+ Volume forgeair-concurrency_mockdata  Creating
+ Volume forgeair-concurrency_mockdata  Created
+ Volume forgeair-concurrency_logs  Creating
+ Volume forgeair-concurrency_logs  Created
+ Container forgeair-concurrency-mock-http-1  Creating
+ Container forgeair-concurrency-mock-http-1  Created
+ Container forgeair-concurrency-airlock-1  Creating
+ Container forgeair-concurrency-airlock-1  Created
+ Container forgeair-concurrency-agent-1  Creating
+ Container forgeair-concurrency-agent-1  Created
+Attaching to agent-1, airlock-1, mock-http-1
+mock-http-1  | [mock-http] up on :9100 (FAKE key required)
+airlock-1    | [airlock] demo source repository built at /state/source (3 commits)
+airlock-1    | [airlock] workspace: built from 3 commits; 3 hidden paths absent; 2 entries dropped; 1 read-only files, 1 closed dirs
+airlock-1    | [airlock] log charge: created cap=1000 expires_at=1795392618
+airlock-1    | [airlock] log deploy: created cap=5 expires_at=1795392618
+airlock-1    | [airlock] up on :8700; 3 tools exposed; 2 gate logs; 7 upstream tools seen; canary PENDING
+agent-1      | [canary] scanned 6309 text files
+airlock-1    | [airlock] refuse 'drop_database': FORGE_TOOL_BLOCKED tool 'drop_database' is not listed in policy (default deny)
+airlock-1    | [airlock] refuse 'rotate_keys': FORGE_TOOL_BLOCKED tool 'rotate_keys' is not listed in policy (default deny)
+airlock-1    | [airlock] refuse 'run_query': FORGE_TOOL_BLOCKED tool 'run_query' is not listed in policy (default deny)
+airlock-1    | [airlock] refuse 'slow_job': FORGE_TOOL_BLOCKED tool 'slow_job' is not listed in policy (default deny)
+airlock-1    | [airlock] refuse 'forge_canary_no_such_tool': FORGE_TOOL_BLOCKED tool 'forge_canary_no_such_tool' is not listed in policy (default deny)
+airlock-1    | [airlock] canary report: PASSED; breaches=[]
+agent-1      | [canary] PASS: 6422 checks, 0 breaches, 4.47s; airlock state={'state': 'PASSED'}
+agent-1      | [agent] scenario concurrency phase 1
+agent-1      |   ok   no upstream credential in the agent environment
+agent-1      |   ok   no direct egress to 1.1.1.1:443
+agent-1      |   ok   no direct egress to 8.8.8.8:53
+agent-1      |   ok   no direct egress to mock-http:9100
+agent-1      |   ok   charge inv-seq-0 (50) passes
+agent-1      |   ok   charge inv-seq-1 (50) passes
+agent-1      |   ok   charge inv-seq-2 (50) passes
+agent-1      |   ok   charge inv-seq-3 (50) passes
+agent-1      |   ok   charge inv-seq-4 (50) passes
+airlock-1    | [airlock] refuse 'charge': FORGE_GATE_REFUSED gate charge: verifier verdict REJECT_DUPLICATE_ID
+airlock-1    | [airlock] refuse 'charge': FORGE_GATE_REFUSED gate charge: verifier verdict REJECT_DUPLICATE_ID
+airlock-1    | [airlock] refuse 'charge': FORGE_GATE_REFUSED gate charge: verifier verdict REJECT_DUPLICATE_ID
+agent-1      |   ok   3 concurrent replays of used ids all refused REJECT_DUPLICATE_ID
+airlock-1    | [airlock] refuse 'charge': FORGE_GATE_REFUSED gate charge: verifier verdict REJECT_DUPLICATE_ID
+airlock-1    | [airlock] refuse 'charge': FORGE_GATE_REFUSED gate charge: verifier verdict REJECT_DUPLICATE_ID
+airlock-1    | [airlock] refuse 'charge': FORGE_GATE_REFUSED gate charge: verifier verdict REJECT_DUPLICATE_ID
+airlock-1    | [airlock] refuse 'charge': FORGE_GATE_REFUSED gate charge: verifier verdict REJECT_DUPLICATE_ID
+airlock-1    | [airlock] refuse 'charge': FORGE_GATE_REFUSED gate charge: verifier verdict REJECT_DUPLICATE_ID
+airlock-1    | [airlock] refuse 'charge': FORGE_GATE_REFUSED gate charge: verifier verdict REJECT_DUPLICATE_ID
+airlock-1    | [airlock] refuse 'charge': FORGE_GATE_REFUSED gate charge: verifier verdict REJECT_DUPLICATE_ID
+airlock-1    | [airlock] refuse 'charge': FORGE_GATE_REFUSED gate charge: verifier verdict REJECT_DUPLICATE_ID
+airlock-1    | [airlock] refuse 'charge': FORGE_GATE_REFUSED gate charge: verifier verdict REJECT_DUPLICATE_ID
+agent-1      |   ok   10 concurrent calls with one new id: exactly 1 passes, 9 REJECT_DUPLICATE_ID
+airlock-1    | [airlock] refuse 'charge': FORGE_GATE_REFUSED gate charge: verifier verdict REJECT_OVER_CAP
+airlock-1    | [airlock] refuse 'charge': FORGE_GATE_REFUSED gate charge: verifier verdict REJECT_OVER_CAP
+airlock-1    | [airlock] refuse 'charge': FORGE_GATE_REFUSED gate charge: verifier verdict REJECT_OVER_CAP
+airlock-1    | [airlock] refuse 'charge': FORGE_GATE_REFUSED gate charge: verifier verdict REJECT_OVER_CAP
+airlock-1    | [airlock] refuse 'charge': FORGE_GATE_REFUSED gate charge: verifier verdict REJECT_OVER_CAP
+airlock-1    | [airlock] refuse 'charge': FORGE_GATE_REFUSED gate charge: verifier verdict REJECT_OVER_CAP
+airlock-1    | [airlock] refuse 'charge': FORGE_GATE_REFUSED gate charge: verifier verdict REJECT_OVER_CAP
+airlock-1    | [airlock] refuse 'charge': FORGE_GATE_REFUSED gate charge: verifier verdict REJECT_OVER_CAP
+airlock-1    | [airlock] refuse 'charge': FORGE_GATE_REFUSED gate charge: verifier verdict REJECT_OVER_CAP
+airlock-1    | [airlock] refuse 'charge': FORGE_GATE_REFUSED gate charge: verifier verdict REJECT_OVER_CAP
+airlock-1    | [airlock] refuse 'charge': FORGE_GATE_REFUSED gate charge: verifier verdict REJECT_OVER_CAP
+airlock-1    | [airlock] refuse 'charge': FORGE_GATE_REFUSED gate charge: verifier verdict REJECT_OVER_CAP
+airlock-1    | [airlock] refuse 'charge': FORGE_GATE_REFUSED gate charge: verifier verdict REJECT_OVER_CAP
+agent-1      |   ok   20 concurrent charges of 100 with 740 left: exactly 7 pass, 13 REJECT_OVER_CAP (1.8s)
+agent-1      |   ok   charge 40 passes (gross=1000=cap)
+airlock-1    | [airlock] refuse 'charge': FORGE_GATE_REFUSED gate charge: verifier verdict REJECT_OVER_CAP
+agent-1      |   ok   charge 1 refused REJECT_OVER_CAP
+airlock-1    | [airlock] refuse 'charge': FORGE_GATE_REFUSED amount=101 > per_call_max 100
+agent-1      |   ok   charge 101 refused per_call_max
+airlock-1    | [airlock] refuse 'charge': FORGE_ARG_REFUSED 'amount' must be an integer in [0, 2^63-1]
+agent-1      |   ok   charge -5 refused (not an integer in [0, 2^63-1])
+airlock-1    | [airlock] refuse 'deploy': FORGE_GATE_REFUSED gate deploy: verifier verdict REJECT_OVER_CAP
+airlock-1    | [airlock] refuse 'deploy': FORGE_GATE_REFUSED gate deploy: verifier verdict REJECT_OVER_CAP
+airlock-1    | [airlock] refuse 'deploy': FORGE_GATE_REFUSED gate deploy: verifier verdict REJECT_OVER_CAP
+airlock-1    | [airlock] refuse 'deploy': FORGE_GATE_REFUSED gate deploy: verifier verdict REJECT_OVER_CAP
+airlock-1    | [airlock] refuse 'deploy': FORGE_GATE_REFUSED gate deploy: verifier verdict REJECT_OVER_CAP
+airlock-1    | [airlock] refuse 'deploy': FORGE_GATE_REFUSED gate deploy: verifier verdict REJECT_OVER_CAP
+airlock-1    | [airlock] refuse 'deploy': FORGE_GATE_REFUSED gate deploy: verifier verdict REJECT_OVER_CAP
+airlock-1    | [airlock] refuse 'deploy': FORGE_GATE_REFUSED gate deploy: verifier verdict REJECT_OVER_CAP
+airlock-1    | [airlock] refuse 'deploy': FORGE_GATE_REFUSED gate deploy: verifier verdict REJECT_OVER_CAP
+airlock-1    | [airlock] refuse 'deploy': FORGE_GATE_REFUSED gate deploy: verifier verdict REJECT_OVER_CAP
+airlock-1    | [airlock] refuse 'deploy': FORGE_GATE_REFUSED gate deploy: verifier verdict REJECT_OVER_CAP
+airlock-1    | [airlock] refuse 'deploy': FORGE_GATE_REFUSED gate deploy: verifier verdict REJECT_OVER_CAP
+airlock-1    | [airlock] refuse 'deploy': FORGE_GATE_REFUSED gate deploy: verifier verdict REJECT_OVER_CAP
+airlock-1    | [airlock] refuse 'deploy': FORGE_GATE_REFUSED gate deploy: verifier verdict REJECT_OVER_CAP
+airlock-1    | [airlock] refuse 'deploy': FORGE_GATE_REFUSED gate deploy: verifier verdict REJECT_OVER_CAP
+agent-1      |   ok   20 concurrent deploys on a count cap of 5: exactly 5 pass, 15 REJECT_OVER_CAP
+agent-1      | [agent] concurrency phase 1: 17 ok, 0 failed
+agent-1      | [agent] RESULT {"domain": "concurrency", "phase": "1", "ok": 17, "failed": []}
+[Kagent-1 exited with code 0
+[31m[1mAborting on container exit...[0m
+ Container forgeair-concurrency-agent-1  Stopping
+ Container forgeair-concurrency-agent-1  Stopped
+ Container forgeair-concurrency-airlock-1  Stopping
+ Container forgeair-concurrency-airlock-1  Stopped
+ Container forgeair-concurrency-mock-http-1  Stopping
+[Kairlock-1 exited with code 0
+ Container forgeair-concurrency-mock-http-1  Stopped
+[Kmock-http-1 exited with code 0

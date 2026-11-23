@@ -1,0 +1,31 @@
+# Domain 3: concurrency + replay on a payments service.
+version: 1
+upstreams:
+  - name: pay
+    transport: http
+    url: http://mock-http:9100/mcp
+    headers:
+      Authorization: "Bearer FAKE_ops_key_DEMO_ONLY_not_real_0001"
+    timeout_s: 5
+tools:
+  allow:
+    - tool: get_status
+  gate:
+    - tool: charge                # value gate with replay protection
+      unit: value
+      value_field: amount
+      cap: 1000
+      per_call_max: 100
+      expires_in_s: 3600
+      id_field: invoice_id
+      arg_rules:
+        invoice_id: {type: string, regex: "[A-Za-z0-9-]{1,64}"}
+    - tool: deploy                # count gate under a burst
+      unit: count
+      cap: 5
+      expires_in_s: 3600
+      arg_rules:
+        env: {in: [staging]}
+paths:
+  hidden_paths: ["src/proprietary/**", "**/algo.ts", ".env*"]
+  readonly_paths: ["tests/**"]

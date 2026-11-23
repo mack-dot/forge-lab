@@ -1,0 +1,27 @@
+# Benchmark policy: one real stdio upstream, one HTTP upstream, one pass-through and one gate.
+version: 1
+upstreams:
+  - name: fs
+    transport: stdio
+    command: [node, /opt/mcpfs/node_modules/@modelcontextprotocol/server-filesystem/dist/index.js, /ws]
+    user: 1000
+  - name: ops
+    transport: http
+    url: http://mock-http:9100/mcp
+    headers:
+      Authorization: "Bearer FAKE_ops_key_DEMO_ONLY_not_real_0001"
+tools:
+  allow:
+    - {tool: read_text_file, upstream: fs, path_args: {path: read}}
+    - {tool: get_status, upstream: ops}
+  gate:
+    - tool: charge
+      upstream: ops
+      unit: value
+      value_field: amount
+      cap: 1000000000
+      expires_in_s: 3600
+      id_field: invoice_id
+paths:
+  hidden_paths: ["src/proprietary/**", "**/algo.ts", ".env*"]
+  readonly_paths: ["tests/**"]

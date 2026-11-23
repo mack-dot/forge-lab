@@ -1,0 +1,931 @@
+[airlock] demo source repository built at /state/source (3 commits)
+[airlock] workspace: built from 3 commits; 3 hidden paths absent; 2 entries dropped; 3 read-only files, 3 closed dirs
+Secure MCP Filesystem Server running on stdio
+Effective allowed directories (from the command line):
+  /ws
+Client does not support MCP Roots, using allowed directories set from server args: [ '/ws' ]
+Effective allowed directories (from the command line):
+  /ws
+[airlock] up on :8700; 13 tools exposed; 0 gate logs; 24 upstream tools seen; canary PENDING
+[airlock] refuse 'move_file': FORGE_TOOL_BLOCKED tool 'move_file' is denied by policy
+[airlock] refuse 'delete_path': FORGE_TOOL_BLOCKED tool 'delete_path' is denied by policy
+[airlock] refuse 'append_file': FORGE_TOOL_BLOCKED tool 'append_file' is not listed in policy (default deny)
+[airlock] refuse 'copy_file': FORGE_TOOL_BLOCKED tool 'copy_file' is not listed in policy (default deny)
+[airlock] refuse 'delete_path': FORGE_TOOL_BLOCKED tool 'delete_path' is denied by policy
+[airlock] refuse 'list_allowed_directories': FORGE_TOOL_BLOCKED tool 'list_allowed_directories' is not listed in policy (default deny)
+[airlock] refuse 'list_dir': FORGE_TOOL_BLOCKED tool 'list_dir' is not listed in policy (default deny)
+[airlock] refuse 'list_directory_with_sizes': FORGE_TOOL_BLOCKED tool 'list_directory_with_sizes' is not listed in policy (default deny)
+[airlock] refuse 'move_file': FORGE_TOOL_BLOCKED tool 'move_file' is denied by policy
+[airlock] refuse 'push_branch': FORGE_TOOL_BLOCKED tool 'push_branch' is not listed in policy (default deny)
+[airlock] refuse 'read_media_file': FORGE_TOOL_BLOCKED tool 'read_media_file' is not listed in policy (default deny)
+[airlock] refuse 'forge_canary_no_such_tool': FORGE_TOOL_BLOCKED tool 'forge_canary_no_such_tool' is not listed in policy (default deny)
+[airlock] refuse 'read_text_file': FORGE_PATH_HIDDEN path '.env' is hidden by policy
+[airlock] refuse 'read_text_file': FORGE_PATH_HIDDEN path '.env/../.env' is hidden by policy
+[airlock] refuse 'read_text_file': FORGE_PATH_HIDDEN path '/workspace/.env' is hidden by policy
+[airlock] refuse 'read_text_file': FORGE_PATH_HIDDEN path './.env' is hidden by policy
+[airlock] refuse 'read_text_file': FORGE_PATH_HIDDEN path 'src/lib/algo.ts' is hidden by policy
+[airlock] refuse 'read_text_file': FORGE_PATH_HIDDEN path 'src/../src/lib/algo.ts' is hidden by policy
+[airlock] refuse 'read_text_file': FORGE_PATH_HIDDEN path '/workspace/src/lib/algo.ts' is hidden by policy
+[airlock] refuse 'read_text_file': FORGE_PATH_HIDDEN path './src/lib/algo.ts' is hidden by policy
+[airlock] refuse 'read_text_file': FORGE_PATH_HIDDEN path 'src/proprietary/core.ts' is hidden by policy
+[airlock] refuse 'read_text_file': FORGE_PATH_HIDDEN path 'src/../src/proprietary/core.ts' is hidden by policy
+[airlock] refuse 'read_text_file': FORGE_PATH_HIDDEN path '/workspace/src/proprietary/core.ts' is hidden by policy
+[airlock] refuse 'read_text_file': FORGE_PATH_HIDDEN path './src/proprietary/core.ts' is hidden by policy
+[airlock] refuse 'read_text_file': FORGE_PATH_OUTSIDE path '../../etc/passwd' escapes the workspace
+[airlock] refuse 'read_text_file': FORGE_PATH_OUTSIDE absolute path '/etc/passwd' is outside the workspace
+[airlock] refuse 'read_text_file': FORGE_PATH_OUTSIDE absolute path '/state/x' is outside the workspace
+[airlock] refuse 'read_text_file': FORGE_PATH_OUTSIDE absolute path '/state/source/x' is outside the workspace
+[airlock] refuse 'read_text_file': FORGE_PATH_OUTSIDE absolute path '/data/x' is outside the workspace
+[airlock] refuse 'read_text_file': FORGE_PATH_OUTSIDE absolute path '/forge/forge.yaml/x' is outside the workspace
+[airlock] refuse 'read_text_file': FORGE_PATH_OUTSIDE absolute path '/ws/x' is outside the workspace
+[airlock] refuse 'read_text_file': FORGE_PATH_OUTSIDE absolute path '/forge-fixtures/x' is outside the workspace
+[airlock] refuse 'read_text_file': FORGE_PATH_HIDDEN path '.forge-canary-link' is hidden by policy
+[airlock] refuse 'read_file': FORGE_PATH_HIDDEN path '.env' is hidden by policy
+[airlock] refuse 'read_file': FORGE_PATH_HIDDEN path '.env/../.env' is hidden by policy
+[airlock] refuse 'read_file': FORGE_PATH_HIDDEN path '/workspace/.env' is hidden by policy
+[airlock] refuse 'read_file': FORGE_PATH_HIDDEN path './.env' is hidden by policy
+[airlock] refuse 'read_file': FORGE_PATH_HIDDEN path 'src/lib/algo.ts' is hidden by policy
+[airlock] refuse 'read_file': FORGE_PATH_HIDDEN path 'src/../src/lib/algo.ts' is hidden by policy
+[airlock] refuse 'read_file': FORGE_PATH_HIDDEN path '/workspace/src/lib/algo.ts' is hidden by policy
+[airlock] refuse 'read_file': FORGE_PATH_HIDDEN path './src/lib/algo.ts' is hidden by policy
+[airlock] refuse 'read_file': FORGE_PATH_HIDDEN path 'src/proprietary/core.ts' is hidden by policy
+[airlock] refuse 'read_file': FORGE_PATH_HIDDEN path 'src/../src/proprietary/core.ts' is hidden by policy
+[airlock] refuse 'read_file': FORGE_PATH_HIDDEN path '/workspace/src/proprietary/core.ts' is hidden by policy
+[airlock] refuse 'read_file': FORGE_PATH_HIDDEN path './src/proprietary/core.ts' is hidden by policy
+[airlock] refuse 'read_file': FORGE_PATH_OUTSIDE path '../../etc/passwd' escapes the workspace
+[airlock] refuse 'read_file': FORGE_PATH_OUTSIDE absolute path '/etc/passwd' is outside the workspace
+[airlock] refuse 'read_file': FORGE_PATH_OUTSIDE absolute path '/state/x' is outside the workspace
+[airlock] refuse 'read_file': FORGE_PATH_OUTSIDE absolute path '/state/source/x' is outside the workspace
+[airlock] refuse 'read_file': FORGE_PATH_OUTSIDE absolute path '/data/x' is outside the workspace
+[airlock] refuse 'read_file': FORGE_PATH_OUTSIDE absolute path '/forge/forge.yaml/x' is outside the workspace
+[airlock] refuse 'read_file': FORGE_PATH_OUTSIDE absolute path '/ws/x' is outside the workspace
+[airlock] refuse 'read_file': FORGE_PATH_OUTSIDE absolute path '/forge-fixtures/x' is outside the workspace
+[airlock] refuse 'read_file': FORGE_PATH_HIDDEN path '.forge-canary-link' is hidden by policy
+[airlock] refuse 'read_multiple_files': FORGE_PATH_HIDDEN path '.env' is hidden by policy
+[airlock] refuse 'read_multiple_files': FORGE_PATH_HIDDEN path '.env/../.env' is hidden by policy
+[airlock] refuse 'read_multiple_files': FORGE_PATH_HIDDEN path '/workspace/.env' is hidden by policy
+[airlock] refuse 'read_multiple_files': FORGE_PATH_HIDDEN path './.env' is hidden by policy
+[airlock] refuse 'read_multiple_files': FORGE_PATH_HIDDEN path 'src/lib/algo.ts' is hidden by policy
+[airlock] refuse 'read_multiple_files': FORGE_PATH_HIDDEN path 'src/../src/lib/algo.ts' is hidden by policy
+[airlock] refuse 'read_multiple_files': FORGE_PATH_HIDDEN path '/workspace/src/lib/algo.ts' is hidden by policy
+[airlock] refuse 'read_multiple_files': FORGE_PATH_HIDDEN path './src/lib/algo.ts' is hidden by policy
+[airlock] refuse 'read_multiple_files': FORGE_PATH_HIDDEN path 'src/proprietary/core.ts' is hidden by policy
+[airlock] refuse 'read_multiple_files': FORGE_PATH_HIDDEN path 'src/../src/proprietary/core.ts' is hidden by policy
+[airlock] refuse 'read_multiple_files': FORGE_PATH_HIDDEN path '/workspace/src/proprietary/core.ts' is hidden by policy
+[airlock] refuse 'read_multiple_files': FORGE_PATH_HIDDEN path './src/proprietary/core.ts' is hidden by policy
+[airlock] refuse 'read_multiple_files': FORGE_PATH_OUTSIDE path '../../etc/passwd' escapes the workspace
+[airlock] refuse 'read_multiple_files': FORGE_PATH_OUTSIDE absolute path '/etc/passwd' is outside the workspace
+[airlock] refuse 'read_multiple_files': FORGE_PATH_OUTSIDE absolute path '/state/x' is outside the workspace
+[airlock] refuse 'read_multiple_files': FORGE_PATH_OUTSIDE absolute path '/state/source/x' is outside the workspace
+[airlock] refuse 'read_multiple_files': FORGE_PATH_OUTSIDE absolute path '/data/x' is outside the workspace
+[airlock] refuse 'read_multiple_files': FORGE_PATH_OUTSIDE absolute path '/forge/forge.yaml/x' is outside the workspace
+[airlock] refuse 'read_multiple_files': FORGE_PATH_OUTSIDE absolute path '/ws/x' is outside the workspace
+[airlock] refuse 'read_multiple_files': FORGE_PATH_OUTSIDE absolute path '/forge-fixtures/x' is outside the workspace
+[airlock] refuse 'read_multiple_files': FORGE_PATH_HIDDEN path '.forge-canary-link' is hidden by policy
+[airlock] refuse 'list_directory': FORGE_PATH_HIDDEN path '.env' is hidden by policy
+[airlock] refuse 'list_directory': FORGE_PATH_HIDDEN path '.env/../.env' is hidden by policy
+[airlock] refuse 'list_directory': FORGE_PATH_HIDDEN path '/workspace/.env' is hidden by policy
+[airlock] refuse 'list_directory': FORGE_PATH_HIDDEN path './.env' is hidden by policy
+[airlock] refuse 'list_directory': FORGE_PATH_HIDDEN path 'src/lib/algo.ts' is hidden by policy
+[airlock] refuse 'list_directory': FORGE_PATH_HIDDEN path 'src/../src/lib/algo.ts' is hidden by policy
+[airlock] refuse 'list_directory': FORGE_PATH_HIDDEN path '/workspace/src/lib/algo.ts' is hidden by policy
+[airlock] refuse 'list_directory': FORGE_PATH_HIDDEN path './src/lib/algo.ts' is hidden by policy
+[airlock] refuse 'list_directory': FORGE_PATH_HIDDEN path 'src/proprietary/core.ts' is hidden by policy
+[airlock] refuse 'list_directory': FORGE_PATH_HIDDEN path 'src/../src/proprietary/core.ts' is hidden by policy
+[airlock] refuse 'list_directory': FORGE_PATH_HIDDEN path '/workspace/src/proprietary/core.ts' is hidden by policy
+[airlock] refuse 'list_directory': FORGE_PATH_HIDDEN path './src/proprietary/core.ts' is hidden by policy
+[airlock] refuse 'list_directory': FORGE_PATH_OUTSIDE path '../../etc/passwd' escapes the workspace
+[airlock] refuse 'list_directory': FORGE_PATH_OUTSIDE absolute path '/etc/passwd' is outside the workspace
+[airlock] refuse 'list_directory': FORGE_PATH_OUTSIDE absolute path '/state/x' is outside the workspace
+[airlock] refuse 'list_directory': FORGE_PATH_OUTSIDE absolute path '/state/source/x' is outside the workspace
+[airlock] refuse 'list_directory': FORGE_PATH_OUTSIDE absolute path '/data/x' is outside the workspace
+[airlock] refuse 'list_directory': FORGE_PATH_OUTSIDE absolute path '/forge/forge.yaml/x' is outside the workspace
+[airlock] refuse 'list_directory': FORGE_PATH_OUTSIDE absolute path '/ws/x' is outside the workspace
+[airlock] refuse 'list_directory': FORGE_PATH_OUTSIDE absolute path '/forge-fixtures/x' is outside the workspace
+[airlock] refuse 'list_directory': FORGE_PATH_HIDDEN path '.forge-canary-link' is hidden by policy
+[airlock] refuse 'directory_tree': FORGE_PATH_HIDDEN path '.env' is hidden by policy
+[airlock] refuse 'directory_tree': FORGE_PATH_HIDDEN path '.env/../.env' is hidden by policy
+[airlock] refuse 'directory_tree': FORGE_PATH_HIDDEN path '/workspace/.env' is hidden by policy
+[airlock] refuse 'directory_tree': FORGE_PATH_HIDDEN path './.env' is hidden by policy
+[airlock] refuse 'directory_tree': FORGE_PATH_HIDDEN path 'src/lib/algo.ts' is hidden by policy
+[airlock] refuse 'directory_tree': FORGE_PATH_HIDDEN path 'src/../src/lib/algo.ts' is hidden by policy
+[airlock] refuse 'directory_tree': FORGE_PATH_HIDDEN path '/workspace/src/lib/algo.ts' is hidden by policy
+[airlock] refuse 'directory_tree': FORGE_PATH_HIDDEN path './src/lib/algo.ts' is hidden by policy
+[airlock] refuse 'directory_tree': FORGE_PATH_HIDDEN path 'src/proprietary/core.ts' is hidden by policy
+[airlock] refuse 'directory_tree': FORGE_PATH_HIDDEN path 'src/../src/proprietary/core.ts' is hidden by policy
+[airlock] refuse 'directory_tree': FORGE_PATH_HIDDEN path '/workspace/src/proprietary/core.ts' is hidden by policy
+[airlock] refuse 'directory_tree': FORGE_PATH_HIDDEN path './src/proprietary/core.ts' is hidden by policy
+[airlock] refuse 'directory_tree': FORGE_PATH_OUTSIDE path '../../etc/passwd' escapes the workspace
+[airlock] refuse 'directory_tree': FORGE_PATH_OUTSIDE absolute path '/etc/passwd' is outside the workspace
+[airlock] refuse 'directory_tree': FORGE_PATH_OUTSIDE absolute path '/state/x' is outside the workspace
+[airlock] refuse 'directory_tree': FORGE_PATH_OUTSIDE absolute path '/state/source/x' is outside the workspace
+[airlock] refuse 'directory_tree': FORGE_PATH_OUTSIDE absolute path '/data/x' is outside the workspace
+[airlock] refuse 'directory_tree': FORGE_PATH_OUTSIDE absolute path '/forge/forge.yaml/x' is outside the workspace
+[airlock] refuse 'directory_tree': FORGE_PATH_OUTSIDE absolute path '/ws/x' is outside the workspace
+[airlock] refuse 'directory_tree': FORGE_PATH_OUTSIDE absolute path '/forge-fixtures/x' is outside the workspace
+[airlock] refuse 'directory_tree': FORGE_PATH_HIDDEN path '.forge-canary-link' is hidden by policy
+[airlock] refuse 'search_files': FORGE_PATH_HIDDEN path '.env' is hidden by policy
+[airlock] refuse 'search_files': FORGE_PATH_HIDDEN path '.env/../.env' is hidden by policy
+[airlock] refuse 'search_files': FORGE_PATH_HIDDEN path '/workspace/.env' is hidden by policy
+[airlock] refuse 'search_files': FORGE_PATH_HIDDEN path './.env' is hidden by policy
+[airlock] refuse 'search_files': FORGE_PATH_HIDDEN path 'src/lib/algo.ts' is hidden by policy
+[airlock] refuse 'search_files': FORGE_PATH_HIDDEN path 'src/../src/lib/algo.ts' is hidden by policy
+[airlock] refuse 'search_files': FORGE_PATH_HIDDEN path '/workspace/src/lib/algo.ts' is hidden by policy
+[airlock] refuse 'search_files': FORGE_PATH_HIDDEN path './src/lib/algo.ts' is hidden by policy
+[airlock] refuse 'search_files': FORGE_PATH_HIDDEN path 'src/proprietary/core.ts' is hidden by policy
+[airlock] refuse 'search_files': FORGE_PATH_HIDDEN path 'src/../src/proprietary/core.ts' is hidden by policy
+[airlock] refuse 'search_files': FORGE_PATH_HIDDEN path '/workspace/src/proprietary/core.ts' is hidden by policy
+[airlock] refuse 'search_files': FORGE_PATH_HIDDEN path './src/proprietary/core.ts' is hidden by policy
+[airlock] refuse 'search_files': FORGE_PATH_OUTSIDE path '../../etc/passwd' escapes the workspace
+[airlock] refuse 'search_files': FORGE_PATH_OUTSIDE absolute path '/etc/passwd' is outside the workspace
+[airlock] refuse 'search_files': FORGE_PATH_OUTSIDE absolute path '/state/x' is outside the workspace
+[airlock] refuse 'search_files': FORGE_PATH_OUTSIDE absolute path '/state/source/x' is outside the workspace
+[airlock] refuse 'search_files': FORGE_PATH_OUTSIDE absolute path '/data/x' is outside the workspace
+[airlock] refuse 'search_files': FORGE_PATH_OUTSIDE absolute path '/forge/forge.yaml/x' is outside the workspace
+[airlock] refuse 'search_files': FORGE_PATH_OUTSIDE absolute path '/ws/x' is outside the workspace
+[airlock] refuse 'search_files': FORGE_PATH_OUTSIDE absolute path '/forge-fixtures/x' is outside the workspace
+[airlock] refuse 'search_files': FORGE_PATH_HIDDEN path '.forge-canary-link' is hidden by policy
+[airlock] refuse 'get_file_info': FORGE_PATH_HIDDEN path '.env' is hidden by policy
+[airlock] refuse 'get_file_info': FORGE_PATH_HIDDEN path '.env/../.env' is hidden by policy
+[airlock] refuse 'get_file_info': FORGE_PATH_HIDDEN path '/workspace/.env' is hidden by policy
+[airlock] refuse 'get_file_info': FORGE_PATH_HIDDEN path './.env' is hidden by policy
+[airlock] refuse 'get_file_info': FORGE_PATH_HIDDEN path 'src/lib/algo.ts' is hidden by policy
+[airlock] refuse 'get_file_info': FORGE_PATH_HIDDEN path 'src/../src/lib/algo.ts' is hidden by policy
+[airlock] refuse 'get_file_info': FORGE_PATH_HIDDEN path '/workspace/src/lib/algo.ts' is hidden by policy
+[airlock] refuse 'get_file_info': FORGE_PATH_HIDDEN path './src/lib/algo.ts' is hidden by policy
+[airlock] refuse 'get_file_info': FORGE_PATH_HIDDEN path 'src/proprietary/core.ts' is hidden by policy
+[airlock] refuse 'get_file_info': FORGE_PATH_HIDDEN path 'src/../src/proprietary/core.ts' is hidden by policy
+[airlock] refuse 'get_file_info': FORGE_PATH_HIDDEN path '/workspace/src/proprietary/core.ts' is hidden by policy
+[airlock] refuse 'get_file_info': FORGE_PATH_HIDDEN path './src/proprietary/core.ts' is hidden by policy
+[airlock] refuse 'get_file_info': FORGE_PATH_OUTSIDE path '../../etc/passwd' escapes the workspace
+[airlock] refuse 'get_file_info': FORGE_PATH_OUTSIDE absolute path '/etc/passwd' is outside the workspace
+[airlock] refuse 'get_file_info': FORGE_PATH_OUTSIDE absolute path '/state/x' is outside the workspace
+[airlock] refuse 'get_file_info': FORGE_PATH_OUTSIDE absolute path '/state/source/x' is outside the workspace
+[airlock] refuse 'get_file_info': FORGE_PATH_OUTSIDE absolute path '/data/x' is outside the workspace
+[airlock] refuse 'get_file_info': FORGE_PATH_OUTSIDE absolute path '/forge/forge.yaml/x' is outside the workspace
+[airlock] refuse 'get_file_info': FORGE_PATH_OUTSIDE absolute path '/ws/x' is outside the workspace
+[airlock] refuse 'get_file_info': FORGE_PATH_OUTSIDE absolute path '/forge-fixtures/x' is outside the workspace
+[airlock] refuse 'get_file_info': FORGE_PATH_HIDDEN path '.forge-canary-link' is hidden by policy
+[airlock] refuse 'search': FORGE_ARG_REFUSED argument 'query' is required by policy
+[airlock] refuse 'search': FORGE_ARG_REFUSED argument 'query' is required by policy
+[airlock] refuse 'search': FORGE_ARG_REFUSED argument 'query' is required by policy
+[airlock] refuse 'search': FORGE_ARG_REFUSED argument 'query' is required by policy
+[airlock] refuse 'search': FORGE_ARG_REFUSED argument 'query' is required by policy
+[airlock] refuse 'search': FORGE_ARG_REFUSED argument 'query' is required by policy
+[airlock] refuse 'search': FORGE_ARG_REFUSED argument 'query' is required by policy
+[airlock] refuse 'search': FORGE_ARG_REFUSED argument 'query' is required by policy
+[airlock] refuse 'search': FORGE_ARG_REFUSED argument 'query' is required by policy
+[airlock] refuse 'search': FORGE_ARG_REFUSED argument 'query' is required by policy
+[airlock] refuse 'search': FORGE_ARG_REFUSED argument 'query' is required by policy
+[airlock] refuse 'search': FORGE_ARG_REFUSED argument 'query' is required by policy
+[airlock] refuse 'search': FORGE_ARG_REFUSED argument 'query' is required by policy
+[airlock] refuse 'search': FORGE_ARG_REFUSED argument 'query' is required by policy
+[airlock] refuse 'search': FORGE_ARG_REFUSED argument 'query' is required by policy
+[airlock] refuse 'search': FORGE_ARG_REFUSED argument 'query' is required by policy
+[airlock] refuse 'search': FORGE_ARG_REFUSED argument 'query' is required by policy
+[airlock] refuse 'search': FORGE_ARG_REFUSED argument 'query' is required by policy
+[airlock] refuse 'search': FORGE_ARG_REFUSED argument 'query' is required by policy
+[airlock] refuse 'search': FORGE_ARG_REFUSED argument 'query' is required by policy
+[airlock] refuse 'search': FORGE_ARG_REFUSED argument 'query' is required by policy
+[airlock] refuse 'write_file': FORGE_PATH_READONLY path '.forge/notes.md' is read-only by policy
+[airlock] refuse 'write_file': FORGE_PATH_READONLY path 'spec/api.md' is read-only by policy
+[airlock] refuse 'write_file': FORGE_PATH_READONLY path 'tests/ui.test.ts' is read-only by policy
+[airlock] refuse 'write_file': FORGE_PATH_READONLY path '.forge/new.txt' is read-only by policy
+[airlock] refuse 'write_file': FORGE_PATH_READONLY path 'spec/new.txt' is read-only by policy
+[airlock] refuse 'write_file': FORGE_PATH_READONLY path 'tests/new.txt' is read-only by policy
+[airlock] refuse 'write_file': FORGE_PATH_HIDDEN path '.env' is hidden by policy
+[airlock] refuse 'write_file': FORGE_PATH_HIDDEN path 'src/lib/algo.ts' is hidden by policy
+[airlock] refuse 'write_file': FORGE_PATH_HIDDEN path 'src/proprietary/core.ts' is hidden by policy
+[airlock] refuse 'edit_file': FORGE_PATH_READONLY path '.forge/notes.md' is read-only by policy
+[airlock] refuse 'edit_file': FORGE_PATH_READONLY path 'spec/api.md' is read-only by policy
+[airlock] refuse 'edit_file': FORGE_PATH_READONLY path 'tests/ui.test.ts' is read-only by policy
+[airlock] refuse 'edit_file': FORGE_PATH_READONLY path '.forge/new.txt' is read-only by policy
+[airlock] refuse 'edit_file': FORGE_PATH_READONLY path 'spec/new.txt' is read-only by policy
+[airlock] refuse 'edit_file': FORGE_PATH_READONLY path 'tests/new.txt' is read-only by policy
+[airlock] refuse 'edit_file': FORGE_PATH_HIDDEN path '.env' is hidden by policy
+[airlock] refuse 'edit_file': FORGE_PATH_HIDDEN path 'src/lib/algo.ts' is hidden by policy
+[airlock] refuse 'edit_file': FORGE_PATH_HIDDEN path 'src/proprietary/core.ts' is hidden by policy
+[airlock] refuse 'create_directory': FORGE_PATH_READONLY path '.forge/notes.md' is read-only by policy
+[airlock] refuse 'create_directory': FORGE_PATH_READONLY path 'spec/api.md' is read-only by policy
+[airlock] refuse 'create_directory': FORGE_PATH_READONLY path 'tests/ui.test.ts' is read-only by policy
+[airlock] refuse 'create_directory': FORGE_PATH_READONLY path '.forge/new.txt' is read-only by policy
+[airlock] refuse 'create_directory': FORGE_PATH_READONLY path 'spec/new.txt' is read-only by policy
+[airlock] refuse 'create_directory': FORGE_PATH_READONLY path 'tests/new.txt' is read-only by policy
+[airlock] refuse 'create_directory': FORGE_PATH_HIDDEN path '.env' is hidden by policy
+[airlock] refuse 'create_directory': FORGE_PATH_HIDDEN path 'src/lib/algo.ts' is hidden by policy
+[airlock] refuse 'create_directory': FORGE_PATH_HIDDEN path 'src/proprietary/core.ts' is hidden by policy
+[airlock] refuse 'git_show': FORGE_PATH_HIDDEN git path '.env' is hidden by policy
+[airlock] refuse 'git_show': FORGE_PATH_HIDDEN git path '.env' is hidden by policy
+[airlock] refuse 'git_show': FORGE_PATH_HIDDEN git path '.env' is hidden by policy
+[airlock] refuse 'git_show': FORGE_PATH_HIDDEN git path 'src/lib/algo.ts' is hidden by policy
+[airlock] refuse 'git_show': FORGE_PATH_HIDDEN git path 'src/lib/algo.ts' is hidden by policy
+[airlock] refuse 'git_show': FORGE_PATH_HIDDEN git path 'src/lib/algo.ts' is hidden by policy
+[airlock] refuse 'git_show': FORGE_PATH_HIDDEN git path 'src/proprietary/core.ts' is hidden by policy
+[airlock] refuse 'git_show': FORGE_PATH_HIDDEN git path 'src/proprietary/core.ts' is hidden by policy
+[airlock] refuse 'git_show': FORGE_PATH_HIDDEN git path 'src/proprietary/core.ts' is hidden by policy
+[airlock] canary report: PASSED; breaches=[]
+[airlock] refuse 'read_multiple_files': FORGE_PATH_HIDDEN path 'src/proprietary/core.ts' is hidden by policy
+[airlock] refuse 'read_text_file': FORGE_PATH_HIDDEN path 'src/proprietary/core.ts' is hidden by policy
+[airlock] refuse 'read_text_file': FORGE_PATH_HIDDEN path 'src/../src/proprietary/core.ts' is hidden by policy
+[airlock] refuse 'read_text_file': FORGE_PATH_HIDDEN path '/workspace/src/proprietary/core.ts' is hidden by policy
+[airlock] refuse 'read_text_file': FORGE_PATH_HIDDEN path './src/lib/algo.ts' is hidden by policy
+[airlock] refuse 'read_text_file': FORGE_PATH_HIDDEN path '.env' is hidden by policy
+[airlock] refuse 'read_text_file': FORGE_PATH_HIDDEN path 'docs/../.env.local' is hidden by policy
+[airlock] refuse 'read_text_file': FORGE_PATH_HIDDEN path 'src/sneaky.ts' is hidden by policy
+[airlock] refuse 'read_text_file': FORGE_PATH_OUTSIDE path 'src/sneaky2.ts' resolves outside the workspace
+[airlock] refuse 'read_text_file': FORGE_PATH_OUTSIDE path 'src/sneaky3.ts' resolves outside the workspace
+[airlock] refuse 'get_file_info': FORGE_PATH_OUTSIDE path '../../state/source/src/proprietary/core.ts' escapes the workspace
+[airlock] refuse 'get_file_info': FORGE_PATH_OUTSIDE absolute path '/etc/passwd' is outside the workspace
+[airlock] refuse 'git_show': FORGE_PATH_HIDDEN git path 'src/proprietary/core.ts' is hidden by policy
+[airlock] refuse 'git_show': FORGE_PATH_HIDDEN git path '.env' is hidden by policy
+[airlock] refuse 'git_show': FORGE_PATH_HIDDEN git path 'src/lib/algo.ts' is hidden by policy
+[airlock] refuse 'write_file': FORGE_PATH_READONLY path 'tests/ui.test.ts' is read-only by policy
+[airlock] refuse 'write_file': FORGE_PATH_READONLY path 'tests/new.test.ts' is read-only by policy
+[airlock] refuse 'write_file': FORGE_PATH_READONLY path 'spec/api.md' is read-only by policy
+[airlock] refuse 'write_file': FORGE_PATH_READONLY path '.forge/notes.md' is read-only by policy
+[airlock] refuse 'write_file': FORGE_PATH_READONLY path 'tests/../tests/x.ts' is read-only by policy
+[airlock] refuse 'write_file': FORGE_PATH_HIDDEN path 'src/proprietary/core.ts' is hidden by policy
+[airlock] refuse 'edit_file': FORGE_PATH_READONLY path 'tests/ui.test.ts' is read-only by policy
+[airlock] refuse 'create_directory': FORGE_PATH_READONLY path 'tests/sub' is read-only by policy
+[airlock] refuse 'move_file': FORGE_TOOL_BLOCKED tool 'move_file' is denied by policy
+[airlock] refuse 'delete_path': FORGE_TOOL_BLOCKED tool 'delete_path' is denied by policy
+[airlock] refuse 'copy_file': FORGE_TOOL_BLOCKED tool 'copy_file' is not listed in policy (default deny)
+[airlock] refuse 'append_file': FORGE_TOOL_BLOCKED tool 'append_file' is not listed in policy (default deny)
+[airlock] refuse 'push_branch': FORGE_TOOL_BLOCKED tool 'push_branch' is not listed in policy (default deny)
+[airlock] refuse 'rm_rf_everything': FORGE_TOOL_BLOCKED tool 'rm_rf_everything' is not listed in policy (default deny)
+[airlock] workspace: re-verified (hidden content absent) at /ws
+Secure MCP Filesystem Server running on stdio
+Effective allowed directories (from the command line):
+  /ws
+Client does not support MCP Roots, using allowed directories set from server args: [ '/ws' ]
+Effective allowed directories (from the command line):
+  /ws
+[airlock] up on :8700; 13 tools exposed; 0 gate logs; 24 upstream tools seen; canary PENDING
+[airlock] refuse 'move_file': FORGE_TOOL_BLOCKED tool 'move_file' is denied by policy
+[airlock] refuse 'delete_path': FORGE_TOOL_BLOCKED tool 'delete_path' is denied by policy
+[airlock] refuse 'append_file': FORGE_TOOL_BLOCKED tool 'append_file' is not listed in policy (default deny)
+[airlock] refuse 'copy_file': FORGE_TOOL_BLOCKED tool 'copy_file' is not listed in policy (default deny)
+[airlock] refuse 'delete_path': FORGE_TOOL_BLOCKED tool 'delete_path' is denied by policy
+[airlock] refuse 'list_allowed_directories': FORGE_TOOL_BLOCKED tool 'list_allowed_directories' is not listed in policy (default deny)
+[airlock] refuse 'list_dir': FORGE_TOOL_BLOCKED tool 'list_dir' is not listed in policy (default deny)
+[airlock] refuse 'list_directory_with_sizes': FORGE_TOOL_BLOCKED tool 'list_directory_with_sizes' is not listed in policy (default deny)
+[airlock] refuse 'move_file': FORGE_TOOL_BLOCKED tool 'move_file' is denied by policy
+[airlock] refuse 'push_branch': FORGE_TOOL_BLOCKED tool 'push_branch' is not listed in policy (default deny)
+[airlock] refuse 'read_media_file': FORGE_TOOL_BLOCKED tool 'read_media_file' is not listed in policy (default deny)
+[airlock] refuse 'forge_canary_no_such_tool': FORGE_TOOL_BLOCKED tool 'forge_canary_no_such_tool' is not listed in policy (default deny)
+[airlock] refuse 'read_text_file': FORGE_PATH_HIDDEN path '.env' is hidden by policy
+[airlock] refuse 'read_text_file': FORGE_PATH_HIDDEN path '.env/../.env' is hidden by policy
+[airlock] refuse 'read_text_file': FORGE_PATH_HIDDEN path '/workspace/.env' is hidden by policy
+[airlock] refuse 'read_text_file': FORGE_PATH_HIDDEN path './.env' is hidden by policy
+[airlock] refuse 'read_text_file': FORGE_PATH_HIDDEN path 'src/lib/algo.ts' is hidden by policy
+[airlock] refuse 'read_text_file': FORGE_PATH_HIDDEN path 'src/../src/lib/algo.ts' is hidden by policy
+[airlock] refuse 'read_text_file': FORGE_PATH_HIDDEN path '/workspace/src/lib/algo.ts' is hidden by policy
+[airlock] refuse 'read_text_file': FORGE_PATH_HIDDEN path './src/lib/algo.ts' is hidden by policy
+[airlock] refuse 'read_text_file': FORGE_PATH_HIDDEN path 'src/proprietary/core.ts' is hidden by policy
+[airlock] refuse 'read_text_file': FORGE_PATH_HIDDEN path 'src/../src/proprietary/core.ts' is hidden by policy
+[airlock] refuse 'read_text_file': FORGE_PATH_HIDDEN path '/workspace/src/proprietary/core.ts' is hidden by policy
+[airlock] refuse 'read_text_file': FORGE_PATH_HIDDEN path './src/proprietary/core.ts' is hidden by policy
+[airlock] refuse 'read_text_file': FORGE_PATH_OUTSIDE path '../../etc/passwd' escapes the workspace
+[airlock] refuse 'read_text_file': FORGE_PATH_OUTSIDE absolute path '/etc/passwd' is outside the workspace
+[airlock] refuse 'read_text_file': FORGE_PATH_OUTSIDE absolute path '/state/x' is outside the workspace
+[airlock] refuse 'read_text_file': FORGE_PATH_OUTSIDE absolute path '/state/source/x' is outside the workspace
+[airlock] refuse 'read_text_file': FORGE_PATH_OUTSIDE absolute path '/data/x' is outside the workspace
+[airlock] refuse 'read_text_file': FORGE_PATH_OUTSIDE absolute path '/forge/forge.yaml/x' is outside the workspace
+[airlock] refuse 'read_text_file': FORGE_PATH_OUTSIDE absolute path '/ws/x' is outside the workspace
+[airlock] refuse 'read_text_file': FORGE_PATH_OUTSIDE absolute path '/forge-fixtures/x' is outside the workspace
+[airlock] refuse 'read_text_file': FORGE_PATH_HIDDEN path '.forge-canary-link' is hidden by policy
+[airlock] refuse 'read_file': FORGE_PATH_HIDDEN path '.env' is hidden by policy
+[airlock] refuse 'read_file': FORGE_PATH_HIDDEN path '.env/../.env' is hidden by policy
+[airlock] refuse 'read_file': FORGE_PATH_HIDDEN path '/workspace/.env' is hidden by policy
+[airlock] refuse 'read_file': FORGE_PATH_HIDDEN path './.env' is hidden by policy
+[airlock] refuse 'read_file': FORGE_PATH_HIDDEN path 'src/lib/algo.ts' is hidden by policy
+[airlock] refuse 'read_file': FORGE_PATH_HIDDEN path 'src/../src/lib/algo.ts' is hidden by policy
+[airlock] refuse 'read_file': FORGE_PATH_HIDDEN path '/workspace/src/lib/algo.ts' is hidden by policy
+[airlock] refuse 'read_file': FORGE_PATH_HIDDEN path './src/lib/algo.ts' is hidden by policy
+[airlock] refuse 'read_file': FORGE_PATH_HIDDEN path 'src/proprietary/core.ts' is hidden by policy
+[airlock] refuse 'read_file': FORGE_PATH_HIDDEN path 'src/../src/proprietary/core.ts' is hidden by policy
+[airlock] refuse 'read_file': FORGE_PATH_HIDDEN path '/workspace/src/proprietary/core.ts' is hidden by policy
+[airlock] refuse 'read_file': FORGE_PATH_HIDDEN path './src/proprietary/core.ts' is hidden by policy
+[airlock] refuse 'read_file': FORGE_PATH_OUTSIDE path '../../etc/passwd' escapes the workspace
+[airlock] refuse 'read_file': FORGE_PATH_OUTSIDE absolute path '/etc/passwd' is outside the workspace
+[airlock] refuse 'read_file': FORGE_PATH_OUTSIDE absolute path '/state/x' is outside the workspace
+[airlock] refuse 'read_file': FORGE_PATH_OUTSIDE absolute path '/state/source/x' is outside the workspace
+[airlock] refuse 'read_file': FORGE_PATH_OUTSIDE absolute path '/data/x' is outside the workspace
+[airlock] refuse 'read_file': FORGE_PATH_OUTSIDE absolute path '/forge/forge.yaml/x' is outside the workspace
+[airlock] refuse 'read_file': FORGE_PATH_OUTSIDE absolute path '/ws/x' is outside the workspace
+[airlock] refuse 'read_file': FORGE_PATH_OUTSIDE absolute path '/forge-fixtures/x' is outside the workspace
+[airlock] refuse 'read_file': FORGE_PATH_HIDDEN path '.forge-canary-link' is hidden by policy
+[airlock] refuse 'read_multiple_files': FORGE_PATH_HIDDEN path '.env' is hidden by policy
+[airlock] refuse 'read_multiple_files': FORGE_PATH_HIDDEN path '.env/../.env' is hidden by policy
+[airlock] refuse 'read_multiple_files': FORGE_PATH_HIDDEN path '/workspace/.env' is hidden by policy
+[airlock] refuse 'read_multiple_files': FORGE_PATH_HIDDEN path './.env' is hidden by policy
+[airlock] refuse 'read_multiple_files': FORGE_PATH_HIDDEN path 'src/lib/algo.ts' is hidden by policy
+[airlock] refuse 'read_multiple_files': FORGE_PATH_HIDDEN path 'src/../src/lib/algo.ts' is hidden by policy
+[airlock] refuse 'read_multiple_files': FORGE_PATH_HIDDEN path '/workspace/src/lib/algo.ts' is hidden by policy
+[airlock] refuse 'read_multiple_files': FORGE_PATH_HIDDEN path './src/lib/algo.ts' is hidden by policy
+[airlock] refuse 'read_multiple_files': FORGE_PATH_HIDDEN path 'src/proprietary/core.ts' is hidden by policy
+[airlock] refuse 'read_multiple_files': FORGE_PATH_HIDDEN path 'src/../src/proprietary/core.ts' is hidden by policy
+[airlock] refuse 'read_multiple_files': FORGE_PATH_HIDDEN path '/workspace/src/proprietary/core.ts' is hidden by policy
+[airlock] refuse 'read_multiple_files': FORGE_PATH_HIDDEN path './src/proprietary/core.ts' is hidden by policy
+[airlock] refuse 'read_multiple_files': FORGE_PATH_OUTSIDE path '../../etc/passwd' escapes the workspace
+[airlock] refuse 'read_multiple_files': FORGE_PATH_OUTSIDE absolute path '/etc/passwd' is outside the workspace
+[airlock] refuse 'read_multiple_files': FORGE_PATH_OUTSIDE absolute path '/state/x' is outside the workspace
+[airlock] refuse 'read_multiple_files': FORGE_PATH_OUTSIDE absolute path '/state/source/x' is outside the workspace
+[airlock] refuse 'read_multiple_files': FORGE_PATH_OUTSIDE absolute path '/data/x' is outside the workspace
+[airlock] refuse 'read_multiple_files': FORGE_PATH_OUTSIDE absolute path '/forge/forge.yaml/x' is outside the workspace
+[airlock] refuse 'read_multiple_files': FORGE_PATH_OUTSIDE absolute path '/ws/x' is outside the workspace
+[airlock] refuse 'read_multiple_files': FORGE_PATH_OUTSIDE absolute path '/forge-fixtures/x' is outside the workspace
+[airlock] refuse 'read_multiple_files': FORGE_PATH_HIDDEN path '.forge-canary-link' is hidden by policy
+[airlock] refuse 'list_directory': FORGE_PATH_HIDDEN path '.env' is hidden by policy
+[airlock] refuse 'list_directory': FORGE_PATH_HIDDEN path '.env/../.env' is hidden by policy
+[airlock] refuse 'list_directory': FORGE_PATH_HIDDEN path '/workspace/.env' is hidden by policy
+[airlock] refuse 'list_directory': FORGE_PATH_HIDDEN path './.env' is hidden by policy
+[airlock] refuse 'list_directory': FORGE_PATH_HIDDEN path 'src/lib/algo.ts' is hidden by policy
+[airlock] refuse 'list_directory': FORGE_PATH_HIDDEN path 'src/../src/lib/algo.ts' is hidden by policy
+[airlock] refuse 'list_directory': FORGE_PATH_HIDDEN path '/workspace/src/lib/algo.ts' is hidden by policy
+[airlock] refuse 'list_directory': FORGE_PATH_HIDDEN path './src/lib/algo.ts' is hidden by policy
+[airlock] refuse 'list_directory': FORGE_PATH_HIDDEN path 'src/proprietary/core.ts' is hidden by policy
+[airlock] refuse 'list_directory': FORGE_PATH_HIDDEN path 'src/../src/proprietary/core.ts' is hidden by policy
+[airlock] refuse 'list_directory': FORGE_PATH_HIDDEN path '/workspace/src/proprietary/core.ts' is hidden by policy
+[airlock] refuse 'list_directory': FORGE_PATH_HIDDEN path './src/proprietary/core.ts' is hidden by policy
+[airlock] refuse 'list_directory': FORGE_PATH_OUTSIDE path '../../etc/passwd' escapes the workspace
+[airlock] refuse 'list_directory': FORGE_PATH_OUTSIDE absolute path '/etc/passwd' is outside the workspace
+[airlock] refuse 'list_directory': FORGE_PATH_OUTSIDE absolute path '/state/x' is outside the workspace
+[airlock] refuse 'list_directory': FORGE_PATH_OUTSIDE absolute path '/state/source/x' is outside the workspace
+[airlock] refuse 'list_directory': FORGE_PATH_OUTSIDE absolute path '/data/x' is outside the workspace
+[airlock] refuse 'list_directory': FORGE_PATH_OUTSIDE absolute path '/forge/forge.yaml/x' is outside the workspace
+[airlock] refuse 'list_directory': FORGE_PATH_OUTSIDE absolute path '/ws/x' is outside the workspace
+[airlock] refuse 'list_directory': FORGE_PATH_OUTSIDE absolute path '/forge-fixtures/x' is outside the workspace
+[airlock] refuse 'list_directory': FORGE_PATH_HIDDEN path '.forge-canary-link' is hidden by policy
+[airlock] refuse 'directory_tree': FORGE_PATH_HIDDEN path '.env' is hidden by policy
+[airlock] refuse 'directory_tree': FORGE_PATH_HIDDEN path '.env/../.env' is hidden by policy
+[airlock] refuse 'directory_tree': FORGE_PATH_HIDDEN path '/workspace/.env' is hidden by policy
+[airlock] refuse 'directory_tree': FORGE_PATH_HIDDEN path './.env' is hidden by policy
+[airlock] refuse 'directory_tree': FORGE_PATH_HIDDEN path 'src/lib/algo.ts' is hidden by policy
+[airlock] refuse 'directory_tree': FORGE_PATH_HIDDEN path 'src/../src/lib/algo.ts' is hidden by policy
+[airlock] refuse 'directory_tree': FORGE_PATH_HIDDEN path '/workspace/src/lib/algo.ts' is hidden by policy
+[airlock] refuse 'directory_tree': FORGE_PATH_HIDDEN path './src/lib/algo.ts' is hidden by policy
+[airlock] refuse 'directory_tree': FORGE_PATH_HIDDEN path 'src/proprietary/core.ts' is hidden by policy
+[airlock] refuse 'directory_tree': FORGE_PATH_HIDDEN path 'src/../src/proprietary/core.ts' is hidden by policy
+[airlock] refuse 'directory_tree': FORGE_PATH_HIDDEN path '/workspace/src/proprietary/core.ts' is hidden by policy
+[airlock] refuse 'directory_tree': FORGE_PATH_HIDDEN path './src/proprietary/core.ts' is hidden by policy
+[airlock] refuse 'directory_tree': FORGE_PATH_OUTSIDE path '../../etc/passwd' escapes the workspace
+[airlock] refuse 'directory_tree': FORGE_PATH_OUTSIDE absolute path '/etc/passwd' is outside the workspace
+[airlock] refuse 'directory_tree': FORGE_PATH_OUTSIDE absolute path '/state/x' is outside the workspace
+[airlock] refuse 'directory_tree': FORGE_PATH_OUTSIDE absolute path '/state/source/x' is outside the workspace
+[airlock] refuse 'directory_tree': FORGE_PATH_OUTSIDE absolute path '/data/x' is outside the workspace
+[airlock] refuse 'directory_tree': FORGE_PATH_OUTSIDE absolute path '/forge/forge.yaml/x' is outside the workspace
+[airlock] refuse 'directory_tree': FORGE_PATH_OUTSIDE absolute path '/ws/x' is outside the workspace
+[airlock] refuse 'directory_tree': FORGE_PATH_OUTSIDE absolute path '/forge-fixtures/x' is outside the workspace
+[airlock] refuse 'directory_tree': FORGE_PATH_HIDDEN path '.forge-canary-link' is hidden by policy
+[airlock] refuse 'search_files': FORGE_PATH_HIDDEN path '.env' is hidden by policy
+[airlock] refuse 'search_files': FORGE_PATH_HIDDEN path '.env/../.env' is hidden by policy
+[airlock] refuse 'search_files': FORGE_PATH_HIDDEN path '/workspace/.env' is hidden by policy
+[airlock] refuse 'search_files': FORGE_PATH_HIDDEN path './.env' is hidden by policy
+[airlock] refuse 'search_files': FORGE_PATH_HIDDEN path 'src/lib/algo.ts' is hidden by policy
+[airlock] refuse 'search_files': FORGE_PATH_HIDDEN path 'src/../src/lib/algo.ts' is hidden by policy
+[airlock] refuse 'search_files': FORGE_PATH_HIDDEN path '/workspace/src/lib/algo.ts' is hidden by policy
+[airlock] refuse 'search_files': FORGE_PATH_HIDDEN path './src/lib/algo.ts' is hidden by policy
+[airlock] refuse 'search_files': FORGE_PATH_HIDDEN path 'src/proprietary/core.ts' is hidden by policy
+[airlock] refuse 'search_files': FORGE_PATH_HIDDEN path 'src/../src/proprietary/core.ts' is hidden by policy
+[airlock] refuse 'search_files': FORGE_PATH_HIDDEN path '/workspace/src/proprietary/core.ts' is hidden by policy
+[airlock] refuse 'search_files': FORGE_PATH_HIDDEN path './src/proprietary/core.ts' is hidden by policy
+[airlock] refuse 'search_files': FORGE_PATH_OUTSIDE path '../../etc/passwd' escapes the workspace
+[airlock] refuse 'search_files': FORGE_PATH_OUTSIDE absolute path '/etc/passwd' is outside the workspace
+[airlock] refuse 'search_files': FORGE_PATH_OUTSIDE absolute path '/state/x' is outside the workspace
+[airlock] refuse 'search_files': FORGE_PATH_OUTSIDE absolute path '/state/source/x' is outside the workspace
+[airlock] refuse 'search_files': FORGE_PATH_OUTSIDE absolute path '/data/x' is outside the workspace
+[airlock] refuse 'search_files': FORGE_PATH_OUTSIDE absolute path '/forge/forge.yaml/x' is outside the workspace
+[airlock] refuse 'search_files': FORGE_PATH_OUTSIDE absolute path '/ws/x' is outside the workspace
+[airlock] refuse 'search_files': FORGE_PATH_OUTSIDE absolute path '/forge-fixtures/x' is outside the workspace
+[airlock] refuse 'search_files': FORGE_PATH_HIDDEN path '.forge-canary-link' is hidden by policy
+[airlock] refuse 'get_file_info': FORGE_PATH_HIDDEN path '.env' is hidden by policy
+[airlock] refuse 'get_file_info': FORGE_PATH_HIDDEN path '.env/../.env' is hidden by policy
+[airlock] refuse 'get_file_info': FORGE_PATH_HIDDEN path '/workspace/.env' is hidden by policy
+[airlock] refuse 'get_file_info': FORGE_PATH_HIDDEN path './.env' is hidden by policy
+[airlock] refuse 'get_file_info': FORGE_PATH_HIDDEN path 'src/lib/algo.ts' is hidden by policy
+[airlock] refuse 'get_file_info': FORGE_PATH_HIDDEN path 'src/../src/lib/algo.ts' is hidden by policy
+[airlock] refuse 'get_file_info': FORGE_PATH_HIDDEN path '/workspace/src/lib/algo.ts' is hidden by policy
+[airlock] refuse 'get_file_info': FORGE_PATH_HIDDEN path './src/lib/algo.ts' is hidden by policy
+[airlock] refuse 'get_file_info': FORGE_PATH_HIDDEN path 'src/proprietary/core.ts' is hidden by policy
+[airlock] refuse 'get_file_info': FORGE_PATH_HIDDEN path 'src/../src/proprietary/core.ts' is hidden by policy
+[airlock] refuse 'get_file_info': FORGE_PATH_HIDDEN path '/workspace/src/proprietary/core.ts' is hidden by policy
+[airlock] refuse 'get_file_info': FORGE_PATH_HIDDEN path './src/proprietary/core.ts' is hidden by policy
+[airlock] refuse 'get_file_info': FORGE_PATH_OUTSIDE path '../../etc/passwd' escapes the workspace
+[airlock] refuse 'get_file_info': FORGE_PATH_OUTSIDE absolute path '/etc/passwd' is outside the workspace
+[airlock] refuse 'get_file_info': FORGE_PATH_OUTSIDE absolute path '/state/x' is outside the workspace
+[airlock] refuse 'get_file_info': FORGE_PATH_OUTSIDE absolute path '/state/source/x' is outside the workspace
+[airlock] refuse 'get_file_info': FORGE_PATH_OUTSIDE absolute path '/data/x' is outside the workspace
+[airlock] refuse 'get_file_info': FORGE_PATH_OUTSIDE absolute path '/forge/forge.yaml/x' is outside the workspace
+[airlock] refuse 'get_file_info': FORGE_PATH_OUTSIDE absolute path '/ws/x' is outside the workspace
+[airlock] refuse 'get_file_info': FORGE_PATH_OUTSIDE absolute path '/forge-fixtures/x' is outside the workspace
+[airlock] refuse 'get_file_info': FORGE_PATH_HIDDEN path '.forge-canary-link' is hidden by policy
+[airlock] refuse 'search': FORGE_ARG_REFUSED argument 'query' is required by policy
+[airlock] refuse 'search': FORGE_ARG_REFUSED argument 'query' is required by policy
+[airlock] refuse 'search': FORGE_ARG_REFUSED argument 'query' is required by policy
+[airlock] refuse 'search': FORGE_ARG_REFUSED argument 'query' is required by policy
+[airlock] refuse 'search': FORGE_ARG_REFUSED argument 'query' is required by policy
+[airlock] refuse 'search': FORGE_ARG_REFUSED argument 'query' is required by policy
+[airlock] refuse 'search': FORGE_ARG_REFUSED argument 'query' is required by policy
+[airlock] refuse 'search': FORGE_ARG_REFUSED argument 'query' is required by policy
+[airlock] refuse 'search': FORGE_ARG_REFUSED argument 'query' is required by policy
+[airlock] refuse 'search': FORGE_ARG_REFUSED argument 'query' is required by policy
+[airlock] refuse 'search': FORGE_ARG_REFUSED argument 'query' is required by policy
+[airlock] refuse 'search': FORGE_ARG_REFUSED argument 'query' is required by policy
+[airlock] refuse 'search': FORGE_ARG_REFUSED argument 'query' is required by policy
+[airlock] refuse 'search': FORGE_ARG_REFUSED argument 'query' is required by policy
+[airlock] refuse 'search': FORGE_ARG_REFUSED argument 'query' is required by policy
+[airlock] refuse 'search': FORGE_ARG_REFUSED argument 'query' is required by policy
+[airlock] refuse 'search': FORGE_ARG_REFUSED argument 'query' is required by policy
+[airlock] refuse 'search': FORGE_ARG_REFUSED argument 'query' is required by policy
+[airlock] refuse 'search': FORGE_ARG_REFUSED argument 'query' is required by policy
+[airlock] refuse 'search': FORGE_ARG_REFUSED argument 'query' is required by policy
+[airlock] refuse 'search': FORGE_ARG_REFUSED argument 'query' is required by policy
+[airlock] refuse 'write_file': FORGE_PATH_READONLY path '.forge/notes.md' is read-only by policy
+[airlock] refuse 'write_file': FORGE_PATH_READONLY path 'spec/api.md' is read-only by policy
+[airlock] refuse 'write_file': FORGE_PATH_READONLY path 'tests/ui.test.ts' is read-only by policy
+[airlock] refuse 'write_file': FORGE_PATH_READONLY path '.forge/new.txt' is read-only by policy
+[airlock] refuse 'write_file': FORGE_PATH_READONLY path 'spec/new.txt' is read-only by policy
+[airlock] refuse 'write_file': FORGE_PATH_READONLY path 'tests/new.txt' is read-only by policy
+[airlock] refuse 'write_file': FORGE_PATH_HIDDEN path '.env' is hidden by policy
+[airlock] refuse 'write_file': FORGE_PATH_HIDDEN path 'src/lib/algo.ts' is hidden by policy
+[airlock] refuse 'write_file': FORGE_PATH_HIDDEN path 'src/proprietary/core.ts' is hidden by policy
+[airlock] refuse 'edit_file': FORGE_PATH_READONLY path '.forge/notes.md' is read-only by policy
+[airlock] refuse 'edit_file': FORGE_PATH_READONLY path 'spec/api.md' is read-only by policy
+[airlock] refuse 'edit_file': FORGE_PATH_READONLY path 'tests/ui.test.ts' is read-only by policy
+[airlock] refuse 'edit_file': FORGE_PATH_READONLY path '.forge/new.txt' is read-only by policy
+[airlock] refuse 'edit_file': FORGE_PATH_READONLY path 'spec/new.txt' is read-only by policy
+[airlock] refuse 'edit_file': FORGE_PATH_READONLY path 'tests/new.txt' is read-only by policy
+[airlock] refuse 'edit_file': FORGE_PATH_HIDDEN path '.env' is hidden by policy
+[airlock] refuse 'edit_file': FORGE_PATH_HIDDEN path 'src/lib/algo.ts' is hidden by policy
+[airlock] refuse 'edit_file': FORGE_PATH_HIDDEN path 'src/proprietary/core.ts' is hidden by policy
+[airlock] refuse 'create_directory': FORGE_PATH_READONLY path '.forge/notes.md' is read-only by policy
+[airlock] refuse 'create_directory': FORGE_PATH_READONLY path 'spec/api.md' is read-only by policy
+[airlock] refuse 'create_directory': FORGE_PATH_READONLY path 'tests/ui.test.ts' is read-only by policy
+[airlock] refuse 'create_directory': FORGE_PATH_READONLY path '.forge/new.txt' is read-only by policy
+[airlock] refuse 'create_directory': FORGE_PATH_READONLY path 'spec/new.txt' is read-only by policy
+[airlock] refuse 'create_directory': FORGE_PATH_READONLY path 'tests/new.txt' is read-only by policy
+[airlock] refuse 'create_directory': FORGE_PATH_HIDDEN path '.env' is hidden by policy
+[airlock] refuse 'create_directory': FORGE_PATH_HIDDEN path 'src/lib/algo.ts' is hidden by policy
+[airlock] refuse 'create_directory': FORGE_PATH_HIDDEN path 'src/proprietary/core.ts' is hidden by policy
+[airlock] refuse 'git_show': FORGE_PATH_HIDDEN git path '.env' is hidden by policy
+[airlock] refuse 'git_show': FORGE_PATH_HIDDEN git path '.env' is hidden by policy
+[airlock] refuse 'git_show': FORGE_PATH_HIDDEN git path '.env' is hidden by policy
+[airlock] refuse 'git_show': FORGE_PATH_HIDDEN git path 'src/lib/algo.ts' is hidden by policy
+[airlock] refuse 'git_show': FORGE_PATH_HIDDEN git path 'src/lib/algo.ts' is hidden by policy
+[airlock] refuse 'git_show': FORGE_PATH_HIDDEN git path 'src/lib/algo.ts' is hidden by policy
+[airlock] refuse 'git_show': FORGE_PATH_HIDDEN git path 'src/proprietary/core.ts' is hidden by policy
+[airlock] refuse 'git_show': FORGE_PATH_HIDDEN git path 'src/proprietary/core.ts' is hidden by policy
+[airlock] refuse 'git_show': FORGE_PATH_HIDDEN git path 'src/proprietary/core.ts' is hidden by policy
+[airlock] canary report: BREACH; breaches=["credential in environment variable LEAKED_TOKEN (self)", "credential in environment variable LEAKED_TOKEN (1)", "credential in environment variable LEAKED_TOKEN (self)"]
+[airlock] workspace: re-verified (hidden content absent) at /ws
+Secure MCP Filesystem Server running on stdio
+Effective allowed directories (from the command line):
+  /ws
+Client does not support MCP Roots, using allowed directories set from server args: [ '/ws' ]
+Effective allowed directories (from the command line):
+  /ws
+[airlock] up on :8700; 13 tools exposed; 0 gate logs; 24 upstream tools seen; canary PENDING
+[airlock] refuse 'move_file': FORGE_TOOL_BLOCKED tool 'move_file' is denied by policy
+[airlock] refuse 'delete_path': FORGE_TOOL_BLOCKED tool 'delete_path' is denied by policy
+[airlock] refuse 'append_file': FORGE_TOOL_BLOCKED tool 'append_file' is not listed in policy (default deny)
+[airlock] refuse 'copy_file': FORGE_TOOL_BLOCKED tool 'copy_file' is not listed in policy (default deny)
+[airlock] refuse 'delete_path': FORGE_TOOL_BLOCKED tool 'delete_path' is denied by policy
+[airlock] refuse 'list_allowed_directories': FORGE_TOOL_BLOCKED tool 'list_allowed_directories' is not listed in policy (default deny)
+[airlock] refuse 'list_dir': FORGE_TOOL_BLOCKED tool 'list_dir' is not listed in policy (default deny)
+[airlock] refuse 'list_directory_with_sizes': FORGE_TOOL_BLOCKED tool 'list_directory_with_sizes' is not listed in policy (default deny)
+[airlock] refuse 'move_file': FORGE_TOOL_BLOCKED tool 'move_file' is denied by policy
+[airlock] refuse 'push_branch': FORGE_TOOL_BLOCKED tool 'push_branch' is not listed in policy (default deny)
+[airlock] refuse 'read_media_file': FORGE_TOOL_BLOCKED tool 'read_media_file' is not listed in policy (default deny)
+[airlock] refuse 'forge_canary_no_such_tool': FORGE_TOOL_BLOCKED tool 'forge_canary_no_such_tool' is not listed in policy (default deny)
+[airlock] refuse 'read_text_file': FORGE_PATH_HIDDEN path '.env' is hidden by policy
+[airlock] refuse 'read_text_file': FORGE_PATH_HIDDEN path '.env/../.env' is hidden by policy
+[airlock] refuse 'read_text_file': FORGE_PATH_HIDDEN path '/workspace/.env' is hidden by policy
+[airlock] refuse 'read_text_file': FORGE_PATH_HIDDEN path './.env' is hidden by policy
+[airlock] refuse 'read_text_file': FORGE_PATH_HIDDEN path 'src/lib/algo.ts' is hidden by policy
+[airlock] refuse 'read_text_file': FORGE_PATH_HIDDEN path 'src/../src/lib/algo.ts' is hidden by policy
+[airlock] refuse 'read_text_file': FORGE_PATH_HIDDEN path '/workspace/src/lib/algo.ts' is hidden by policy
+[airlock] refuse 'read_text_file': FORGE_PATH_HIDDEN path './src/lib/algo.ts' is hidden by policy
+[airlock] refuse 'read_text_file': FORGE_PATH_HIDDEN path 'src/proprietary/core.ts' is hidden by policy
+[airlock] refuse 'read_text_file': FORGE_PATH_HIDDEN path 'src/../src/proprietary/core.ts' is hidden by policy
+[airlock] refuse 'read_text_file': FORGE_PATH_HIDDEN path '/workspace/src/proprietary/core.ts' is hidden by policy
+[airlock] refuse 'read_text_file': FORGE_PATH_HIDDEN path './src/proprietary/core.ts' is hidden by policy
+[airlock] refuse 'read_text_file': FORGE_PATH_OUTSIDE path '../../etc/passwd' escapes the workspace
+[airlock] refuse 'read_text_file': FORGE_PATH_OUTSIDE absolute path '/etc/passwd' is outside the workspace
+[airlock] refuse 'read_text_file': FORGE_PATH_OUTSIDE absolute path '/state/x' is outside the workspace
+[airlock] refuse 'read_text_file': FORGE_PATH_OUTSIDE absolute path '/state/source/x' is outside the workspace
+[airlock] refuse 'read_text_file': FORGE_PATH_OUTSIDE absolute path '/data/x' is outside the workspace
+[airlock] refuse 'read_text_file': FORGE_PATH_OUTSIDE absolute path '/forge/forge.yaml/x' is outside the workspace
+[airlock] refuse 'read_text_file': FORGE_PATH_OUTSIDE absolute path '/ws/x' is outside the workspace
+[airlock] refuse 'read_text_file': FORGE_PATH_OUTSIDE absolute path '/forge-fixtures/x' is outside the workspace
+[airlock] refuse 'read_text_file': FORGE_PATH_HIDDEN path '.forge-canary-link' is hidden by policy
+[airlock] refuse 'read_file': FORGE_PATH_HIDDEN path '.env' is hidden by policy
+[airlock] refuse 'read_file': FORGE_PATH_HIDDEN path '.env/../.env' is hidden by policy
+[airlock] refuse 'read_file': FORGE_PATH_HIDDEN path '/workspace/.env' is hidden by policy
+[airlock] refuse 'read_file': FORGE_PATH_HIDDEN path './.env' is hidden by policy
+[airlock] refuse 'read_file': FORGE_PATH_HIDDEN path 'src/lib/algo.ts' is hidden by policy
+[airlock] refuse 'read_file': FORGE_PATH_HIDDEN path 'src/../src/lib/algo.ts' is hidden by policy
+[airlock] refuse 'read_file': FORGE_PATH_HIDDEN path '/workspace/src/lib/algo.ts' is hidden by policy
+[airlock] refuse 'read_file': FORGE_PATH_HIDDEN path './src/lib/algo.ts' is hidden by policy
+[airlock] refuse 'read_file': FORGE_PATH_HIDDEN path 'src/proprietary/core.ts' is hidden by policy
+[airlock] refuse 'read_file': FORGE_PATH_HIDDEN path 'src/../src/proprietary/core.ts' is hidden by policy
+[airlock] refuse 'read_file': FORGE_PATH_HIDDEN path '/workspace/src/proprietary/core.ts' is hidden by policy
+[airlock] refuse 'read_file': FORGE_PATH_HIDDEN path './src/proprietary/core.ts' is hidden by policy
+[airlock] refuse 'read_file': FORGE_PATH_OUTSIDE path '../../etc/passwd' escapes the workspace
+[airlock] refuse 'read_file': FORGE_PATH_OUTSIDE absolute path '/etc/passwd' is outside the workspace
+[airlock] refuse 'read_file': FORGE_PATH_OUTSIDE absolute path '/state/x' is outside the workspace
+[airlock] refuse 'read_file': FORGE_PATH_OUTSIDE absolute path '/state/source/x' is outside the workspace
+[airlock] refuse 'read_file': FORGE_PATH_OUTSIDE absolute path '/data/x' is outside the workspace
+[airlock] refuse 'read_file': FORGE_PATH_OUTSIDE absolute path '/forge/forge.yaml/x' is outside the workspace
+[airlock] refuse 'read_file': FORGE_PATH_OUTSIDE absolute path '/ws/x' is outside the workspace
+[airlock] refuse 'read_file': FORGE_PATH_OUTSIDE absolute path '/forge-fixtures/x' is outside the workspace
+[airlock] refuse 'read_file': FORGE_PATH_HIDDEN path '.forge-canary-link' is hidden by policy
+[airlock] refuse 'read_multiple_files': FORGE_PATH_HIDDEN path '.env' is hidden by policy
+[airlock] refuse 'read_multiple_files': FORGE_PATH_HIDDEN path '.env/../.env' is hidden by policy
+[airlock] refuse 'read_multiple_files': FORGE_PATH_HIDDEN path '/workspace/.env' is hidden by policy
+[airlock] refuse 'read_multiple_files': FORGE_PATH_HIDDEN path './.env' is hidden by policy
+[airlock] refuse 'read_multiple_files': FORGE_PATH_HIDDEN path 'src/lib/algo.ts' is hidden by policy
+[airlock] refuse 'read_multiple_files': FORGE_PATH_HIDDEN path 'src/../src/lib/algo.ts' is hidden by policy
+[airlock] refuse 'read_multiple_files': FORGE_PATH_HIDDEN path '/workspace/src/lib/algo.ts' is hidden by policy
+[airlock] refuse 'read_multiple_files': FORGE_PATH_HIDDEN path './src/lib/algo.ts' is hidden by policy
+[airlock] refuse 'read_multiple_files': FORGE_PATH_HIDDEN path 'src/proprietary/core.ts' is hidden by policy
+[airlock] refuse 'read_multiple_files': FORGE_PATH_HIDDEN path 'src/../src/proprietary/core.ts' is hidden by policy
+[airlock] refuse 'read_multiple_files': FORGE_PATH_HIDDEN path '/workspace/src/proprietary/core.ts' is hidden by policy
+[airlock] refuse 'read_multiple_files': FORGE_PATH_HIDDEN path './src/proprietary/core.ts' is hidden by policy
+[airlock] refuse 'read_multiple_files': FORGE_PATH_OUTSIDE path '../../etc/passwd' escapes the workspace
+[airlock] refuse 'read_multiple_files': FORGE_PATH_OUTSIDE absolute path '/etc/passwd' is outside the workspace
+[airlock] refuse 'read_multiple_files': FORGE_PATH_OUTSIDE absolute path '/state/x' is outside the workspace
+[airlock] refuse 'read_multiple_files': FORGE_PATH_OUTSIDE absolute path '/state/source/x' is outside the workspace
+[airlock] refuse 'read_multiple_files': FORGE_PATH_OUTSIDE absolute path '/data/x' is outside the workspace
+[airlock] refuse 'read_multiple_files': FORGE_PATH_OUTSIDE absolute path '/forge/forge.yaml/x' is outside the workspace
+[airlock] refuse 'read_multiple_files': FORGE_PATH_OUTSIDE absolute path '/ws/x' is outside the workspace
+[airlock] refuse 'read_multiple_files': FORGE_PATH_OUTSIDE absolute path '/forge-fixtures/x' is outside the workspace
+[airlock] refuse 'read_multiple_files': FORGE_PATH_HIDDEN path '.forge-canary-link' is hidden by policy
+[airlock] refuse 'list_directory': FORGE_PATH_HIDDEN path '.env' is hidden by policy
+[airlock] refuse 'list_directory': FORGE_PATH_HIDDEN path '.env/../.env' is hidden by policy
+[airlock] refuse 'list_directory': FORGE_PATH_HIDDEN path '/workspace/.env' is hidden by policy
+[airlock] refuse 'list_directory': FORGE_PATH_HIDDEN path './.env' is hidden by policy
+[airlock] refuse 'list_directory': FORGE_PATH_HIDDEN path 'src/lib/algo.ts' is hidden by policy
+[airlock] refuse 'list_directory': FORGE_PATH_HIDDEN path 'src/../src/lib/algo.ts' is hidden by policy
+[airlock] refuse 'list_directory': FORGE_PATH_HIDDEN path '/workspace/src/lib/algo.ts' is hidden by policy
+[airlock] refuse 'list_directory': FORGE_PATH_HIDDEN path './src/lib/algo.ts' is hidden by policy
+[airlock] refuse 'list_directory': FORGE_PATH_HIDDEN path 'src/proprietary/core.ts' is hidden by policy
+[airlock] refuse 'list_directory': FORGE_PATH_HIDDEN path 'src/../src/proprietary/core.ts' is hidden by policy
+[airlock] refuse 'list_directory': FORGE_PATH_HIDDEN path '/workspace/src/proprietary/core.ts' is hidden by policy
+[airlock] refuse 'list_directory': FORGE_PATH_HIDDEN path './src/proprietary/core.ts' is hidden by policy
+[airlock] refuse 'list_directory': FORGE_PATH_OUTSIDE path '../../etc/passwd' escapes the workspace
+[airlock] refuse 'list_directory': FORGE_PATH_OUTSIDE absolute path '/etc/passwd' is outside the workspace
+[airlock] refuse 'list_directory': FORGE_PATH_OUTSIDE absolute path '/state/x' is outside the workspace
+[airlock] refuse 'list_directory': FORGE_PATH_OUTSIDE absolute path '/state/source/x' is outside the workspace
+[airlock] refuse 'list_directory': FORGE_PATH_OUTSIDE absolute path '/data/x' is outside the workspace
+[airlock] refuse 'list_directory': FORGE_PATH_OUTSIDE absolute path '/forge/forge.yaml/x' is outside the workspace
+[airlock] refuse 'list_directory': FORGE_PATH_OUTSIDE absolute path '/ws/x' is outside the workspace
+[airlock] refuse 'list_directory': FORGE_PATH_OUTSIDE absolute path '/forge-fixtures/x' is outside the workspace
+[airlock] refuse 'list_directory': FORGE_PATH_HIDDEN path '.forge-canary-link' is hidden by policy
+[airlock] refuse 'directory_tree': FORGE_PATH_HIDDEN path '.env' is hidden by policy
+[airlock] refuse 'directory_tree': FORGE_PATH_HIDDEN path '.env/../.env' is hidden by policy
+[airlock] refuse 'directory_tree': FORGE_PATH_HIDDEN path '/workspace/.env' is hidden by policy
+[airlock] refuse 'directory_tree': FORGE_PATH_HIDDEN path './.env' is hidden by policy
+[airlock] refuse 'directory_tree': FORGE_PATH_HIDDEN path 'src/lib/algo.ts' is hidden by policy
+[airlock] refuse 'directory_tree': FORGE_PATH_HIDDEN path 'src/../src/lib/algo.ts' is hidden by policy
+[airlock] refuse 'directory_tree': FORGE_PATH_HIDDEN path '/workspace/src/lib/algo.ts' is hidden by policy
+[airlock] refuse 'directory_tree': FORGE_PATH_HIDDEN path './src/lib/algo.ts' is hidden by policy
+[airlock] refuse 'directory_tree': FORGE_PATH_HIDDEN path 'src/proprietary/core.ts' is hidden by policy
+[airlock] refuse 'directory_tree': FORGE_PATH_HIDDEN path 'src/../src/proprietary/core.ts' is hidden by policy
+[airlock] refuse 'directory_tree': FORGE_PATH_HIDDEN path '/workspace/src/proprietary/core.ts' is hidden by policy
+[airlock] refuse 'directory_tree': FORGE_PATH_HIDDEN path './src/proprietary/core.ts' is hidden by policy
+[airlock] refuse 'directory_tree': FORGE_PATH_OUTSIDE path '../../etc/passwd' escapes the workspace
+[airlock] refuse 'directory_tree': FORGE_PATH_OUTSIDE absolute path '/etc/passwd' is outside the workspace
+[airlock] refuse 'directory_tree': FORGE_PATH_OUTSIDE absolute path '/state/x' is outside the workspace
+[airlock] refuse 'directory_tree': FORGE_PATH_OUTSIDE absolute path '/state/source/x' is outside the workspace
+[airlock] refuse 'directory_tree': FORGE_PATH_OUTSIDE absolute path '/data/x' is outside the workspace
+[airlock] refuse 'directory_tree': FORGE_PATH_OUTSIDE absolute path '/forge/forge.yaml/x' is outside the workspace
+[airlock] refuse 'directory_tree': FORGE_PATH_OUTSIDE absolute path '/ws/x' is outside the workspace
+[airlock] refuse 'directory_tree': FORGE_PATH_OUTSIDE absolute path '/forge-fixtures/x' is outside the workspace
+[airlock] refuse 'directory_tree': FORGE_PATH_HIDDEN path '.forge-canary-link' is hidden by policy
+[airlock] refuse 'search_files': FORGE_PATH_HIDDEN path '.env' is hidden by policy
+[airlock] refuse 'search_files': FORGE_PATH_HIDDEN path '.env/../.env' is hidden by policy
+[airlock] refuse 'search_files': FORGE_PATH_HIDDEN path '/workspace/.env' is hidden by policy
+[airlock] refuse 'search_files': FORGE_PATH_HIDDEN path './.env' is hidden by policy
+[airlock] refuse 'search_files': FORGE_PATH_HIDDEN path 'src/lib/algo.ts' is hidden by policy
+[airlock] refuse 'search_files': FORGE_PATH_HIDDEN path 'src/../src/lib/algo.ts' is hidden by policy
+[airlock] refuse 'search_files': FORGE_PATH_HIDDEN path '/workspace/src/lib/algo.ts' is hidden by policy
+[airlock] refuse 'search_files': FORGE_PATH_HIDDEN path './src/lib/algo.ts' is hidden by policy
+[airlock] refuse 'search_files': FORGE_PATH_HIDDEN path 'src/proprietary/core.ts' is hidden by policy
+[airlock] refuse 'search_files': FORGE_PATH_HIDDEN path 'src/../src/proprietary/core.ts' is hidden by policy
+[airlock] refuse 'search_files': FORGE_PATH_HIDDEN path '/workspace/src/proprietary/core.ts' is hidden by policy
+[airlock] refuse 'search_files': FORGE_PATH_HIDDEN path './src/proprietary/core.ts' is hidden by policy
+[airlock] refuse 'search_files': FORGE_PATH_OUTSIDE path '../../etc/passwd' escapes the workspace
+[airlock] refuse 'search_files': FORGE_PATH_OUTSIDE absolute path '/etc/passwd' is outside the workspace
+[airlock] refuse 'search_files': FORGE_PATH_OUTSIDE absolute path '/state/x' is outside the workspace
+[airlock] refuse 'search_files': FORGE_PATH_OUTSIDE absolute path '/state/source/x' is outside the workspace
+[airlock] refuse 'search_files': FORGE_PATH_OUTSIDE absolute path '/data/x' is outside the workspace
+[airlock] refuse 'search_files': FORGE_PATH_OUTSIDE absolute path '/forge/forge.yaml/x' is outside the workspace
+[airlock] refuse 'search_files': FORGE_PATH_OUTSIDE absolute path '/ws/x' is outside the workspace
+[airlock] refuse 'search_files': FORGE_PATH_OUTSIDE absolute path '/forge-fixtures/x' is outside the workspace
+[airlock] refuse 'search_files': FORGE_PATH_HIDDEN path '.forge-canary-link' is hidden by policy
+[airlock] refuse 'get_file_info': FORGE_PATH_HIDDEN path '.env' is hidden by policy
+[airlock] refuse 'get_file_info': FORGE_PATH_HIDDEN path '.env/../.env' is hidden by policy
+[airlock] refuse 'get_file_info': FORGE_PATH_HIDDEN path '/workspace/.env' is hidden by policy
+[airlock] refuse 'get_file_info': FORGE_PATH_HIDDEN path './.env' is hidden by policy
+[airlock] refuse 'get_file_info': FORGE_PATH_HIDDEN path 'src/lib/algo.ts' is hidden by policy
+[airlock] refuse 'get_file_info': FORGE_PATH_HIDDEN path 'src/../src/lib/algo.ts' is hidden by policy
+[airlock] refuse 'get_file_info': FORGE_PATH_HIDDEN path '/workspace/src/lib/algo.ts' is hidden by policy
+[airlock] refuse 'get_file_info': FORGE_PATH_HIDDEN path './src/lib/algo.ts' is hidden by policy
+[airlock] refuse 'get_file_info': FORGE_PATH_HIDDEN path 'src/proprietary/core.ts' is hidden by policy
+[airlock] refuse 'get_file_info': FORGE_PATH_HIDDEN path 'src/../src/proprietary/core.ts' is hidden by policy
+[airlock] refuse 'get_file_info': FORGE_PATH_HIDDEN path '/workspace/src/proprietary/core.ts' is hidden by policy
+[airlock] refuse 'get_file_info': FORGE_PATH_HIDDEN path './src/proprietary/core.ts' is hidden by policy
+[airlock] refuse 'get_file_info': FORGE_PATH_OUTSIDE path '../../etc/passwd' escapes the workspace
+[airlock] refuse 'get_file_info': FORGE_PATH_OUTSIDE absolute path '/etc/passwd' is outside the workspace
+[airlock] refuse 'get_file_info': FORGE_PATH_OUTSIDE absolute path '/state/x' is outside the workspace
+[airlock] refuse 'get_file_info': FORGE_PATH_OUTSIDE absolute path '/state/source/x' is outside the workspace
+[airlock] refuse 'get_file_info': FORGE_PATH_OUTSIDE absolute path '/data/x' is outside the workspace
+[airlock] refuse 'get_file_info': FORGE_PATH_OUTSIDE absolute path '/forge/forge.yaml/x' is outside the workspace
+[airlock] refuse 'get_file_info': FORGE_PATH_OUTSIDE absolute path '/ws/x' is outside the workspace
+[airlock] refuse 'get_file_info': FORGE_PATH_OUTSIDE absolute path '/forge-fixtures/x' is outside the workspace
+[airlock] refuse 'get_file_info': FORGE_PATH_HIDDEN path '.forge-canary-link' is hidden by policy
+[airlock] refuse 'search': FORGE_ARG_REFUSED argument 'query' is required by policy
+[airlock] refuse 'search': FORGE_ARG_REFUSED argument 'query' is required by policy
+[airlock] refuse 'search': FORGE_ARG_REFUSED argument 'query' is required by policy
+[airlock] refuse 'search': FORGE_ARG_REFUSED argument 'query' is required by policy
+[airlock] refuse 'search': FORGE_ARG_REFUSED argument 'query' is required by policy
+[airlock] refuse 'search': FORGE_ARG_REFUSED argument 'query' is required by policy
+[airlock] refuse 'search': FORGE_ARG_REFUSED argument 'query' is required by policy
+[airlock] refuse 'search': FORGE_ARG_REFUSED argument 'query' is required by policy
+[airlock] refuse 'search': FORGE_ARG_REFUSED argument 'query' is required by policy
+[airlock] refuse 'search': FORGE_ARG_REFUSED argument 'query' is required by policy
+[airlock] refuse 'search': FORGE_ARG_REFUSED argument 'query' is required by policy
+[airlock] refuse 'search': FORGE_ARG_REFUSED argument 'query' is required by policy
+[airlock] refuse 'search': FORGE_ARG_REFUSED argument 'query' is required by policy
+[airlock] refuse 'search': FORGE_ARG_REFUSED argument 'query' is required by policy
+[airlock] refuse 'search': FORGE_ARG_REFUSED argument 'query' is required by policy
+[airlock] refuse 'search': FORGE_ARG_REFUSED argument 'query' is required by policy
+[airlock] refuse 'search': FORGE_ARG_REFUSED argument 'query' is required by policy
+[airlock] refuse 'search': FORGE_ARG_REFUSED argument 'query' is required by policy
+[airlock] refuse 'search': FORGE_ARG_REFUSED argument 'query' is required by policy
+[airlock] refuse 'search': FORGE_ARG_REFUSED argument 'query' is required by policy
+[airlock] refuse 'search': FORGE_ARG_REFUSED argument 'query' is required by policy
+[airlock] refuse 'write_file': FORGE_PATH_READONLY path '.forge/notes.md' is read-only by policy
+[airlock] refuse 'write_file': FORGE_PATH_READONLY path 'spec/api.md' is read-only by policy
+[airlock] refuse 'write_file': FORGE_PATH_READONLY path 'tests/ui.test.ts' is read-only by policy
+[airlock] refuse 'write_file': FORGE_PATH_READONLY path '.forge/new.txt' is read-only by policy
+[airlock] refuse 'write_file': FORGE_PATH_READONLY path 'spec/new.txt' is read-only by policy
+[airlock] refuse 'write_file': FORGE_PATH_READONLY path 'tests/new.txt' is read-only by policy
+[airlock] refuse 'write_file': FORGE_PATH_HIDDEN path '.env' is hidden by policy
+[airlock] refuse 'write_file': FORGE_PATH_HIDDEN path 'src/lib/algo.ts' is hidden by policy
+[airlock] refuse 'write_file': FORGE_PATH_HIDDEN path 'src/proprietary/core.ts' is hidden by policy
+[airlock] refuse 'edit_file': FORGE_PATH_READONLY path '.forge/notes.md' is read-only by policy
+[airlock] refuse 'edit_file': FORGE_PATH_READONLY path 'spec/api.md' is read-only by policy
+[airlock] refuse 'edit_file': FORGE_PATH_READONLY path 'tests/ui.test.ts' is read-only by policy
+[airlock] refuse 'edit_file': FORGE_PATH_READONLY path '.forge/new.txt' is read-only by policy
+[airlock] refuse 'edit_file': FORGE_PATH_READONLY path 'spec/new.txt' is read-only by policy
+[airlock] refuse 'edit_file': FORGE_PATH_READONLY path 'tests/new.txt' is read-only by policy
+[airlock] refuse 'edit_file': FORGE_PATH_HIDDEN path '.env' is hidden by policy
+[airlock] refuse 'edit_file': FORGE_PATH_HIDDEN path 'src/lib/algo.ts' is hidden by policy
+[airlock] refuse 'edit_file': FORGE_PATH_HIDDEN path 'src/proprietary/core.ts' is hidden by policy
+[airlock] refuse 'create_directory': FORGE_PATH_READONLY path '.forge/notes.md' is read-only by policy
+[airlock] refuse 'create_directory': FORGE_PATH_READONLY path 'spec/api.md' is read-only by policy
+[airlock] refuse 'create_directory': FORGE_PATH_READONLY path 'tests/ui.test.ts' is read-only by policy
+[airlock] refuse 'create_directory': FORGE_PATH_READONLY path '.forge/new.txt' is read-only by policy
+[airlock] refuse 'create_directory': FORGE_PATH_READONLY path 'spec/new.txt' is read-only by policy
+[airlock] refuse 'create_directory': FORGE_PATH_READONLY path 'tests/new.txt' is read-only by policy
+[airlock] refuse 'create_directory': FORGE_PATH_HIDDEN path '.env' is hidden by policy
+[airlock] refuse 'create_directory': FORGE_PATH_HIDDEN path 'src/lib/algo.ts' is hidden by policy
+[airlock] refuse 'create_directory': FORGE_PATH_HIDDEN path 'src/proprietary/core.ts' is hidden by policy
+[airlock] refuse 'git_show': FORGE_PATH_HIDDEN git path '.env' is hidden by policy
+[airlock] refuse 'git_show': FORGE_PATH_HIDDEN git path '.env' is hidden by policy
+[airlock] refuse 'git_show': FORGE_PATH_HIDDEN git path '.env' is hidden by policy
+[airlock] refuse 'git_show': FORGE_PATH_HIDDEN git path 'src/lib/algo.ts' is hidden by policy
+[airlock] refuse 'git_show': FORGE_PATH_HIDDEN git path 'src/lib/algo.ts' is hidden by policy
+[airlock] refuse 'git_show': FORGE_PATH_HIDDEN git path 'src/lib/algo.ts' is hidden by policy
+[airlock] refuse 'git_show': FORGE_PATH_HIDDEN git path 'src/proprietary/core.ts' is hidden by policy
+[airlock] refuse 'git_show': FORGE_PATH_HIDDEN git path 'src/proprietary/core.ts' is hidden by policy
+[airlock] refuse 'git_show': FORGE_PATH_HIDDEN git path 'src/proprietary/core.ts' is hidden by policy
+[airlock] canary report: BREACH; breaches=["fingerprint of hidden content or a credential found in /opt/leak/core.ts"]
+[airlock] workspace: re-verified (hidden content absent) at /ws
+Secure MCP Filesystem Server running on stdio
+Effective allowed directories (from the command line):
+  /ws
+Client does not support MCP Roots, using allowed directories set from server args: [ '/ws' ]
+Effective allowed directories (from the command line):
+  /ws
+[airlock] up on :8700; 13 tools exposed; 0 gate logs; 24 upstream tools seen; canary PENDING
+[airlock] refuse 'move_file': FORGE_TOOL_BLOCKED tool 'move_file' is denied by policy
+[airlock] refuse 'delete_path': FORGE_TOOL_BLOCKED tool 'delete_path' is denied by policy
+[airlock] refuse 'append_file': FORGE_TOOL_BLOCKED tool 'append_file' is not listed in policy (default deny)
+[airlock] refuse 'copy_file': FORGE_TOOL_BLOCKED tool 'copy_file' is not listed in policy (default deny)
+[airlock] refuse 'delete_path': FORGE_TOOL_BLOCKED tool 'delete_path' is denied by policy
+[airlock] refuse 'list_allowed_directories': FORGE_TOOL_BLOCKED tool 'list_allowed_directories' is not listed in policy (default deny)
+[airlock] refuse 'list_dir': FORGE_TOOL_BLOCKED tool 'list_dir' is not listed in policy (default deny)
+[airlock] refuse 'list_directory_with_sizes': FORGE_TOOL_BLOCKED tool 'list_directory_with_sizes' is not listed in policy (default deny)
+[airlock] refuse 'move_file': FORGE_TOOL_BLOCKED tool 'move_file' is denied by policy
+[airlock] refuse 'push_branch': FORGE_TOOL_BLOCKED tool 'push_branch' is not listed in policy (default deny)
+[airlock] refuse 'read_media_file': FORGE_TOOL_BLOCKED tool 'read_media_file' is not listed in policy (default deny)
+[airlock] refuse 'forge_canary_no_such_tool': FORGE_TOOL_BLOCKED tool 'forge_canary_no_such_tool' is not listed in policy (default deny)
+[airlock] refuse 'read_text_file': FORGE_PATH_HIDDEN path '.env' is hidden by policy
+[airlock] refuse 'read_text_file': FORGE_PATH_HIDDEN path '.env/../.env' is hidden by policy
+[airlock] refuse 'read_text_file': FORGE_PATH_HIDDEN path '/workspace/.env' is hidden by policy
+[airlock] refuse 'read_text_file': FORGE_PATH_HIDDEN path './.env' is hidden by policy
+[airlock] refuse 'read_text_file': FORGE_PATH_HIDDEN path 'src/lib/algo.ts' is hidden by policy
+[airlock] refuse 'read_text_file': FORGE_PATH_HIDDEN path 'src/../src/lib/algo.ts' is hidden by policy
+[airlock] refuse 'read_text_file': FORGE_PATH_HIDDEN path '/workspace/src/lib/algo.ts' is hidden by policy
+[airlock] refuse 'read_text_file': FORGE_PATH_HIDDEN path './src/lib/algo.ts' is hidden by policy
+[airlock] refuse 'read_text_file': FORGE_PATH_HIDDEN path 'src/proprietary/core.ts' is hidden by policy
+[airlock] refuse 'read_text_file': FORGE_PATH_HIDDEN path 'src/../src/proprietary/core.ts' is hidden by policy
+[airlock] refuse 'read_text_file': FORGE_PATH_HIDDEN path '/workspace/src/proprietary/core.ts' is hidden by policy
+[airlock] refuse 'read_text_file': FORGE_PATH_HIDDEN path './src/proprietary/core.ts' is hidden by policy
+[airlock] refuse 'read_text_file': FORGE_PATH_OUTSIDE path '../../etc/passwd' escapes the workspace
+[airlock] refuse 'read_text_file': FORGE_PATH_OUTSIDE absolute path '/etc/passwd' is outside the workspace
+[airlock] refuse 'read_text_file': FORGE_PATH_OUTSIDE absolute path '/state/x' is outside the workspace
+[airlock] refuse 'read_text_file': FORGE_PATH_OUTSIDE absolute path '/state/source/x' is outside the workspace
+[airlock] refuse 'read_text_file': FORGE_PATH_OUTSIDE absolute path '/data/x' is outside the workspace
+[airlock] refuse 'read_text_file': FORGE_PATH_OUTSIDE absolute path '/forge/forge.yaml/x' is outside the workspace
+[airlock] refuse 'read_text_file': FORGE_PATH_OUTSIDE absolute path '/ws/x' is outside the workspace
+[airlock] refuse 'read_text_file': FORGE_PATH_OUTSIDE absolute path '/forge-fixtures/x' is outside the workspace
+[airlock] refuse 'read_text_file': FORGE_PATH_HIDDEN path '.forge-canary-link' is hidden by policy
+[airlock] refuse 'read_file': FORGE_PATH_HIDDEN path '.env' is hidden by policy
+[airlock] refuse 'read_file': FORGE_PATH_HIDDEN path '.env/../.env' is hidden by policy
+[airlock] refuse 'read_file': FORGE_PATH_HIDDEN path '/workspace/.env' is hidden by policy
+[airlock] refuse 'read_file': FORGE_PATH_HIDDEN path './.env' is hidden by policy
+[airlock] refuse 'read_file': FORGE_PATH_HIDDEN path 'src/lib/algo.ts' is hidden by policy
+[airlock] refuse 'read_file': FORGE_PATH_HIDDEN path 'src/../src/lib/algo.ts' is hidden by policy
+[airlock] refuse 'read_file': FORGE_PATH_HIDDEN path '/workspace/src/lib/algo.ts' is hidden by policy
+[airlock] refuse 'read_file': FORGE_PATH_HIDDEN path './src/lib/algo.ts' is hidden by policy
+[airlock] refuse 'read_file': FORGE_PATH_HIDDEN path 'src/proprietary/core.ts' is hidden by policy
+[airlock] refuse 'read_file': FORGE_PATH_HIDDEN path 'src/../src/proprietary/core.ts' is hidden by policy
+[airlock] refuse 'read_file': FORGE_PATH_HIDDEN path '/workspace/src/proprietary/core.ts' is hidden by policy
+[airlock] refuse 'read_file': FORGE_PATH_HIDDEN path './src/proprietary/core.ts' is hidden by policy
+[airlock] refuse 'read_file': FORGE_PATH_OUTSIDE path '../../etc/passwd' escapes the workspace
+[airlock] refuse 'read_file': FORGE_PATH_OUTSIDE absolute path '/etc/passwd' is outside the workspace
+[airlock] refuse 'read_file': FORGE_PATH_OUTSIDE absolute path '/state/x' is outside the workspace
+[airlock] refuse 'read_file': FORGE_PATH_OUTSIDE absolute path '/state/source/x' is outside the workspace
+[airlock] refuse 'read_file': FORGE_PATH_OUTSIDE absolute path '/data/x' is outside the workspace
+[airlock] refuse 'read_file': FORGE_PATH_OUTSIDE absolute path '/forge/forge.yaml/x' is outside the workspace
+[airlock] refuse 'read_file': FORGE_PATH_OUTSIDE absolute path '/ws/x' is outside the workspace
+[airlock] refuse 'read_file': FORGE_PATH_OUTSIDE absolute path '/forge-fixtures/x' is outside the workspace
+[airlock] refuse 'read_file': FORGE_PATH_HIDDEN path '.forge-canary-link' is hidden by policy
+[airlock] refuse 'read_multiple_files': FORGE_PATH_HIDDEN path '.env' is hidden by policy
+[airlock] refuse 'read_multiple_files': FORGE_PATH_HIDDEN path '.env/../.env' is hidden by policy
+[airlock] refuse 'read_multiple_files': FORGE_PATH_HIDDEN path '/workspace/.env' is hidden by policy
+[airlock] refuse 'read_multiple_files': FORGE_PATH_HIDDEN path './.env' is hidden by policy
+[airlock] refuse 'read_multiple_files': FORGE_PATH_HIDDEN path 'src/lib/algo.ts' is hidden by policy
+[airlock] refuse 'read_multiple_files': FORGE_PATH_HIDDEN path 'src/../src/lib/algo.ts' is hidden by policy
+[airlock] refuse 'read_multiple_files': FORGE_PATH_HIDDEN path '/workspace/src/lib/algo.ts' is hidden by policy
+[airlock] refuse 'read_multiple_files': FORGE_PATH_HIDDEN path './src/lib/algo.ts' is hidden by policy
+[airlock] refuse 'read_multiple_files': FORGE_PATH_HIDDEN path 'src/proprietary/core.ts' is hidden by policy
+[airlock] refuse 'read_multiple_files': FORGE_PATH_HIDDEN path 'src/../src/proprietary/core.ts' is hidden by policy
+[airlock] refuse 'read_multiple_files': FORGE_PATH_HIDDEN path '/workspace/src/proprietary/core.ts' is hidden by policy
+[airlock] refuse 'read_multiple_files': FORGE_PATH_HIDDEN path './src/proprietary/core.ts' is hidden by policy
+[airlock] refuse 'read_multiple_files': FORGE_PATH_OUTSIDE path '../../etc/passwd' escapes the workspace
+[airlock] refuse 'read_multiple_files': FORGE_PATH_OUTSIDE absolute path '/etc/passwd' is outside the workspace
+[airlock] refuse 'read_multiple_files': FORGE_PATH_OUTSIDE absolute path '/state/x' is outside the workspace
+[airlock] refuse 'read_multiple_files': FORGE_PATH_OUTSIDE absolute path '/state/source/x' is outside the workspace
+[airlock] refuse 'read_multiple_files': FORGE_PATH_OUTSIDE absolute path '/data/x' is outside the workspace
+[airlock] refuse 'read_multiple_files': FORGE_PATH_OUTSIDE absolute path '/forge/forge.yaml/x' is outside the workspace
+[airlock] refuse 'read_multiple_files': FORGE_PATH_OUTSIDE absolute path '/ws/x' is outside the workspace
+[airlock] refuse 'read_multiple_files': FORGE_PATH_OUTSIDE absolute path '/forge-fixtures/x' is outside the workspace
+[airlock] refuse 'read_multiple_files': FORGE_PATH_HIDDEN path '.forge-canary-link' is hidden by policy
+[airlock] refuse 'list_directory': FORGE_PATH_HIDDEN path '.env' is hidden by policy
+[airlock] refuse 'list_directory': FORGE_PATH_HIDDEN path '.env/../.env' is hidden by policy
+[airlock] refuse 'list_directory': FORGE_PATH_HIDDEN path '/workspace/.env' is hidden by policy
+[airlock] refuse 'list_directory': FORGE_PATH_HIDDEN path './.env' is hidden by policy
+[airlock] refuse 'list_directory': FORGE_PATH_HIDDEN path 'src/lib/algo.ts' is hidden by policy
+[airlock] refuse 'list_directory': FORGE_PATH_HIDDEN path 'src/../src/lib/algo.ts' is hidden by policy
+[airlock] refuse 'list_directory': FORGE_PATH_HIDDEN path '/workspace/src/lib/algo.ts' is hidden by policy
+[airlock] refuse 'list_directory': FORGE_PATH_HIDDEN path './src/lib/algo.ts' is hidden by policy
+[airlock] refuse 'list_directory': FORGE_PATH_HIDDEN path 'src/proprietary/core.ts' is hidden by policy
+[airlock] refuse 'list_directory': FORGE_PATH_HIDDEN path 'src/../src/proprietary/core.ts' is hidden by policy
+[airlock] refuse 'list_directory': FORGE_PATH_HIDDEN path '/workspace/src/proprietary/core.ts' is hidden by policy
+[airlock] refuse 'list_directory': FORGE_PATH_HIDDEN path './src/proprietary/core.ts' is hidden by policy
+[airlock] refuse 'list_directory': FORGE_PATH_OUTSIDE path '../../etc/passwd' escapes the workspace
+[airlock] refuse 'list_directory': FORGE_PATH_OUTSIDE absolute path '/etc/passwd' is outside the workspace
+[airlock] refuse 'list_directory': FORGE_PATH_OUTSIDE absolute path '/state/x' is outside the workspace
+[airlock] refuse 'list_directory': FORGE_PATH_OUTSIDE absolute path '/state/source/x' is outside the workspace
+[airlock] refuse 'list_directory': FORGE_PATH_OUTSIDE absolute path '/data/x' is outside the workspace
+[airlock] refuse 'list_directory': FORGE_PATH_OUTSIDE absolute path '/forge/forge.yaml/x' is outside the workspace
+[airlock] refuse 'list_directory': FORGE_PATH_OUTSIDE absolute path '/ws/x' is outside the workspace
+[airlock] refuse 'list_directory': FORGE_PATH_OUTSIDE absolute path '/forge-fixtures/x' is outside the workspace
+[airlock] refuse 'list_directory': FORGE_PATH_HIDDEN path '.forge-canary-link' is hidden by policy
+[airlock] refuse 'directory_tree': FORGE_PATH_HIDDEN path '.env' is hidden by policy
+[airlock] refuse 'directory_tree': FORGE_PATH_HIDDEN path '.env/../.env' is hidden by policy
+[airlock] refuse 'directory_tree': FORGE_PATH_HIDDEN path '/workspace/.env' is hidden by policy
+[airlock] refuse 'directory_tree': FORGE_PATH_HIDDEN path './.env' is hidden by policy
+[airlock] refuse 'directory_tree': FORGE_PATH_HIDDEN path 'src/lib/algo.ts' is hidden by policy
+[airlock] refuse 'directory_tree': FORGE_PATH_HIDDEN path 'src/../src/lib/algo.ts' is hidden by policy
+[airlock] refuse 'directory_tree': FORGE_PATH_HIDDEN path '/workspace/src/lib/algo.ts' is hidden by policy
+[airlock] refuse 'directory_tree': FORGE_PATH_HIDDEN path './src/lib/algo.ts' is hidden by policy
+[airlock] refuse 'directory_tree': FORGE_PATH_HIDDEN path 'src/proprietary/core.ts' is hidden by policy
+[airlock] refuse 'directory_tree': FORGE_PATH_HIDDEN path 'src/../src/proprietary/core.ts' is hidden by policy
+[airlock] refuse 'directory_tree': FORGE_PATH_HIDDEN path '/workspace/src/proprietary/core.ts' is hidden by policy
+[airlock] refuse 'directory_tree': FORGE_PATH_HIDDEN path './src/proprietary/core.ts' is hidden by policy
+[airlock] refuse 'directory_tree': FORGE_PATH_OUTSIDE path '../../etc/passwd' escapes the workspace
+[airlock] refuse 'directory_tree': FORGE_PATH_OUTSIDE absolute path '/etc/passwd' is outside the workspace
+[airlock] refuse 'directory_tree': FORGE_PATH_OUTSIDE absolute path '/state/x' is outside the workspace
+[airlock] refuse 'directory_tree': FORGE_PATH_OUTSIDE absolute path '/state/source/x' is outside the workspace
+[airlock] refuse 'directory_tree': FORGE_PATH_OUTSIDE absolute path '/data/x' is outside the workspace
+[airlock] refuse 'directory_tree': FORGE_PATH_OUTSIDE absolute path '/forge/forge.yaml/x' is outside the workspace
+[airlock] refuse 'directory_tree': FORGE_PATH_OUTSIDE absolute path '/ws/x' is outside the workspace
+[airlock] refuse 'directory_tree': FORGE_PATH_OUTSIDE absolute path '/forge-fixtures/x' is outside the workspace
+[airlock] refuse 'directory_tree': FORGE_PATH_HIDDEN path '.forge-canary-link' is hidden by policy
+[airlock] refuse 'search_files': FORGE_PATH_HIDDEN path '.env' is hidden by policy
+[airlock] refuse 'search_files': FORGE_PATH_HIDDEN path '.env/../.env' is hidden by policy
+[airlock] refuse 'search_files': FORGE_PATH_HIDDEN path '/workspace/.env' is hidden by policy
+[airlock] refuse 'search_files': FORGE_PATH_HIDDEN path './.env' is hidden by policy
+[airlock] refuse 'search_files': FORGE_PATH_HIDDEN path 'src/lib/algo.ts' is hidden by policy
+[airlock] refuse 'search_files': FORGE_PATH_HIDDEN path 'src/../src/lib/algo.ts' is hidden by policy
+[airlock] refuse 'search_files': FORGE_PATH_HIDDEN path '/workspace/src/lib/algo.ts' is hidden by policy
+[airlock] refuse 'search_files': FORGE_PATH_HIDDEN path './src/lib/algo.ts' is hidden by policy
+[airlock] refuse 'search_files': FORGE_PATH_HIDDEN path 'src/proprietary/core.ts' is hidden by policy
+[airlock] refuse 'search_files': FORGE_PATH_HIDDEN path 'src/../src/proprietary/core.ts' is hidden by policy
+[airlock] refuse 'search_files': FORGE_PATH_HIDDEN path '/workspace/src/proprietary/core.ts' is hidden by policy
+[airlock] refuse 'search_files': FORGE_PATH_HIDDEN path './src/proprietary/core.ts' is hidden by policy
+[airlock] refuse 'search_files': FORGE_PATH_OUTSIDE path '../../etc/passwd' escapes the workspace
+[airlock] refuse 'search_files': FORGE_PATH_OUTSIDE absolute path '/etc/passwd' is outside the workspace
+[airlock] refuse 'search_files': FORGE_PATH_OUTSIDE absolute path '/state/x' is outside the workspace
+[airlock] refuse 'search_files': FORGE_PATH_OUTSIDE absolute path '/state/source/x' is outside the workspace
+[airlock] refuse 'search_files': FORGE_PATH_OUTSIDE absolute path '/data/x' is outside the workspace
+[airlock] refuse 'search_files': FORGE_PATH_OUTSIDE absolute path '/forge/forge.yaml/x' is outside the workspace
+[airlock] refuse 'search_files': FORGE_PATH_OUTSIDE absolute path '/ws/x' is outside the workspace
+[airlock] refuse 'search_files': FORGE_PATH_OUTSIDE absolute path '/forge-fixtures/x' is outside the workspace
+[airlock] refuse 'search_files': FORGE_PATH_HIDDEN path '.forge-canary-link' is hidden by policy
+[airlock] refuse 'get_file_info': FORGE_PATH_HIDDEN path '.env' is hidden by policy
+[airlock] refuse 'get_file_info': FORGE_PATH_HIDDEN path '.env/../.env' is hidden by policy
+[airlock] refuse 'get_file_info': FORGE_PATH_HIDDEN path '/workspace/.env' is hidden by policy
+[airlock] refuse 'get_file_info': FORGE_PATH_HIDDEN path './.env' is hidden by policy
+[airlock] refuse 'get_file_info': FORGE_PATH_HIDDEN path 'src/lib/algo.ts' is hidden by policy
+[airlock] refuse 'get_file_info': FORGE_PATH_HIDDEN path 'src/../src/lib/algo.ts' is hidden by policy
+[airlock] refuse 'get_file_info': FORGE_PATH_HIDDEN path '/workspace/src/lib/algo.ts' is hidden by policy
+[airlock] refuse 'get_file_info': FORGE_PATH_HIDDEN path './src/lib/algo.ts' is hidden by policy
+[airlock] refuse 'get_file_info': FORGE_PATH_HIDDEN path 'src/proprietary/core.ts' is hidden by policy
+[airlock] refuse 'get_file_info': FORGE_PATH_HIDDEN path 'src/../src/proprietary/core.ts' is hidden by policy
+[airlock] refuse 'get_file_info': FORGE_PATH_HIDDEN path '/workspace/src/proprietary/core.ts' is hidden by policy
+[airlock] refuse 'get_file_info': FORGE_PATH_HIDDEN path './src/proprietary/core.ts' is hidden by policy
+[airlock] refuse 'get_file_info': FORGE_PATH_OUTSIDE path '../../etc/passwd' escapes the workspace
+[airlock] refuse 'get_file_info': FORGE_PATH_OUTSIDE absolute path '/etc/passwd' is outside the workspace
+[airlock] refuse 'get_file_info': FORGE_PATH_OUTSIDE absolute path '/state/x' is outside the workspace
+[airlock] refuse 'get_file_info': FORGE_PATH_OUTSIDE absolute path '/state/source/x' is outside the workspace
+[airlock] refuse 'get_file_info': FORGE_PATH_OUTSIDE absolute path '/data/x' is outside the workspace
+[airlock] refuse 'get_file_info': FORGE_PATH_OUTSIDE absolute path '/forge/forge.yaml/x' is outside the workspace
+[airlock] refuse 'get_file_info': FORGE_PATH_OUTSIDE absolute path '/ws/x' is outside the workspace
+[airlock] refuse 'get_file_info': FORGE_PATH_OUTSIDE absolute path '/forge-fixtures/x' is outside the workspace
+[airlock] refuse 'get_file_info': FORGE_PATH_HIDDEN path '.forge-canary-link' is hidden by policy
+[airlock] refuse 'search': FORGE_ARG_REFUSED argument 'query' is required by policy
+[airlock] refuse 'search': FORGE_ARG_REFUSED argument 'query' is required by policy
+[airlock] refuse 'search': FORGE_ARG_REFUSED argument 'query' is required by policy
+[airlock] refuse 'search': FORGE_ARG_REFUSED argument 'query' is required by policy
+[airlock] refuse 'search': FORGE_ARG_REFUSED argument 'query' is required by policy
+[airlock] refuse 'search': FORGE_ARG_REFUSED argument 'query' is required by policy
+[airlock] refuse 'search': FORGE_ARG_REFUSED argument 'query' is required by policy
+[airlock] refuse 'search': FORGE_ARG_REFUSED argument 'query' is required by policy
+[airlock] refuse 'search': FORGE_ARG_REFUSED argument 'query' is required by policy
+[airlock] refuse 'search': FORGE_ARG_REFUSED argument 'query' is required by policy
+[airlock] refuse 'search': FORGE_ARG_REFUSED argument 'query' is required by policy
+[airlock] refuse 'search': FORGE_ARG_REFUSED argument 'query' is required by policy
+[airlock] refuse 'search': FORGE_ARG_REFUSED argument 'query' is required by policy
+[airlock] refuse 'search': FORGE_ARG_REFUSED argument 'query' is required by policy
+[airlock] refuse 'search': FORGE_ARG_REFUSED argument 'query' is required by policy
+[airlock] refuse 'search': FORGE_ARG_REFUSED argument 'query' is required by policy
+[airlock] refuse 'search': FORGE_ARG_REFUSED argument 'query' is required by policy
+[airlock] refuse 'search': FORGE_ARG_REFUSED argument 'query' is required by policy
+[airlock] refuse 'search': FORGE_ARG_REFUSED argument 'query' is required by policy
+[airlock] refuse 'search': FORGE_ARG_REFUSED argument 'query' is required by policy
+[airlock] refuse 'search': FORGE_ARG_REFUSED argument 'query' is required by policy
+[airlock] refuse 'write_file': FORGE_PATH_READONLY path '.forge/notes.md' is read-only by policy
+[airlock] refuse 'write_file': FORGE_PATH_READONLY path 'spec/api.md' is read-only by policy
+[airlock] refuse 'write_file': FORGE_PATH_READONLY path 'tests/ui.test.ts' is read-only by policy
+[airlock] refuse 'write_file': FORGE_PATH_READONLY path '.forge/new.txt' is read-only by policy
+[airlock] refuse 'write_file': FORGE_PATH_READONLY path 'spec/new.txt' is read-only by policy
+[airlock] refuse 'write_file': FORGE_PATH_READONLY path 'tests/new.txt' is read-only by policy
+[airlock] refuse 'write_file': FORGE_PATH_HIDDEN path '.env' is hidden by policy
+[airlock] refuse 'write_file': FORGE_PATH_HIDDEN path 'src/lib/algo.ts' is hidden by policy
+[airlock] refuse 'write_file': FORGE_PATH_HIDDEN path 'src/proprietary/core.ts' is hidden by policy
+[airlock] refuse 'edit_file': FORGE_PATH_READONLY path '.forge/notes.md' is read-only by policy
+[airlock] refuse 'edit_file': FORGE_PATH_READONLY path 'spec/api.md' is read-only by policy
+[airlock] refuse 'edit_file': FORGE_PATH_READONLY path 'tests/ui.test.ts' is read-only by policy
+[airlock] refuse 'edit_file': FORGE_PATH_READONLY path '.forge/new.txt' is read-only by policy
+[airlock] refuse 'edit_file': FORGE_PATH_READONLY path 'spec/new.txt' is read-only by policy
+[airlock] refuse 'edit_file': FORGE_PATH_READONLY path 'tests/new.txt' is read-only by policy
+[airlock] refuse 'edit_file': FORGE_PATH_HIDDEN path '.env' is hidden by policy
+[airlock] refuse 'edit_file': FORGE_PATH_HIDDEN path 'src/lib/algo.ts' is hidden by policy
+[airlock] refuse 'edit_file': FORGE_PATH_HIDDEN path 'src/proprietary/core.ts' is hidden by policy
+[airlock] refuse 'create_directory': FORGE_PATH_READONLY path '.forge/notes.md' is read-only by policy
+[airlock] refuse 'create_directory': FORGE_PATH_READONLY path 'spec/api.md' is read-only by policy
+[airlock] refuse 'create_directory': FORGE_PATH_READONLY path 'tests/ui.test.ts' is read-only by policy
+[airlock] refuse 'create_directory': FORGE_PATH_READONLY path '.forge/new.txt' is read-only by policy
+[airlock] refuse 'create_directory': FORGE_PATH_READONLY path 'spec/new.txt' is read-only by policy
+[airlock] refuse 'create_directory': FORGE_PATH_READONLY path 'tests/new.txt' is read-only by policy
+[airlock] refuse 'create_directory': FORGE_PATH_HIDDEN path '.env' is hidden by policy
+[airlock] refuse 'create_directory': FORGE_PATH_HIDDEN path 'src/lib/algo.ts' is hidden by policy
+[airlock] refuse 'create_directory': FORGE_PATH_HIDDEN path 'src/proprietary/core.ts' is hidden by policy
+[airlock] refuse 'git_show': FORGE_PATH_HIDDEN git path '.env' is hidden by policy
+[airlock] refuse 'git_show': FORGE_PATH_HIDDEN git path '.env' is hidden by policy
+[airlock] refuse 'git_show': FORGE_PATH_HIDDEN git path '.env' is hidden by policy
+[airlock] refuse 'git_show': FORGE_PATH_HIDDEN git path 'src/lib/algo.ts' is hidden by policy
+[airlock] refuse 'git_show': FORGE_PATH_HIDDEN git path 'src/lib/algo.ts' is hidden by policy
+[airlock] refuse 'git_show': FORGE_PATH_HIDDEN git path 'src/lib/algo.ts' is hidden by policy
+[airlock] refuse 'git_show': FORGE_PATH_HIDDEN git path 'src/proprietary/core.ts' is hidden by policy
+[airlock] refuse 'git_show': FORGE_PATH_HIDDEN git path 'src/proprietary/core.ts' is hidden by policy
+[airlock] refuse 'git_show': FORGE_PATH_HIDDEN git path 'src/proprietary/core.ts' is hidden by policy
+[airlock] canary report: BREACH; breaches=["read-only file chmod: .forge/notes.md", "read-only file chmod: spec/api.md", "read-only file chmod: tests/ui.test.ts", "read-only dir renamed: .forge", "read-only dir renamed: spec", "read-only dir renamed: tests"]
+[airlock] refuse 'read_file': FORGE_BREACH_LOCKDOWN startup canary found a breach; airlock refuses every call

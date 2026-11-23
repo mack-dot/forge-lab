@@ -1,0 +1,5 @@
+fixtures
+policies
+results
+*.md
+**/__pycache__

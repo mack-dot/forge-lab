@@ -1,0 +1,2 @@
+[airlock] FATAL (fail closed): policy: tool 'get_status' is both denied and allowed/gated
+

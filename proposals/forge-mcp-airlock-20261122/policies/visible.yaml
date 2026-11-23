@@ -1,0 +1,25 @@
+# Domain 4: visible_paths allowlist (default deny for code). The agent's workspace holds
+# ONLY files that match visible_paths; hidden_paths still removes files (hidden wins).
+version: 1
+upstreams:
+  - name: fs
+    transport: stdio
+    command: [node, /opt/mcpfs/node_modules/@modelcontextprotocol/server-filesystem/dist/index.js, /ws]
+    user: 1000
+  - name: repo
+    transport: stdio
+    command: [python3, -I, /forge/mocks/mock_repo_mcp.py, --root, /ws, --git-dir, /state/filtered.git]
+    user: 1000
+    env:
+      REPO_TOKEN: FAKE_repo_token_DEMO_ONLY_not_real_0002
+tools:
+  allow:
+    - {tool: read_text_file, upstream: fs, path_args: {path: read}}
+    - {tool: list_directory, upstream: fs, path_args: {path: read}}
+    - {tool: directory_tree, upstream: fs, path_args: {path: read}}
+    - {tool: write_file, upstream: fs, path_args: {path: write}}
+    - {tool: git_log, upstream: repo}
+    - {tool: git_show, upstream: repo, path_args: {spec: git_revpath}}
+paths:
+  visible_paths: ["src/ui/**", "README.md"]
+  hidden_paths: ["src/ui/**/secret*", ".env*"]
