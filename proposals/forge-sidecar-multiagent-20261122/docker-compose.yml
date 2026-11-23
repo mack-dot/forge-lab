@@ -1,0 +1,53 @@
+# Three untrusted agents, each with its own budget, each on its own no-egress network; one sidecar holds the
+# only API key and decides every spend with the proved verifier on two logs (the agent's and the swarm's).
+services:
+  upstream:
+    image: python:3.12-slim
+    networks: [egress]
+    environment: [EXPECTED_KEY=sk_live_DEMO_ONLY_not_a_real_key]
+    volumes: ["./upstream_mock.py:/app/x.py:ro"]
+    command: python /app/x.py
+  sidecar:
+    build: ./sidecar
+    networks: [net-support, net-research, net-coder, egress, admin]
+    environment:
+      - UPSTREAM_KEY=sk_live_DEMO_ONLY_not_a_real_key
+      - UPSTREAM_URL=http://upstream:9000/charge
+    volumes: ["./policy.json:/policy/policy.json:ro", "forge-logs:/data"]
+    depends_on: [upstream]
+  agent-support:
+    image: python:3.12-slim
+    networks: [net-support]
+    environment: [ROLE=support, AGENT_TOKEN=tok-support-7f3a, SIDECAR_URL=http://sidecar:8000]
+    volumes: ["./agents/agent.py:/app/x.py:ro"]
+    command: python /app/x.py
+    depends_on: [sidecar]
+  agent-research:
+    image: python:3.12-slim
+    networks: [net-research]
+    environment: [ROLE=research, AGENT_TOKEN=tok-research-91c2, SIDECAR_URL=http://sidecar:8000]
+    volumes: ["./agents/agent.py:/app/x.py:ro"]
+    command: python /app/x.py
+    depends_on: [sidecar]
+  agent-coder:
+    image: python:3.12-slim
+    networks: [net-coder]
+    environment: [ROLE=coder, AGENT_TOKEN=tok-coder-55be, SIDECAR_URL=http://sidecar:8000]
+    volumes: ["./agents/agent.py:/app/x.py:ro"]
+    command: python /app/x.py
+    depends_on: [sidecar]
+  auditor:
+    profiles: [audit]
+    image: python:3.12-slim
+    networks: [admin, egress]
+    environment: [SIDECAR_URL=http://sidecar:8000, UPSTREAM_URL=http://upstream:9000/ledger, ADMIN_TOKEN=admin-demo-token-not-secret, WAIT_S=0]
+    volumes: ["./auditor.py:/app/x.py:ro", "./policy.json:/policy/policy.json:ro"]
+    command: python /app/x.py
+networks:
+  net-support: {internal: true}
+  net-research: {internal: true}
+  net-coder: {internal: true}
+  admin: {internal: true}
+  egress: {}
+volumes:
+  forge-logs: {}
