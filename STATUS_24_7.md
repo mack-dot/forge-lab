@@ -5,7 +5,7 @@ only those measured in a named checkout; anything else is marked as an estimate 
 
 **`end_to_end=false`.** Open named links: S1 (hardware human approval: code in PR #11, real-key test pending the owner), hardware VM boundary (Linux: Kata microVM battery 35/35 in PR #13; macOS: blocked), E2/E4, M1-B. None is merged and verified as a whole yet.
 
-Last updated: 2026-11-23 (M1.1b #10, M1.2 #12, M1.3 #9, M3 #11, M4 #13 open for the owner; end_to_end=false).
+Last updated: 2026-11-23 (owner merge order and vfkit decision recorded; M2.2, M2.3 probes, M5.1, visibleTo, M4b vfkit IN_PROGRESS; end_to_end=false).
 
 ## Repositories
 
@@ -38,11 +38,11 @@ Found and fixed on the way: PR #6 gave false APP_SYNTAX_ERROR on Node < 22.13 an
 | M1.2 coverage (NODE_V8_COVERAGE, coverage.py / stdlib tracer) and `mutate --app` | PR_OPEN (#12) | CI green; 109 cases. Example, strong vs weak inputs (negative control): legacy_wallet.py lines 4/4 vs 3/4, branches 2/2 vs 1/2 (reject path named); legacy_wallet.ts blocks never run 0 vs 1; mutate --app caught 19/21 vs 8/21 (2 survivors in app.py, likely equivalent). Cost: --coverage Python 156→241 ms, TS 196→281 ms; per mutant Python 0.15–0.22 s … Java ~1.4 s | no coverage for Go/Rust/Java/C#; JS has no branch totals (blocks instead) |
 | M1.3 forge-ci Action hardening | PR_OPEN (#9) | zero-config `cli/forge_ci.py` + `examples/workflows/forge.yml`; base auto-detected (PR, merge group, push); 50,000-input sweep, seed = run id; job summary with repro commands. Negative controls in CI (runs 45113316698, 45114616292, 45115220522): unchanged → pass; W1 removed → APPROVAL_CHANGED (SPEC_CHANGED with base none); planted bypass → UNAPPROVED_BYPASS; edited INVARIANTS.md → INVARIANTS_STALE; rare wrapper bug → DISAGREE (1,500 inputs found it in 8/20 seeds, 50,000 in 10/10). Sweep 1.5–5.4 s per language on ubuntu-latest. First planted bug too rare (missed in run 45113930328), replaced | follow-ups: Action input for FORGE_ALLOWED_SIGNERS (with M3); pin Java/Rust/.NET; defaults changed (upgrade note) |
 | M2.1 `/llm` proxy, no key in the box | DONE (v0.13.0) | G8: key absent from env, /proc and 10,843 files; 20 concurrent streams → exactly 7 forwarded (= floor(room/R)); error, cut stream, SIGKILL keep full reservation; restart keeps the cap; real-API smoke 19 tokens settled, HTTP 200. PROVED: verifier verdict on the log; NATIVE CHECK: estimate, settlement, proxy. Owner decision 2026-11-23: strict 1 byte/token default, override in forge.yaml | — |
-| M2.2 MCP Streamable HTTP, multi-upstream, roles | NOT_STARTED | HTTP side of #97 is a subset of MCP | start after M2.1 (same proxy code) |
-| M2.3 red-team swarm | IN_PROGRESS | filesystem CRITICAL fixed (16 alias cases; 14 fail on old code; G5 requires them); protocol F1–F8 fixed; in-box /proc, git-object, fd and Docker end-to-end alias probes NOT yet run; Windows names, homoglyph folding open | combined prove_release, then in-box probes |
+| M2.2 MCP Streamable HTTP, multi-upstream, roles | IN_PROGRESS (`feat/M2.2-mcp-http`) | — | PR |
+| M2.3 red-team swarm | IN_PROGRESS | filesystem CRITICAL fixed (16 alias cases; 14 fail on old code; G5 requires them); protocol F1–F8 fixed; in-box /proc, git-object, fd and Docker end-to-end alias probes NOT yet run; Windows names, homoglyph folding open | in-box probes IN_PROGRESS (`feat/M2.3-inbox-probes`) |
 | M3 S1 hardware approval | PR_OPEN (#11); real-hardware positive test BLOCKED_NEEDS_HUMAN | CI 6/6, 126 cases; rogue-agent negative controls 27/27 exit 2 (spec, forge.yaml, INVARIANTS.md, approved.json, .sig, signing switched off, own key added and re-signed, all at once; anchor outside the project and at --base); owner-signed positive control exit 0 (software ed25519 key, FINITE TEST); airlock require_human_approval: hardware 16 unit + 6/6 Docker e2e; mutants of the verifier code fail 7–8 cases each | owner: run the YubiKey steps in PR #11 (Homebrew openssh; macOS ssh-keygen has no FIDO provider). Follow-up: Action input for FORGE_ALLOWED_SIGNERS on push runs. Still trusted: ssh-keygen, the anchor file or base-branch protection, key custody, no rollback dates |
-| M4 microVM / gVisor | PR_OPEN (#13); macOS microVM agent BLOCKED_NEEDS_HUMAN | `--isolation docker|gvisor|microvm`, fail closed (exit 2 runtime missing or mismatch; in-box kernel probe exit 10). CI ubuntu-latest runs 45116333410, 45121073630: validate.sh docker 34/34, gvisor 35/35 (kernel 4.19.0-gvisor), microvm Kata 4.3.1/QEMU 35/35 (guest 6.18.56); run_up_e2e 12/12 each. Negative controls: missing runtime refused; runc posing as gVisor caught. Warm start overhead vs runc: gVisor +8–13 ms, Kata ≈ +2 s. Firecracker boot 426–712 ms (CI has /dev/kvm); Mac vfkit VM boot 293–380 ms warm (boot only). One CI Kata job hung 29 min (run 45117987521), now time-limited | owner: choose vfkit or Apple `container` for the macOS agent VM (needs rootfs, virtio-fs with nosymfollow, internal network). Not tested: G5–G8 under non-docker backends, Kata with Cloud Hypervisor/Firecracker, attacks on gVisor/Kata |
-| M5.1 stateful trace fuzzing | NOT_STARTED | — | — |
+| M4 microVM / gVisor | PR_OPEN (#13); macOS microVM agent BLOCKED_NEEDS_HUMAN | `--isolation docker|gvisor|microvm`, fail closed (exit 2 runtime missing or mismatch; in-box kernel probe exit 10). CI ubuntu-latest runs 45116333410, 45121073630: validate.sh docker 34/34, gvisor 35/35 (kernel 4.19.0-gvisor), microvm Kata 4.3.1/QEMU 35/35 (guest 6.18.56); run_up_e2e 12/12 each. Negative controls: missing runtime refused; runc posing as gVisor caught. Warm start overhead vs runc: gVisor +8–13 ms, Kata ≈ +2 s. Firecracker boot 426–712 ms (CI has /dev/kvm); Mac vfkit VM boot 293–380 ms warm (boot only). One CI Kata job hung 29 min (run 45117987521), now time-limited | owner chose vfkit (2026-11-23); macOS agent VM IN_PROGRESS on `feat/M4b-vfkit` (stacked on #13). Not tested: G5–G8 under non-docker backends, Kata with Cloud Hypervisor/Firecracker, attacks on gVisor/Kata |
+| M5.1 stateful trace fuzzing | IN_PROGRESS (`feat/M5.1-trace-fuzz`) | — | PR |
 | M5.2 M1-B verified native core | NOT_STARTED | M1-B OPEN in the research record | — |
 
 ## Owner feedback queue (2026-11-23, from the chronicle session), not in the directive's list
@@ -58,9 +58,15 @@ Found and fixed on the way: PR #6 gave false APP_SYNTAX_ERROR on Node < 22.13 an
 | Normative approval hashes; compact approval digest | PR #6; chronicle approval screen 26,214 → 1,404 characters |
 | Next-rule suggestion | PR #6; chronicle copy suggests `visibleTo()` (gate.ts) |
 
+## Owner decisions 2026-11-23 (second batch)
+
+- macOS agent VM: vfkit.
+- Merge order (owner): forge-claude-mod #2 → #3 → #10 → #12 → #9 → #11 → #13, plus forge #99; the agent merges `main` into each later branch to fix conflicts (no force-push); v0.14.0 after all are in. Rehearsal from `bd23da9`: conflicts expected in #10 (tests/run_cs_diff.py), #9, #11 (CHANGELOG.md, hooks/register.ts, tests/run_tests.py), #13 (CHANGELOG.md).
+- S1 physical YubiKey test: PENDING until the owner runs it; 27/27 software-forgery checks are not a hardware result.
+- visibleTo() acid test: scratch copy of the owner's app only, synthetic fixture in the suite (`feat/visibleto-acid`), IN_PROGRESS.
+
 ## Blocked, needs the owner
 
 | Item | Why | What is needed |
 | --- | --- | --- |
 | M3 positive test | a hardware signature needs a person's key or finger | the owner runs the steps in forge-claude-mod PR #11 with a YubiKey (or tries Touch ID via ssh-keychain.dylib) |
-| M4 microVM on macOS | the agent VM needs a rootfs, a virtio-fs share keeping nosymfollow, and an internal network to the airlock | the owner picks vfkit (no install) or Apple `container` (admin install) |
