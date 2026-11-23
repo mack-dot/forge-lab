@@ -5,14 +5,14 @@ only those measured in a named checkout; anything else is marked as an estimate 
 
 **`end_to_end=false`.** Open named links: S1 (hardware human approval: code in PR #11, real-key test PENDING; no physical key has been used), hardware VM boundary (Linux: Kata microVM battery 35/35 in PR #13; macOS: vfkit IN_PROGRESS), E2/E4, M1-B. None is merged and verified as a whole yet.
 
-Last updated: 2026-11-23 (mode switch to integration and first-time UX; #14 combines seven PRs; #15–#19 open; M2.2, M2.3, vfkit, scrub in progress; end_to_end=false).
+Last updated: 2026-11-23 (#14 merged; clean-clone test of main running; #15–#22 open; M2.3 and first-time UX in progress; end_to_end=false).
 
 ## Repositories
 
 | Repository | Visibility | `main` | Open pull requests |
 | --- | --- | --- | --- |
-| mack-dot/forge | public (since 2026-11-23) | #100 README merged (`3c203cb1`) | #99 (this file), #98, #89, #76, #37, #36, #34, #15, #14, #5, #3, #2, #1 |
-| mack-dot/forge-claude-mod | public, no ruleset | `bd23da9` (tag v0.13.0) | #14 (combines #2, #3, #10, #12, #9, #11, #13), #15–#19, scrub PR; the seven are superseded by #14 |
+| mack-dot/forge | public (since 2026-11-23) | `b0fe292d` (#99 this file, #100 README; both `--admin` squash on the owner's choice) | #98, #89, #76, #37, #36, #34, #15, #14, #5, #3, #2, #1 |
+| mack-dot/forge-claude-mod | public, no ruleset | `96ef74e0` (#14 merged: #2, #3, #9–#13; v0.13.0 is the last tag) | #15–#22 (all target main), first-time UX (in progress) |
 
 Process note: plugin releases v0.9.0–v0.12.2 were made before this directive by fast-forwarding `main` and tagging
 from `wip/*` branches. From now on (Law 2) every milestone is a `feat/<milestone-id>` branch with a pull request;
@@ -64,12 +64,15 @@ No new feature tracks after the running ones. Next: one unified release (#14 + #
 
 | PR (forge-claude-mod) | Content | CI | Notes |
 | --- | --- | --- | --- |
-| #14 | #2, #3, #10, #12, #9, #11, #13 merged in the owner's order, conflicts resolved | green | found: #3 made the example UNAPPROVED_BYPASS (36 failures) and a missed Rust bypass line, fixed; Docker name collisions between parallel runs, fixed (two parallel validate.sh 34/34 PASS; same-id control fails 27/27); prove_release: G2–G8 pass with parallel runs on the host, G1 re-run pending |
+| #14 | MERGED `96ef74e0` (2026-11-23, on the owner's authorization) | 15/15 (gVisor job re-run once: runner Docker daemon did not restart) | prove_release.sh on `9cb2763`: PASS 8/8, 1188 s, with other agents' Docker runs on the host. Found on the way: #3 broke the example (36 failures) and a missed Rust bypass line; fixed-name Docker collisions between parallel runs (fixed; parallel validate 34/34 ×2, same-id control fails); two tests depended on machine load (fixed input counts); cleanup checks now count only their own run's objects |
 | #15 | M5.1 trace fuzz | 6/6 | see M5.1 row |
 | #16 | recursive-rule acid test, synthetic fixture | 6/6 | found and fixed: approval did not cover included spec files (soundness) |
 | #17 | callers, drift status, feeder ranking | 13/13 | stacked on #14 |
 | #18 | crash-fuzz, coverage steering, tiers | 13/13 | stacked on #14; steered 20/20 vs blind 0/20 on a narrow-branch bug |
 | #19 | AST bypass scan (TS/JS, Python) | 6/6 | on a real app copy: 290 → 76 hits, 46/46 AST hits real |
+| #20 | remove private-app details from files (owner rule) | green | plugin 152/152, airlock 187/187; history, tags and commit messages not rewritten |
+| #21 | M4b vfkit macOS agent VM | macOS job: unit only (no nested virtualization) | local: validate 37/37, up e2e 18/18 under vfkit; Claude Code in the VM not yet (no Node in the image) |
+| #22 | M2.2 Streamable HTTP MCP, multi-upstream, roles | 12/15 (gVisor runner, stacked-base fixture) | airlock 273/273; 6 gate-removed mutants each fail; prove_release exit 1 twice, only on other runs' Docker objects (fixed on main since); re-run pending |
 
 ## Owner decisions 2026-11-23 (second batch)
 
