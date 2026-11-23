@@ -63,7 +63,7 @@ Found and fixed on the way: PR #6 gave false APP_SYNTAX_ERROR on Node < 22.13 an
 - macOS agent VM: vfkit.
 - Merge order (owner): forge-claude-mod #2 → #3 → #10 → #12 → #9 → #11 → #13, plus forge #99; the agent merges `main` into each later branch to fix conflicts (no force-push); v0.14.0 after all are in. Rehearsal from `bd23da9`: conflicts expected in #10 (tests/run_cs_diff.py), #9, #11 (CHANGELOG.md, hooks/register.ts, tests/run_tests.py), #13 (CHANGELOG.md).
 - S1 physical YubiKey test: PENDING until the owner runs it; 27/27 software-forgery checks are not a hardware result.
-- recursive-rule acid test: scratch copy of the owner's app only, synthetic fixture in the suite (`feat/visibleto-acid`), IN_PROGRESS.
+- recursive-rule acid test: scratch copy of the owner's app only, synthetic fixture in the suite, IN_PROGRESS.
 
 ## Blocked, needs the owner
 
