@@ -5,7 +5,7 @@ only those measured in a named checkout; anything else is marked as an estimate 
 
 **`end_to_end=false`.** Open named links: S1 (hardware human approval), hardware VM boundary, E2/E4, M1-B.
 
-Last updated: 2026-11-23 (first entry, written from the repositories' state on that date).
+Last updated: 2026-11-23 (M0.2 pull request opened; M1.1 third planted bug in progress).
 
 ## Repositories
 
@@ -33,9 +33,9 @@ the agent merges and tags nothing.
 | Id | Status | Evidence / measured | Next action |
 | --- | --- | --- | --- |
 | M0.1 unified build clean from a scratch clone | IN_PROGRESS | 7/7 gates on `2881584` twice; plugin CI green on v0.12.2 | re-run all 7 gates on the merged branch from a fresh clone; open `feat/M0.1` PR in forge-claude-mod |
-| M0.2 TRIAL.md pre-registration | PARTIAL | TRIAL.md (v0.7.0) has success targets and rows for minutes, decisions, mutate, bugs found, false alarms | add `completion_rate`, `minutes_to_verified`, `unplanted_bugs_found`, `false_alarms`, `drop_off_step` by these names |
+| M0.2 TRIAL.md pre-registration | PR_OPEN | forge-claude-mod pull request #2 (`feat/M0.2`): the five metrics by name, definitions, `trial-results.csv` template; 2 secret scans, 0 findings | owner review and merge |
 | M0.3 sealed 40-bug benchmark | IN_PROGRESS | earlier: 8-bug set (now overfit), fresh 10-bug set recall 7/10 top-5, hit 25/25 (v0.10.2) | agents A and B harvest 40–50 bugs and measure v0.12.2 |
-| M1.1 Go, Rust, Java, C# evaluators | DONE except one gate | shipped v0.9.0 (Go, Rust) and v0.10.0 (Java, C#); warm per-language run 120–520 ms on the example; planted bugs caught per language: Python 3, Go 3, TypeScript 2, Rust 2, Java 2, C# 2 (CI) | gate "3/3 planted bugs per language" is NOT met for TypeScript, Rust, Java, C#: add a third planted bug each |
+| M1.1 Go, Rust, Java, C# evaluators | IN_PROGRESS (gate gap) | shipped v0.9.0 (Go, Rust) and v0.10.0 (Java, C#); warm per-language run 120–520 ms on the example; planted bugs caught per language: Python 3, Go 3, TypeScript 2, Rust 2, Java 2, C# 2 (CI) | gate "3/3 planted bugs per language" is NOT met for TypeScript, Rust, Java, C#: add a third planted bug each |
 | M1.2 coverage (c8, coverage.py) and `mutate --app` | NOT_STARTED | — | — |
 | M1.3 forge-ci Action hardening | PARTIAL | Action runs check, `APPROVAL_CHANGED`, `build --check`, `invariants --check`; included files verified and scanned | add a configurable 50,000-input diff sweep and a zero-config workflow |
 | M2.1 `/llm` proxy, no key in the box | IN_PROGRESS | agent running | — |
