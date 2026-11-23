@@ -1,0 +1,1 @@
+{"name": "forge-airlock", "version": "0.1.0", "description": "Forge MCP airlock: run claude (or any command) in a box that cannot see hidden code or upstream keys; MCP calls default-deny, gated by a compiled Dafny-proved verifier; changes come back only after your y", "license": "MIT"}

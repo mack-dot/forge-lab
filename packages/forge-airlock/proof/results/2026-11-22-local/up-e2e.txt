@@ -1,0 +1,11 @@
+ok    up: the canary passed and the hostile script ran to the end (exit 0)
+ok    up: the review lists hidden and ignored changes as not applied
+ok    up: answer n -> the real repository is unchanged
+ok    up: answer y -> exactly the allowed files changed
+ok    up: the agent's edit and the MCP write arrived
+ok    up: hidden files, read-only files and forge.yaml are untouched
+ok    up: --pass-env prints the warning that the agent can read the value
+ok    up: an upstream secret passed to the agent -> canary BREACH, exit 10, command not run, nothing synced
+ok    up: no container, network or run volume left behind
+logs: /var/folders/z1/n227h7913nn_v79v7r6dlwyc0000gn/T/forge-e2e-terbdssy
+9 cases, 0 failed

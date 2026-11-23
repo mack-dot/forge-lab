@@ -1,0 +1,11 @@
+fixtures
+policies
+results
+*.md
+**/__pycache__
+proof
+tests
+commands
+.claude-plugin
+forge
+forge_airlock.py

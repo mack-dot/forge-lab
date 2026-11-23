@@ -1,0 +1,54 @@
+[airlock] demo source repository built at /state/source (3 commits)
+[airlock] workspace: built from 3 commits; 3 hidden paths absent; 2 entries dropped; 1 read-only files, 1 closed dirs
+[airlock] log charge: created cap=1000000000 expires_at=1795397944
+Secure MCP Filesystem Server running on stdio
+Effective allowed directories (from the command line):
+  /ws
+Client does not support MCP Roots, using allowed directories set from server args: [ '/ws' ]
+Effective allowed directories (from the command line):
+  /ws
+[airlock] up on :8700; 3 tools exposed; 1 gate logs; 23 upstream tools seen; canary PENDING
+[airlock] refuse 'append_file': FORGE_TOOL_BLOCKED tool 'append_file' is not listed in policy (default deny)
+[airlock] refuse 'copy_file': FORGE_TOOL_BLOCKED tool 'copy_file' is not listed in policy (default deny)
+[airlock] refuse 'create_directory': FORGE_TOOL_BLOCKED tool 'create_directory' is not listed in policy (default deny)
+[airlock] refuse 'deploy': FORGE_TOOL_BLOCKED tool 'deploy' is not listed in policy (default deny)
+[airlock] refuse 'directory_tree': FORGE_TOOL_BLOCKED tool 'directory_tree' is not listed in policy (default deny)
+[airlock] refuse 'drop_database': FORGE_TOOL_BLOCKED tool 'drop_database' is not listed in policy (default deny)
+[airlock] refuse 'edit_file': FORGE_TOOL_BLOCKED tool 'edit_file' is not listed in policy (default deny)
+[airlock] refuse 'get_file_info': FORGE_TOOL_BLOCKED tool 'get_file_info' is not listed in policy (default deny)
+[airlock] refuse 'list_allowed_directories': FORGE_TOOL_BLOCKED tool 'list_allowed_directories' is not listed in policy (default deny)
+[airlock] refuse 'list_directory': FORGE_TOOL_BLOCKED tool 'list_directory' is not listed in policy (default deny)
+[airlock] refuse 'list_directory_with_sizes': FORGE_TOOL_BLOCKED tool 'list_directory_with_sizes' is not listed in policy (default deny)
+[airlock] refuse 'move_file': FORGE_TOOL_BLOCKED tool 'move_file' is not listed in policy (default deny)
+[airlock] refuse 'read_file': FORGE_TOOL_BLOCKED tool 'read_file' is not listed in policy (default deny)
+[airlock] refuse 'read_media_file': FORGE_TOOL_BLOCKED tool 'read_media_file' is not listed in policy (default deny)
+[airlock] refuse 'read_multiple_files': FORGE_TOOL_BLOCKED tool 'read_multiple_files' is not listed in policy (default deny)
+[airlock] refuse 'rotate_keys': FORGE_TOOL_BLOCKED tool 'rotate_keys' is not listed in policy (default deny)
+[airlock] refuse 'run_query': FORGE_TOOL_BLOCKED tool 'run_query' is not listed in policy (default deny)
+[airlock] refuse 'search_files': FORGE_TOOL_BLOCKED tool 'search_files' is not listed in policy (default deny)
+[airlock] refuse 'slow_job': FORGE_TOOL_BLOCKED tool 'slow_job' is not listed in policy (default deny)
+[airlock] refuse 'write_file': FORGE_TOOL_BLOCKED tool 'write_file' is not listed in policy (default deny)
+[airlock] refuse 'forge_canary_no_such_tool': FORGE_TOOL_BLOCKED tool 'forge_canary_no_such_tool' is not listed in policy (default deny)
+[airlock] refuse 'read_text_file': FORGE_PATH_HIDDEN path '.env' is hidden by policy
+[airlock] refuse 'read_text_file': FORGE_PATH_HIDDEN path '.env/../.env' is hidden by policy
+[airlock] refuse 'read_text_file': FORGE_PATH_HIDDEN path '/workspace/.env' is hidden by policy
+[airlock] refuse 'read_text_file': FORGE_PATH_HIDDEN path './.env' is hidden by policy
+[airlock] refuse 'read_text_file': FORGE_PATH_HIDDEN path 'src/lib/algo.ts' is hidden by policy
+[airlock] refuse 'read_text_file': FORGE_PATH_HIDDEN path 'src/../src/lib/algo.ts' is hidden by policy
+[airlock] refuse 'read_text_file': FORGE_PATH_HIDDEN path '/workspace/src/lib/algo.ts' is hidden by policy
+[airlock] refuse 'read_text_file': FORGE_PATH_HIDDEN path './src/lib/algo.ts' is hidden by policy
+[airlock] refuse 'read_text_file': FORGE_PATH_HIDDEN path 'src/proprietary/core.ts' is hidden by policy
+[airlock] refuse 'read_text_file': FORGE_PATH_HIDDEN path 'src/../src/proprietary/core.ts' is hidden by policy
+[airlock] refuse 'read_text_file': FORGE_PATH_HIDDEN path '/workspace/src/proprietary/core.ts' is hidden by policy
+[airlock] refuse 'read_text_file': FORGE_PATH_HIDDEN path './src/proprietary/core.ts' is hidden by policy
+[airlock] refuse 'read_text_file': FORGE_PATH_OUTSIDE path '../../etc/passwd' escapes the workspace
+[airlock] refuse 'read_text_file': FORGE_PATH_OUTSIDE absolute path '/etc/passwd' is outside the workspace
+[airlock] refuse 'read_text_file': FORGE_PATH_OUTSIDE absolute path '/state/x' is outside the workspace
+[airlock] refuse 'read_text_file': FORGE_PATH_OUTSIDE absolute path '/state/source/x' is outside the workspace
+[airlock] refuse 'read_text_file': FORGE_PATH_OUTSIDE absolute path '/data/x' is outside the workspace
+[airlock] refuse 'read_text_file': FORGE_PATH_OUTSIDE absolute path '/forge/forge.yaml/x' is outside the workspace
+[airlock] refuse 'read_text_file': FORGE_PATH_OUTSIDE absolute path '/ws/x' is outside the workspace
+[airlock] refuse 'read_text_file': FORGE_PATH_OUTSIDE absolute path '/source/x' is outside the workspace
+[airlock] refuse 'read_text_file': FORGE_PATH_OUTSIDE absolute path '/forge-fixtures/x' is outside the workspace
+[airlock] refuse 'read_text_file': FORGE_PATH_HIDDEN path '.forge-canary-link' is hidden by policy
+[airlock] canary report: PASSED; breaches=[]

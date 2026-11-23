@@ -1,0 +1,3 @@
+#!/bin/sh
+# forge - run the Forge airlock from a checkout:  forge init  |  forge up -- claude
+exec python3 "$(dirname "$0")/forge_airlock.py" "$@"

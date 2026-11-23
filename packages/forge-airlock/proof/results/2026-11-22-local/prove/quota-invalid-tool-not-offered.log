@@ -1,0 +1,6 @@
+[airlock] workspace: re-verified (hidden content absent) at /ws
+[airlock] log deploy: reloaded 3 steps gross=3 cap=3 re-verified ACCEPT
+[airlock] log run_query: reloaded 3 steps gross=1000 cap=1000 re-verified ACCEPT
+[airlock] log slow_job: reloaded 2 steps gross=2 cap=2 re-verified ACCEPT
+[airlock] FATAL (fail closed): policy tool 'no_such_upstream_tool': offered by 0 matching upstreams (need exactly 1)
+

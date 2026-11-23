@@ -1,0 +1,11 @@
+{
+  "name": "forge",
+  "owner": { "name": "mack-dot" },
+  "plugins": [
+    {
+      "name": "forge-airlock",
+      "source": "./packages/forge-airlock",
+      "description": "Forge MCP airlock: run claude (or any command) in a box without hidden code or upstream keys; default-deny MCP; caps decided by a compiled Dafny-proved verifier"
+    }
+  ]
+}
