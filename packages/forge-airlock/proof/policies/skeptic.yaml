@@ -1,0 +1,39 @@
+# Policy for skeptic_challenge.sh: code lockdown + a count gate + a denied tool, in one airlock.
+version: 1
+upstreams:
+  - name: fs
+    transport: stdio
+    command: [node, /opt/mcpfs/node_modules/@modelcontextprotocol/server-filesystem/dist/index.js, /ws]
+    user: 1000
+  - name: repo
+    transport: stdio
+    command: [python3, -I, /forge/mocks/mock_repo_mcp.py, --root, /ws, --git-dir, /state/filtered.git]
+    user: 1000
+    env:
+      REPO_TOKEN: FAKE_repo_token_DEMO_ONLY_not_real_0002
+  - name: ops
+    transport: http
+    url: http://mock-http:9100/mcp
+    headers:
+      Authorization: "Bearer FAKE_ops_key_DEMO_ONLY_not_real_0001"
+tools:
+  allow:
+    - {tool: read_text_file, upstream: fs, path_args: {path: read}}
+    - {tool: list_directory, upstream: fs, path_args: {path: read}}
+    - {tool: search_files, upstream: fs, path_args: {path: read}}
+    - {tool: write_file, upstream: fs, path_args: {path: write}}
+    - {tool: git_show, upstream: repo, path_args: {spec: git_revpath}}
+    - {tool: get_status, upstream: ops}
+  deny: [drop_database, move_file]
+  gate:
+    - tool: deploy
+      upstream: ops
+      unit: count
+      cap: 3
+      expires_in_s: 86400
+      arg_rules:
+        env: {in: [staging]}
+        branch: {not_in: [main], regex: "[a-z0-9][a-z0-9/_-]{0,63}"}
+paths:
+  hidden_paths: ["src/proprietary/**", "**/algo.ts", ".env*"]
+  readonly_paths: ["tests/**", "spec/**", ".forge/**"]

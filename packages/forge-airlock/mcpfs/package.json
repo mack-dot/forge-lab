@@ -1,0 +1,8 @@
+{
+  "name": "forge-airlock-mcpfs",
+  "private": true,
+  "description": "Pins the real off-the-shelf MCP filesystem server used as an airlock upstream.",
+  "dependencies": {
+    "@modelcontextprotocol/server-filesystem": "2.2.0"
+  }
+}
