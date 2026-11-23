@@ -1,0 +1,65 @@
+prove_airlock: commit de6437f7, docker 28.5.1
+== build (one image for every domain)
+ok   image build                                                    exit=0   expect=0      1s
+== domain codebase (forge.yaml = policies/codebase.yaml)
+ok   codebase: docker compose up (canary + scenario phase 1)        exit=0   expect=0     10s
+     agent-1      | [canary] PASS: 8826 checks, 0 breaches, 5.47s; airlock state={'state': 'PASSED'}
+     agent-1      | [agent] codebase phase 1: 76 ok, 0 failed
+ok   codebase: planted breach control-env-secret -> canary BREACH   exit=10  expect=10    10s
+     [canary] BREACH: credential in environment variable LEAKED_TOKEN (self)
+     [canary] BREACH: credential in environment variable LEAKED_TOKEN (1)
+     [canary] BREACH: credential in environment variable LEAKED_TOKEN (self)
+ok   codebase: planted breach control-hidden-mount -> canary BREACH exit=10  expect=10     9s
+     [canary] BREACH: fingerprint of hidden content or a credential found in /opt/leak/core.ts
+     [canary] BREACH: 8827 checks, 1 breaches, 5.59s; airlock state={'state': 'BREACH'}
+ok   codebase: planted breach control-root-writes -> canary BREACH  exit=10  expect=10     8s
+     [canary] BREACH: read-only file chmod: .forge/notes.md
+     [canary] BREACH: read-only file chmod: spec/api.md
+     [canary] BREACH: read-only file chmod: tests/ui.test.ts
+ok   codebase: after BREACH an allowed read is refused (lockdown)   exit=0   expect=0      0s
+ok   codebase: workspace re-verified on each of 3 restarts (count=3) exit=0   expect=0      1s
+== domain visible (forge.yaml = policies/visible.yaml)
+ok   visible: docker compose up (canary + scenario phase 1)         exit=0   expect=0     10s
+     agent-1      | [canary] PASS: 9013 checks, 0 breaches, 5.51s; airlock state={'state': 'PASSED'}
+     agent-1      | [agent] visible phase 1: 53 ok, 0 failed
+== domain quota (forge.yaml = policies/quota.yaml)
+ok   quota: docker compose up (canary + scenario phase 1)           exit=0   expect=0     15s
+     agent-1      | [canary] PASS: 8609 checks, 0 breaches, 6.36s; airlock state={'state': 'PASSED'}
+     agent-1      | [agent] quota phase 1: 27 ok, 0 failed
+ok   quota: docker compose restart airlock (same log volume)        exit=0   expect=0      5s
+     [airlock] log deploy: reloaded 3 steps gross=3 cap=3 re-verified ACCEPT
+     [airlock] log run_query: reloaded 3 steps gross=1000 cap=1000 re-verified ACCEPT
+     [airlock] log slow_job: reloaded 2 steps gross=2 cap=2 re-verified ACCEPT
+     [airlock] log deploy: reloaded 3 steps gross=3 cap=3 re-verified ACCEPT
+     [airlock] log run_query: reloaded 3 steps gross=1000 cap=1000 re-verified ACCEPT
+     [airlock] log slow_job: reloaded 2 steps gross=2 cap=2 re-verified ACCEPT
+ok   quota: phase 2 after restart (caps kept)                       exit=0   expect=0      8s
+     [agent] quota phase 2: 8 ok, 0 failed
+ok   quota: audit (every log re-verifies ACCEPT, gross <= cap)      exit=0   expect=0      1s
+ok   quota: audit numbers (3 deploys, 1000 rows, 2 aborted, 0 denied calls upstream) exit=0   expect=0      0s
+ok   quota: planted breach control-egress (agent on upstream net) -> BREACH exit=10  expect=10     9s
+     [canary] BREACH: egress connection succeeded: mock-http:9100
+     [canary] BREACH: DNS resolution succeeded: mock-http
+     [canary] BREACH: 8607 checks, 2 breaches, 6.03s; airlock state={'state': 'BREACH'}
+ok   quota: second airlock on the same log volume refuses to start  exit=2   expect=2      1s
+ok   quota: invalid policy unknown-key -> refuses to start          exit=2   expect=2      1s
+ok   quota: invalid policy allow-and-deny -> refuses to start       exit=2   expect=2      1s
+ok   quota: invalid policy tool-not-offered -> refuses to start     exit=2   expect=2      1s
+ok   quota: invalid policy cap-changed -> refuses to start          exit=2   expect=2      1s
+ok   quota: one flipped log byte -> airlock refuses to start        exit=2   expect=2      1s
+     [airlock] FATAL (fail closed): gate log: deploy: stored log does not verify (REJECT_BAD_SEAL); refusing to start
+== domain concurrency (forge.yaml = policies/concurrency.yaml)
+ok   concurrency: docker compose up (canary + scenario phase 1)     exit=0   expect=0     13s
+     agent-1      | [canary] PASS: 8599 checks, 0 breaches, 7.6s; airlock state={'state': 'PASSED'}
+     agent-1      | [agent] concurrency phase 1: 17 ok, 0 failed
+ok   concurrency: audit (every log re-verifies ACCEPT, gross <= cap) exit=0   expect=0      4s
+ok   concurrency: audit numbers (sum 1000, 14 charges, 0 duplicate ids, 5 deploys) exit=0   expect=0      0s
+== total 118s
+ok   cleanup: 0 containers and 0 volumes left (c=0 v=0)             exit=0   expect=0      0s
+VALIDATE: PASS
+| call | n | direct median / p95 (ms) | via airlock median / p95 (ms) | overhead median / p95 (ms) |
+| --- | --- | --- | --- | --- |
+| read_text_file (real fs server, stdio), allowed pass-through | 120 | 0.8 / 1.27 | 1.78 / 2.63 | 0.98 / 1.36 |
+| get_status (mock HTTP), allowed pass-through | 120 | 1.74 / 3.09 | 2.56 / 3.74 | 0.82 / 0.65 |
+| charge amount=1 (mock HTTP), gated by the compiled verifier | 120 | 1.39 / 2.31 | 22.67 / 30.33 | 21.28 / 28.02 |
+prove_airlock: validate=0 bench=0 cleanup=0 (containers=0 volumes=0 networks=0) total=136s

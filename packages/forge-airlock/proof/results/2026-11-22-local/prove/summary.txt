@@ -1,0 +1,26 @@
+ok   image build                                                    exit=0   expect=0      1s
+ok   codebase: docker compose up (canary + scenario phase 1)        exit=0   expect=0     10s
+ok   codebase: planted breach control-env-secret -> canary BREACH   exit=10  expect=10    10s
+ok   codebase: planted breach control-hidden-mount -> canary BREACH exit=10  expect=10     9s
+ok   codebase: planted breach control-root-writes -> canary BREACH  exit=10  expect=10     8s
+ok   codebase: after BREACH an allowed read is refused (lockdown)   exit=0   expect=0      0s
+ok   codebase: workspace re-verified on each of 3 restarts (count=3) exit=0   expect=0      1s
+ok   visible: docker compose up (canary + scenario phase 1)         exit=0   expect=0     10s
+ok   quota: docker compose up (canary + scenario phase 1)           exit=0   expect=0     15s
+ok   quota: docker compose restart airlock (same log volume)        exit=0   expect=0      5s
+ok   quota: phase 2 after restart (caps kept)                       exit=0   expect=0      8s
+ok   quota: audit (every log re-verifies ACCEPT, gross <= cap)      exit=0   expect=0      1s
+ok   quota: audit numbers (3 deploys, 1000 rows, 2 aborted, 0 denied calls upstream) exit=0   expect=0      0s
+ok   quota: planted breach control-egress (agent on upstream net) -> BREACH exit=10  expect=10     9s
+ok   quota: second airlock on the same log volume refuses to start  exit=2   expect=2      1s
+ok   quota: invalid policy unknown-key -> refuses to start          exit=2   expect=2      1s
+ok   quota: invalid policy allow-and-deny -> refuses to start       exit=2   expect=2      1s
+ok   quota: invalid policy tool-not-offered -> refuses to start     exit=2   expect=2      1s
+ok   quota: invalid policy cap-changed -> refuses to start          exit=2   expect=2      1s
+ok   quota: one flipped log byte -> airlock refuses to start        exit=2   expect=2      1s
+ok   concurrency: docker compose up (canary + scenario phase 1)     exit=0   expect=0     13s
+ok   concurrency: audit (every log re-verifies ACCEPT, gross <= cap) exit=0   expect=0      4s
+ok   concurrency: audit numbers (sum 1000, 14 charges, 0 duplicate ids, 5 deploys) exit=0   expect=0      0s
+== total 118s
+ok   cleanup: 0 containers and 0 volumes left (c=0 v=0)             exit=0   expect=0      0s
+VALIDATE: PASS

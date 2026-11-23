@@ -1,0 +1,7 @@
+Secure MCP Filesystem Server running on stdio
+Effective allowed directories (from the command line):
+  /ws
+Client does not support MCP Roots, using allowed directories set from server args: [ '/ws' ]
+Effective allowed directories (from the command line):
+  /ws
+[bench] RESULT {"mode": "direct", "fs_read": {"n": 120, "median_ms": 0.8, "p95_ms": 1.27, "max_ms": 2.59}, "http_pass": {"n": 120, "median_ms": 1.74, "p95_ms": 3.09, "max_ms": 25.75}, "http_gate": {"n": 120, "median_ms": 1.39, "p95_ms": 2.31, "max_ms": 3.14}}

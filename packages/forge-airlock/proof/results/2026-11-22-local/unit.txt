@@ -1,0 +1,70 @@
+ok    policy: a valid forge.yaml loads
+ok    policy: ${PAY_KEY} resolves on the airlock side only
+ok    policy: the host side keeps the NAME (resolve=False reads no secret)
+ok    policy: a named secret that is not set stops the start (fail closed)
+ok    policy: resolved secrets are known to the canary
+ok    policy: allow and deny of one tool is refused
+ok    policy: an unknown key is refused
+ok    policy: version 2 is refused
+ok    policy: a gate without expiry is refused
+ok    policy: unit=value without value_field is refused
+ok    policy: agent.egress_allow must be host:port
+ok    policy: forge.yaml itself is always read-only
+ok    policy: an unlisted tool is refused FORGE_TOOL_BLOCKED
+ok    policy: a denied tool is refused FORGE_TOOL_BLOCKED
+ok    policy: the YAML that draft.to_yaml writes parses back to the same document
+ok    policy: policy.py check exits 2 on an invalid file
+ok    paths: hidden directory pattern matches files below it
+ok    paths: a basename pattern (.env*) matches at any depth
+ok    paths: a public file is visible
+ok    paths: '..' that leaves the workspace is refused FORGE_PATH_OUTSIDE
+ok    paths: an absolute path outside the workspace is refused
+ok    paths: a symlink to hidden code is refused after realpath()
+ok    paths: 'src/../src/proprietary/core.ts' is refused
+ok    paths: a write to a read-only path is refused FORGE_PATH_READONLY
+ok    paths: a read of a read-only path is allowed
+ok    paths: .git is refused
+ok    paths: git_revpath with a hidden path is refused
+ok    paths: visible_paths keeps only matching files
+ok    paths: hidden wins over visible
+ok    paths: with visible_paths, a read outside it is refused
+ok    paths: with visible_paths, an empty list is refused
+ok    sync: allowed changes are proposed (modified, added, deleted)
+ok    sync: a change to a hidden path is never applied
+ok    sync: a change to a read-only path is never applied (incl. forge.yaml)
+ok    sync: your own change since the start is not overwritten
+ok    sync: ignored files (node_modules) are not applied
+ok    sync: a write through a symlinked parent in the real repository is refused
+ok    sync: symlinks are never applied
+ok    sync: the review flags .mcp.json as sensitive
+ok    sync: apply writes only the proposed files
+ok    sync: content that does not match its hash is refused
+ok    verifier: persistent+memo, persistent and fresh subprocess give identical JSON on 24 logs x 2 (verdicts seen: ACCEPT, ACCEPT_TORN_TAIL, REJECT_BAD_SEAL, REJECT_CHAIN_BREAK, REJECT_DUPLICATE_ID, REJECT_MALFORMED_RECORD, REJECT_OVER_CAP, REJECT_SEQ_MISMATCH)
+ok    verifier: the memo table was used (hits > 0)
+ok    verifier: a killed verifier process is restarted (next call still verified)
+ok    verifier: no answer in time gives UNVERIFIABLE_INTERNAL (fail closed)
+[airlock] log deploy: created cap=3 expires_at=1795397788
+ok    gate: count cap 3 -> 3 ACCEPT, the 4th REJECT_OVER_CAP
+[airlock] log pay: created cap=1000 expires_at=1795397788
+ok    gate: value cap 1000: 600 ok, replayed id REJECT_DUPLICATE_ID, 401 over, 400 ok
+[airlock] log deploy: reloaded 3 steps gross=3 cap=3 re-verified ACCEPT
+ok    gate: after a reload the cap is still reached
+ok    gate: a reload with a different cap is refused
+ok    gate: one flipped log byte -> the log is refused at load
+ok    draft: no secret value from .mcp.json reaches forge.yaml
+ok    draft: secrets are named ${NAME} only
+ok    draft: hidden paths proposed (.env*, infra/**, proprietary)
+ok    draft: read-only paths proposed (tests, spec, .forge, INVARIANTS.md)
+ok    draft: ignored files are not scanned (node_modules)
+ok    draft: read-like tools allowed
+ok    draft: destructive tools denied
+ok    draft: money tool gated by value with a cap
+ok    draft: side-effect tool gated by count
+ok    draft: unknown tool left out (default deny) and asked about
+ok    draft: the draft is a valid policy
+ok    draft: `forge init --json` runs without Docker and leaks no value
+ok    static: commands/airlock.md has description front matter
+ok    static: the command uses AskUserQuestion and never asks for secret values
+ok    static: plugin.json names the plugin forge-airlock
+ok    static: no absolute host home path in the package
+66 cases, 0 failed

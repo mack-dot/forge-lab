@@ -118,7 +118,7 @@ Measured latency of one gated call, 120 calls after 5 warm-up calls (log grows t
 | Where | Before (#97: subprocess per call) median / p95 | After (persistent + memo) median / p95 |
 | --- | --- | --- |
 | host, `GateLog.reserve` (Python 3.10, macOS, no Docker) | 307.75 / 503.3 ms | 15.25 / 23.47 ms |
-| Docker, `charge` through the airlock (bench.sh) | BENCH_BEFORE | BENCH_AFTER |
+| Docker, `charge` through the airlock, agent to upstream (bench.sh) | 338.16 / 776.48 ms | 22.67 / 30.33 ms |
 
 Persistent process without the memo: 276.3 / 446.28 ms (host): process start was not the main
 cost; the compiled SHA-256 over every record was. The cost still grows with the log (about
@@ -140,7 +140,10 @@ closed on timeout), gate decisions through it, and the `forge.yaml` draft (no se
 exactly the allowed files; a passed upstream secret gives canary BREACH, exit 10, nothing synced.
 There is no CI job for these (this repository's `.github/` is not changed by this package).
 
-Local results (2026-11-22, macOS, Docker 28.5.1): see `proof/results/` and the pull request.
+Local results (2026-11-22, one macOS machine, Docker 28.5.1, commit `de6437f7`), in
+`proof/results/2026-11-22-local/`: `run_tests.py` exit 0 (66 cases); `run_up_e2e.py` exit 0
+(9 cases); `prove_airlock.sh` exit 0 (24 of 24 validate checks, bench, cleanup 0/0/0, 136 s);
+`FORGE_VERIFIER=subprocess bench.sh` exit 0 (the "before" row). Docker numbers vary by run.
 
 ## Honest labels
 
