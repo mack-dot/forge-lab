@@ -3,9 +3,9 @@
 Ground truth for `endtoendtrue.md`. Read at the start of every run; update after every milestone. Numbers are
 only those measured in a named checkout; anything else is marked as an estimate or inference.
 
-**`end_to_end=false`.** Open named links: S1 (hardware human approval), hardware VM boundary, E2/E4, M1-B.
+**`end_to_end=false`.** Open named links: S1 (hardware human approval: code in PR #11, real-key test pending the owner), hardware VM boundary (Linux: Kata microVM battery 35/35 in PR #13; macOS: blocked), E2/E4, M1-B. None is merged and verified as a whole yet.
 
-Last updated: 2026-11-23 (v0.13.0 released; M1.1b, M1.3, M3, M4 started in parallel worktrees).
+Last updated: 2026-11-23 (M1.1b #10, M1.2 #12, M1.3 #9, M3 #11, M4 #13 open for the owner; end_to_end=false).
 
 ## Repositories
 
@@ -41,7 +41,7 @@ Found and fixed on the way: PR #6 gave false APP_SYNTAX_ERROR on Node < 22.13 an
 | M2.2 MCP Streamable HTTP, multi-upstream, roles | NOT_STARTED | HTTP side of #97 is a subset of MCP | start after M2.1 (same proxy code) |
 | M2.3 red-team swarm | IN_PROGRESS | filesystem CRITICAL fixed (16 alias cases; 14 fail on old code; G5 requires them); protocol F1–F8 fixed; in-box /proc, git-object, fd and Docker end-to-end alias probes NOT yet run; Windows names, homoglyph folding open | combined prove_release, then in-box probes |
 | M3 S1 hardware approval | PR_OPEN (#11); real-hardware positive test BLOCKED_NEEDS_HUMAN | CI 6/6, 126 cases; rogue-agent negative controls 27/27 exit 2 (spec, forge.yaml, INVARIANTS.md, approved.json, .sig, signing switched off, own key added and re-signed, all at once; anchor outside the project and at --base); owner-signed positive control exit 0 (software ed25519 key, FINITE TEST); airlock require_human_approval: hardware 16 unit + 6/6 Docker e2e; mutants of the verifier code fail 7–8 cases each | owner: run the YubiKey steps in PR #11 (Homebrew openssh; macOS ssh-keygen has no FIDO provider). Follow-up: Action input for FORGE_ALLOWED_SIGNERS on push runs. Still trusted: ssh-keygen, the anchor file or base-branch protection, key custody, no rollback dates |
-| M4 microVM / gVisor | IN_PROGRESS (agent, `feat/M4-isolation`) | — | gVisor in a Linux CI workflow; microVM scaffold (Virtualization.framework / Firecracker if CI has KVM) |
+| M4 microVM / gVisor | PR_OPEN (#13); macOS microVM agent BLOCKED_NEEDS_HUMAN | `--isolation docker|gvisor|microvm`, fail closed (exit 2 runtime missing or mismatch; in-box kernel probe exit 10). CI ubuntu-latest runs 45116333410, 45121073630: validate.sh docker 34/34, gvisor 35/35 (kernel 4.19.0-gvisor), microvm Kata 4.3.1/QEMU 35/35 (guest 6.18.56); run_up_e2e 12/12 each. Negative controls: missing runtime refused; runc posing as gVisor caught. Warm start overhead vs runc: gVisor +8–13 ms, Kata ≈ +2 s. Firecracker boot 426–712 ms (CI has /dev/kvm); Mac vfkit VM boot 293–380 ms warm (boot only). One CI Kata job hung 29 min (run 45117987521), now time-limited | owner: choose vfkit or Apple `container` for the macOS agent VM (needs rootfs, virtio-fs with nosymfollow, internal network). Not tested: G5–G8 under non-docker backends, Kata with Cloud Hypervisor/Firecracker, attacks on gVisor/Kata |
 | M5.1 stateful trace fuzzing | NOT_STARTED | — | — |
 | M5.2 M1-B verified native core | NOT_STARTED | M1-B OPEN in the research record | — |
 
@@ -63,4 +63,4 @@ Found and fixed on the way: PR #6 gave false APP_SYNTAX_ERROR on Node < 22.13 an
 | Item | Why | What is needed |
 | --- | --- | --- |
 | M3 positive test | a hardware signature needs a person's key or finger | the owner runs the steps in forge-claude-mod PR #11 with a YubiKey (or tries Touch ID via ssh-keychain.dylib) |
-| M4 on Linux backends | this machine is macOS | a Linux host or CI runner with KVM |
+| M4 microVM on macOS | the agent VM needs a rootfs, a virtio-fs share keeping nosymfollow, and an internal network to the airlock | the owner picks vfkit (no install) or Apple `container` (admin install) |
