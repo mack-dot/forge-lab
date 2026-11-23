@@ -1,18 +1,24 @@
 # Forge
 
+> **Everyday users:** use [forge-claude-mod](https://github.com/mack-dot/forge-claude-mod) (Claude Code plugin, 6-language diff fuzzer, MCP airlock; current release v0.13.0). Install in Claude Code: `/plugin install forge --marketplace mack-dot/forge-claude-mod`\
+> **This repository** holds the proof cores (Dafny, HOL4/CakeML), the verification receipts and the research record.
+
 **The aim: LLMs propose, checkers dispose, and humans approve intent
 (specs), not code.** This is an aim, not the present state. Today no
 approval channel exists that an agent cannot forge (link S1 is MISSING),
-and nothing enforces protected-path approval on `main` (`main` is not
-protected; links E2 and E4 are MISSING; blocker 5 "Enforcement does not
-exist"). Sources:
+and nothing enforces protected-path approval on `main` (links E2 and E4
+are MISSING; blocker 5 "Enforcement does not exist"). `main` has one
+GitHub ruleset, `protect-main` (read on 2026-11-23). It requires a pull
+request with one approving code-owner review, linear history, no force
+push and no deletion. It requires no status check, so the protected-path
+gate does not block a merge. The repository admin role can bypass the
+ruleset when it merges a pull request. Sources:
 [TOP_LEVEL_GRAPH.md](proposals/m1b-mission-20261119/TOP_LEVEL_GRAPH.md)
 (S1, E2, E4, blocker 5) and
 [the graph refresh](proposals/m1b-mission-20261119/TOP_LEVEL_GRAPH_REFRESH_20261119.md)
 (E2, E4).
 
-Forge is a research prototype, licensed under Apache-2.0 (see `LICENSE`;
-the repository is private at the time of this text).
+Forge is a research prototype, licensed under Apache-2.0 (see `LICENSE`).
 **`end_to_end=false`**: no result here is a proof of a deployed system.
 
 ## Try it in 30 seconds (no Dafny required)
@@ -41,8 +47,19 @@ agree on **1,999 / 1,999** differential cases (0 diffs) and catch **14 / 14** pl
 killed by the proof itself. See [the dual-leg report](proposals/escrow-dual-leg-20261121/REPORT.md).
 
 **Honest scope:** this runs the *proved verifier core* (a **NATIVE CHECK** once compiled) over a **finite**
-set of inputs. `end_to_end=false`. The drop-in `forge wrap` / MCP sidecar that makes this enforcement
-*unbypassable* (Phase 1, links E2/E4 above) is **not built yet** — watch releases for v0.1.
+set of inputs. `end_to_end=false`. An MCP airlock now exists in two forms. Neither makes enforcement unbypassable, and links
+E2/E4 above stay MISSING.
+
+- [Pull request 97](https://github.com/mack-dot/forge/pull/97) (merged):
+  [proposals/forge-mcp-airlock-20261122](proposals/forge-mcp-airlock-20261122/README.md), a proposal
+  slice with `prove_airlock.sh`. The airlock is a NATIVE CHECK. The gate verdict on one log is the only
+  PROVED part. Every result is a FINITE TEST. `end_to_end=false`.
+- [forge-claude-mod `airlock/`](https://github.com/mack-dot/forge-claude-mod/tree/main/airlock)
+  (release v0.13.0, `/forge:airlock`). PROVED: only the verdict of the compiled #91 verifier on one
+  log, about the Dafny model. NATIVE CHECK: the compiled verifier as it runs, the engine, the canary,
+  the egress proxy, and the `llm` estimate and settlement. FINITE TEST: every run and number in its
+  README (one machine). Isolation is a container that shares the host kernel. Spending caps for real
+  money are NOT PROVED. `end_to_end=false`.
 
 ## What Forge is
 
@@ -248,7 +265,7 @@ machine and one hosted runner profile.
 | Stage 8: refund boundary | Claims R1 to R5 of the approved refund spec for `impl/Refund.dfy`: `source_proof`. Wrapper with 9,000 generated cases and 68 fixtures: `unit_tested` | the wrapper, the JSON parser, the executor | [refund record](docs/stage8-refund.md) |
 | Stage 9: provenance | Contract and tools are in the tree. Its six EXIT cases are NOT RUN on `main`'s present bytes: 8 lock entries are stale and the renewal needs a hosted signing run that is not authorized | — | [ROADMAP.md](ROADMAP.md) |
 | Stage 11: incremental verification | An obligation graph decides what a change must check again; a stale dependency is rejected; three EXIT cases exit 0 on recorded evaluations: `floor_controls` and recorded runs | the input declarations of each gate | [ROADMAP.md](ROADMAP.md) |
-| Round 4: the gate guards itself | Eight modules of the pull request gate are frozen; a change to a protected path needs a ratification record on the trusted side; control sets with 0 evasions: `floor_controls`; three fresh-context reviews by separate workers of the same model family on the same machine (not independent parties) | four more gate modules stay ratifiable (stated limit). Nothing enforces the ratification rule on `main`: `main` has no branch protection ([graph](proposals/m1b-mission-20261119/TOP_LEVEL_GRAPH.md) E2 and blocker 5) | [checklist](proposals/forge2-pillar1-print-effects/v3/BOOTSTRAP_CHECKLIST.md) |
+| Round 4: the gate guards itself | Eight modules of the pull request gate are frozen; a change to a protected path needs a ratification record on the trusted side; control sets with 0 evasions: `floor_controls`; three fresh-context reviews by separate workers of the same model family on the same machine (not independent parties) | four more gate modules stay ratifiable (stated limit). Nothing enforces the ratification rule on `main`: the `protect-main` ruleset requires a reviewed pull request but no status check, and the admin role can bypass it ([graph](proposals/m1b-mission-20261119/TOP_LEVEL_GRAPH.md) E2 and blocker 5) | [checklist](proposals/forge2-pillar1-print-effects/v3/BOOTSTRAP_CHECKLIST.md) |
 | Slice 1: refund finality | Checker core `impl/RefundFinality.dfy`, claims P1 to P4 (a token only for an authorized transition; every authorized transition gets one; no intent on refusal; token binding): `source_proof`. Issuer, sink and dispatcher: 126 suite rows (115 before T19), 48 rejection attempts with 0 effects: `unit_tested`. 10 of 10 copies with one check removed fail (run on the 115-row suite, before T19). **Before T19 the sink had a known defect**: under a faulty signer, red-team exploits E1 and E2 gave two refunds for one request id ([E1](proposals/night-shift-20261119/orch-C/c3-identity/e1_two_effects_one_reqid.ts), [E2](proposals/night-shift-20261119/orch-C/c3-identity/e2_cross_charge.ts), [logs](proposals/night-shift-20261119/orch-C/c3-identity/logs/e1_two_effects_one_reqid-merged.log)). Pull request 74 (`f1d87032`, T19) put the hardened sink, minter and dispatcher on `main`: regressions X1 to X6 pass on that tree and fail on the old one ([T19 graph refresh](proposals/m1b-mission-20261119/TOP_LEVEL_GRAPH_REFRESH_20261120_T19.md) row U3). TESTED level only | the compiled JavaScript, the issuer, Ed25519 in Node, SQLite, process isolation; no lock against two minter processes on one memory file. The claim text is not approved intent | [Slice 1 report](proposals/forge2-slice1-refund-finality/REPORT.md), [T19 report](proposals/t19-hardened-sink-20261119/REPORT.md) |
 | Slice 2: spec clearing | `NO_CHOICE` for the three approved specs; `CHOICE` for two planted loose specs; `EQUIVALENT` and `DIVERGES` with examples: each verdict rests on Dafny lemmas (`source_proof` of the lemma; the tool is dispatch only). 11 of 11 copies with one check removed fail | the tool; a person must read the hand-written claim lemmas | [Slice 2 report](proposals/forge2-slice2-spec-clearing/REPORT.md) |
 | Slice 3: runtime certificates | Certificate checker core against a candidate spec (not approved): `source_proof`. Three optimizers (TypeScript, safe Rust, an adversarial Python program) exchanged against one compiled core with 0 Dafny starts for the exchange; 84 allocations committed, each for a token: `runtime_certificate_checked` by an unproved compiled core; 0 tokens for the adversary. 26 of 26 copies fail | the compiled core, issuer, sink, the macOS sandbox tool (trusted, one platform). Sound, not complete | [Slice 3 report](proposals/forge2-slice3-runtime-certificates/REPORT.md) |
