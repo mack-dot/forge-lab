@@ -363,7 +363,7 @@ def test_static():
                 continue
             if "/" + "Users/" in t:
                 bad.append(os.path.relpath(os.path.join(d, f), PKG))
-    case("static: no absolute /Users/ path in the package", not bad, bad)
+    case("static: no absolute host home path in the package", not bad, bad)
 
 
 def main():
