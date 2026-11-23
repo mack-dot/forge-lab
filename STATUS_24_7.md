@@ -3,20 +3,20 @@
 Ground truth for `endtoendtrue.md`. Read at the start of every run; update after every milestone. Numbers are
 only those measured in a named checkout; anything else is marked as an estimate or inference.
 
-**`end_to_end=false`.** Open named links: S1 (hardware human approval: code in PR #11, real-key test pending the owner), hardware VM boundary (Linux: Kata microVM battery 35/35 in PR #13; macOS: blocked), E2/E4, M1-B. None is merged and verified as a whole yet.
+**`end_to_end=false`.** Open named links: S1 (hardware human approval: code in PR #11, real-key test PENDING; no physical key has been used), hardware VM boundary (Linux: Kata microVM battery 35/35 in PR #13; macOS: vfkit IN_PROGRESS), E2/E4, M1-B. None is merged and verified as a whole yet.
 
-Last updated: 2026-11-23 (owner merge order and vfkit decision recorded; M2.2, M2.3 probes, M5.1, recursive-rule acid test, M4b vfkit IN_PROGRESS; end_to_end=false).
+Last updated: 2026-11-23 (mode switch to integration and first-time UX; #14 combines seven PRs; #15–#19 open; M2.2, M2.3, vfkit, scrub in progress; end_to_end=false).
 
 ## Repositories
 
 | Repository | Visibility | `main` | Open pull requests |
 | --- | --- | --- | --- |
-| mack-dot/forge | private | `4aef55d0` (#97 airlock merged) | #98 private airlock plugin (pushed by the owner), #89, #76, #37, #36, #34, #15, #14, #5, #3, #2, #1 |
-| mack-dot/forge-claude-mod | public | `bd23da9` (tag v0.13.0) | #2 (M0.2), #3 (M1.1) — for the owner |
+| mack-dot/forge | public (since 2026-11-23) | #100 README merged (`3c203cb1`) | #99 (this file), #98, #89, #76, #37, #36, #34, #15, #14, #5, #3, #2, #1 |
+| mack-dot/forge-claude-mod | public, no ruleset | `bd23da9` (tag v0.13.0) | #14 (combines #2, #3, #10, #12, #9, #11, #13), #15–#19, scrub PR; the seven are superseded by #14 |
 
 Process note: plugin releases v0.9.0–v0.12.2 were made before this directive by fast-forwarding `main` and tagging
 from `wip/*` branches. From now on (Law 2) every milestone is a `feat/<milestone-id>` branch with a pull request;
-the agent merges and tags nothing, except where the owner explicitly authorizes it (2026-11-23: PRs #4–#8 and the v0.13.0 release).
+the agent merges and tags nothing, except where the owner explicitly authorizes it (2026-11-23: PRs #4–#8 and the v0.13.0 release; later the same day: forge #100 and #99 with `--admin` — the review cannot come from the author's account and forge/proof-gate rejects docs-only changes — and forge-claude-mod #14 only after prove_release passes).
 
 ## Released
 
@@ -57,6 +57,19 @@ Found and fixed on the way: PR #6 gave false APP_SYNTAX_ERROR on Node < 22.13 an
 | Fast generated JS module + string cache; serviceTest live-call check | IN_PROGRESS (agent, `feat/fast-js-wrapper`) |
 | Normative approval hashes; compact approval digest | PR #6; private-app approval screen 26,214 → 1,404 characters |
 | Next-rule suggestion | PR #6; private-app copy: suggests the recursive visibility function as the next rule |
+
+## Mode switch (owner, 2026-11-23, late)
+
+No new feature tracks after the running ones. Next: one unified release (#14 + #15–#19 + M2.2/M2.3/vfkit + scrub), one integrated clean-clone test, a fresh-machine test (no Dafny/.NET/goimports), a first-time-user pass (bare `/forge` runs the whole beginner loop; advanced tools hidden until relevant; README short, depth in `docs/`), then 5 real people (TRIAL.md, run by the owner).
+
+| PR (forge-claude-mod) | Content | CI | Notes |
+| --- | --- | --- | --- |
+| #14 | #2, #3, #10, #12, #9, #11, #13 merged in the owner's order, conflicts resolved | green | found: #3 made the example UNAPPROVED_BYPASS (36 failures) and a missed Rust bypass line, fixed; Docker name collisions between parallel runs, fixed (two parallel validate.sh 34/34 PASS; same-id control fails 27/27); prove_release: G2–G8 pass with parallel runs on the host, G1 re-run pending |
+| #15 | M5.1 trace fuzz | 6/6 | see M5.1 row |
+| #16 | recursive-rule acid test, synthetic fixture | 6/6 | found and fixed: approval did not cover included spec files (soundness) |
+| #17 | callers, drift status, feeder ranking | 13/13 | stacked on #14 |
+| #18 | crash-fuzz, coverage steering, tiers | 13/13 | stacked on #14; steered 20/20 vs blind 0/20 on a narrow-branch bug |
+| #19 | AST bypass scan (TS/JS, Python) | 6/6 | on a real app copy: 290 → 76 hits, 46/46 AST hits real |
 
 ## Owner decisions 2026-11-23 (second batch)
 
